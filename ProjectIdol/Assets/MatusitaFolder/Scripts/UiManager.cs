@@ -14,7 +14,7 @@ public class UiManager : MonoBehaviour
     int score = 0;
     int bonusScore = 50;
     int combo = 0;
-    float time = 180.0f;
+    float time = 180;
 
     public void Update()
     {

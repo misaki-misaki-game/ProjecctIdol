@@ -19,23 +19,23 @@ public class Note : MonoBehaviour
             if (randNumber == 0)
             {
                 // 生成位置
-                Vector3 pos = new Vector3(0, -40, 0);
+                Vector3 pos = new Vector3(0, -24, 0);
                 // プレハブを指定位置に生成
                 Instantiate(prefabBlue, pos, Quaternion.identity);
             }
             if (randNumber == 1)
             {
-                Vector3 pos = new Vector3(0, -40, 0);
+                Vector3 pos = new Vector3(0, -24, 0);
                 Instantiate(prefabRed, pos, Quaternion.identity);
             }
             if (randNumber == 2)
             {
-                Vector3 pos = new Vector3(0, -40, 0);
+                Vector3 pos = new Vector3(0, -24, 0);
                 Instantiate(prefabWhite, pos, Quaternion.identity);
             }
             if (randNumber == 3)
             {
-                Vector3 pos = new Vector3(0, -40, 0);
+                Vector3 pos = new Vector3(0, -24, 0);
                 Instantiate(prefabYellow, pos, Quaternion.identity);
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoteMove : MonoBehaviour
 {
-    int speed = 40;
+    int speed = 60;
 
     //オブジェクトの移動方向を保持するために必要
     Vector3 direction;
