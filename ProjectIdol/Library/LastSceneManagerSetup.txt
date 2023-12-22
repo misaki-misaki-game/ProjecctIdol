@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/MatusitaFolder/Scenes/RhythmGame.unity
+- path: Assets/Scenes/Matusita/RhythmGame.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
