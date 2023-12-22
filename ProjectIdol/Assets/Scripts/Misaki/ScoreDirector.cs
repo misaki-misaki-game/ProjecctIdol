@@ -155,7 +155,7 @@ public class ScoreDirector : SignalScript
         // トータルスコアに加算
         totalScore += score;
         // スコアを表示
-        scoreText.text = string.Format("SCORE:\n{0:000000000}", totalScore);
+        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
         // コンボを表示
         comboText.text = string.Format("{0:0}combo", combo);
     }
@@ -209,7 +209,7 @@ public class ScoreDirector : SignalScript
         {
             rank[4] = "D";
         }
-        UltText[4].text = string.Format("{0:0000}Pt", ultimateScore[4]); // 各究極スコアを書き出し
+        UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
 
     }
 }

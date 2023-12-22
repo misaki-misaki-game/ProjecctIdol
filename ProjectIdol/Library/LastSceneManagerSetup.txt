@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Matusita/RhythmGame.unity
+- path: Assets/Scenes/Misaki/PazulScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
