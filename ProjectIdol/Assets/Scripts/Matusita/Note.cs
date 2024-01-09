@@ -9,41 +9,35 @@ public class Note : MonoBehaviour
     public GameObject prefabWhite;
     public GameObject prefabYellow;
 
-    public PanelManager panelManager;
-
     void Update()
     {
-        if (!panelManager.isPanelActive)
+        //30フレームごとにシーンにプレハブ生成
+        if (Time.frameCount % 240 == 0)
         {
-            //30フレームごとにシーンにプレハブ生成
-            if (Time.frameCount % 240 == 0)
-            {
-                int randNumber = Random.Range(0, 4);
+            int randNumber = Random.Range(0, 4);
 
-                if (randNumber == 0)
-                {
-                    // 生成位置
-                    Vector3 pos = new Vector3(0, -25, 0);
-                    // プレハブを指定位置に生成
-                    Instantiate(prefabBlue, pos, Quaternion.identity);
-                }
-                if (randNumber == 1)
-                {
-                    Vector3 pos = new Vector3(0, -25, 0);
-                    Instantiate(prefabRed, pos, Quaternion.identity);
-                }
-                if (randNumber == 2)
-                {
-                    Vector3 pos = new Vector3(0, -25, 0);
-                    Instantiate(prefabWhite, pos, Quaternion.identity);
-                }
-                if (randNumber == 3)
-                {
-                    Vector3 pos = new Vector3(0, -25, 0);
-                    Instantiate(prefabYellow, pos, Quaternion.identity);
-                }
+            if (randNumber == 0)
+            {
+                // 生成位置
+                Vector3 pos = new Vector3(0, -20, 0);
+                // プレハブを指定位置に生成
+                Instantiate(prefabBlue, pos, Quaternion.identity);
+            }
+            if (randNumber == 1)
+            {
+                Vector3 pos = new Vector3(0, -20, 0);
+                Instantiate(prefabRed, pos, Quaternion.identity);
+            }
+            if (randNumber == 2)
+            {
+                Vector3 pos = new Vector3(0, -20, 0);
+                Instantiate(prefabWhite, pos, Quaternion.identity);
+            }
+            if (randNumber == 3)
+            {
+                Vector3 pos = new Vector3(0, -20, 0);
+                Instantiate(prefabYellow, pos, Quaternion.identity);
             }
         }
     }
-
 }
