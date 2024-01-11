@@ -14,6 +14,7 @@ public class TimeDirector : MonoBehaviour
     public StarDirector starDirector; // StarDirector変数
     public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
     public GameObject graphBackImage; // グラフ背景用変数
+    public GameObject nextButton; // ボタン変数
     public ButtonScript buttonScript; // ButtonScript変数
     public ScoreDirector scoreDirector; // ScoreDirector変数
     public DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
@@ -51,12 +52,13 @@ public class TimeDirector : MonoBehaviour
             this.gameOver = false; // falseにすることでこのif文を1回だけ呼び出す
             this.gameStart = false; // 上記を行うと上のif文が呼び出されるのでそれを行わないためにfalseにする
             animAi.SetTrigger("isDanceEnd"); // アイのアニメーションを終了する
-            buttonScript.gameStart = false; // falseにしてボタンをクリックできないようにする
+            buttonScript.ButtonsDestroy(); // ボタンを全て破壊する
             scoreDirector.SetRank(); // 各スコアに応じてランクを設定する
             graphBackImage.SetActive(true); // グラフ用背景を表示
             // diamondFrameとdiamondGraphのセットアップを行う
             diamondFrame.SetUp();
             diamondGraph.SetUp();
+            nextButton.SetActive(true); // ボタンを表示する
         }
     }
     public void Count3()

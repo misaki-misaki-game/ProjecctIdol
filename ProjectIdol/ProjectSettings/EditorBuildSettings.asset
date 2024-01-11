@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Misaki/TitleScene.unity
-    guid: 1bd23fff3abe0dd45b176897b8db576c
+    path: Assets/Scenes/Matusita/TitleScene.unity
+    guid: 9463fc908df78124585cf8f93e90c40b
   - enabled: 1
     path: Assets/Scenes/Misaki/PazulScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02

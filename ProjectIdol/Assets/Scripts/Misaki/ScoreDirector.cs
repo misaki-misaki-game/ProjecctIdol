@@ -29,11 +29,10 @@ public class ScoreDirector : SignalScript
     public float minTotalB = 241f;
     public float minTotalC = 121f;
     /// <summary> 各究極トータルランクの下限の値 </summary>
-    /// 
 
     public int combo; // コンボ変数
     public int chain; // チェイン変数
-    public enum UltimateType
+    public enum UltimateType // スコア名称列挙型
     {
         intelligence = 0,
         charisma,
@@ -54,11 +53,14 @@ public class ScoreDirector : SignalScript
     public string[] rank = new string[5]; // ultimateScoreの要素数と同じ　[D,C,B,A,S]のどれかにする [5]は究極トータルスコア
     [EnumIndex(typeof(UltimateType))]
     public TextMeshProUGUI[] UltText = new TextMeshProUGUI[5]; // 究極パラメーターテキスト表示用
-
+    public TextMeshProUGUI UltRankText; // ランクテキスト表示用
     public TextMeshProUGUI scoreText; // スコアテキスト表示用
     public TextMeshProUGUI comboText; // コンボテキスト表示用
     public StarDirector starDirector; // StarDirector変数
-    
+    public GameObject nextButton; // ボタン変数
+    public GameObject resultObject; // リザルトオブジェクト変数
+    public GameObject graphObject; // グラフオブジェクト変数
+
     // Start is called before the first frame update
     void Start()
     {
@@ -172,15 +174,15 @@ public class ScoreDirector : SignalScript
             {
                 rank[i] = "A";
             }
-            else if (minRankB <= ultimateScore[i]) // 61以上100以下ならAランク
+            else if (minRankB <= ultimateScore[i]) // 61以上100以下ならBランク
             {
                 rank[i] = "B";
             }
-            else if (minRankC <= ultimateScore[i]) // 31以上60以下ならAランク
+            else if (minRankC <= ultimateScore[i]) // 31以上60以下ならCランク
             {
                 rank[i] = "C";
             }
-            else  // 0以上30以下ならAランク
+            else  // 0以上30以下ならDランク
             {
                 rank[i] = "D";
             }
@@ -210,6 +212,12 @@ public class ScoreDirector : SignalScript
             rank[4] = "D";
         }
         UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
-
+    }
+    
+    public void ShowResult()
+    {
+        nextButton.SetActive(false); // ボタンを非表示
+        graphObject.SetActive(false); // グラフを非表示
+        resultObject.SetActive(true); // リザルトを表示
     }
 }

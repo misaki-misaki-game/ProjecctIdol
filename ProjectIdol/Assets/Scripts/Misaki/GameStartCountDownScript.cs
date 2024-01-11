@@ -29,7 +29,7 @@ public class GameStartCountDownScript : MonoBehaviour
     }
     public void Count0()
     {
-        gameStartText.text = string.Format("Start"); // テキストの文字をStartにする
+        gameStartText.text = string.Format("Live\nStart!!"); // テキストの文字をLiveStart!!にする
         aniScd.SetBool("isCount1", true); // AnimatorのisCount1を変更
     }
     public void GameStart()
