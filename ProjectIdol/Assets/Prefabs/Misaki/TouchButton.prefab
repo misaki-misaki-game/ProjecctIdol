@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8551838905725771325}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.16, y: 0.16, z: 0.16}
+  m_LocalScale: {x: 0.22999999, y: 0.22999999, z: 0.22999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4106152715212550124}
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 9117074501797810208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3058070579754891037}
@@ -160,15 +160,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0.21698111, g: 0.20347098, b: 0.20347098, a: 0}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &4232916625086357258
@@ -188,7 +188,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -210,5 +210,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  effectState: 0
   setSignalPoint: 0
+  destroyDeleteTime: 1
   needPoint: 3
+  effects:
+  - {fileID: 1459862227383078, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
+  - {fileID: 1491359990764140, guid: 18c0a8b63ea8b4448a595b0c24c1384a, type: 3}
+  - {fileID: 1202522996400206, guid: f87e7926fd589094b8a269e14b8bea5e, type: 3}
+  signals:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 75161fec8aceee046a33b937f9e0d2b2, type: 3}
+  - {fileID: 21300000, guid: b032d8b91c812374b97ac7220c8f1fd8, type: 3}
+  - {fileID: 21300000, guid: 6eb78a1597ba8ed43a16b35168355139, type: 3}
+  - {fileID: 21300000, guid: 8fc7a82e415e7094080602ed523bb0bc, type: 3}

@@ -60,6 +60,8 @@ public class ScoreDirector : SignalScript
     public GameObject nextButton; // ボタン変数
     public GameObject resultObject; // リザルトオブジェクト変数
     public GameObject graphObject; // グラフオブジェクト変数
+    public AudioSource SEAudioSource; // SE用オーディオソース
+    public AudioClip SEAudioClip; // 決定音クリップ
 
     // Start is called before the first frame update
     void Start()
@@ -109,7 +111,7 @@ public class ScoreDirector : SignalScript
             comboTime = comboDurationTime;
             // isCombo変数をtrueにする
             isCombo = true;
-            if (starDirector.isStarMode == true) // お星様モードであれば
+            if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
             {
                 score = scoreBaseValue * 1.5f * (2 * chain); // 基礎スコア50を1.5倍
             }
@@ -134,7 +136,7 @@ public class ScoreDirector : SignalScript
             // 加算するスコアを1.2倍
             score *= 1.2f;
         }
-        if (starDirector.isStarMode == true) // お星様モードであれば
+        if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
         {
             score += score * 0.5f; // 獲得スコアに対して50%を加算する
         }
@@ -212,10 +214,12 @@ public class ScoreDirector : SignalScript
             rank[4] = "D";
         }
         UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
+        UltRankText.text = string.Format(rank[4]); // ランク書き出し
     }
-    
     public void ShowResult()
     {
+        SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
+        SEAudioSource.Play(); // SEを鳴らす
         nextButton.SetActive(false); // ボタンを非表示
         graphObject.SetActive(false); // グラフを非表示
         resultObject.SetActive(true); // リザルトを表示

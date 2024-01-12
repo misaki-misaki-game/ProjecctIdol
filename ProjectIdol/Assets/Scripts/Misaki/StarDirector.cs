@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UI;
+using static SignalScript;
 
 public class StarDirector : MonoBehaviour
 {
-    public bool isStarMode; // お星様モードかどうか
+    public enum StarState
+    {
+        NormalMode, // 通常状態 0
+        StarMode // スターモード 1
+    }
+    public enum BackImageState
+    {
+        StageNormal, // 通常ステージ背景 0
+        StageStar, // スターステージ背景 1
+        ArenaNormal, // 通常アリーナ背景 2
+        ArenaStar // スターアリーナ背景 3
+    }
+    public StarState starState = StarState.NormalMode; // StarState変数
     public Image Gauge; // お星様ゲージ
     public Animator animAi; // アイのアニメーション用変数
+    [EnumIndex(typeof(BackImageState))]
+    public Sprite[] backImages = new Sprite[4]; // 背景画像配列
+    public GameObject[] backImageObjects = new GameObject[2]; // 背景オブジェクト配列
 
     // Start is called before the first frame update
     void Start()
@@ -20,21 +36,25 @@ public class StarDirector : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isStarMode) // isStarModeが真のとき
+        if (starState == StarState.StarMode) // スターモードの時
         {
             animAi.SetBool("isStarMode", true); // アイのスターモードアニメーションをスタートする
+            backImageObjects[0].GetComponent<Image>().sprite = backImages[1]; // ステージ背景をスターモードにする
+            backImageObjects[1].GetComponent<Image>().sprite = backImages[3]; // 観客背景をスターモードにする
             Gauge.fillAmount -= Time.deltaTime / 10; // ゲージを減少させる(10秒間)
             if (Gauge.fillAmount <= 0) // ゲージがなくなったら
             {
+                backImageObjects[0].GetComponent<Image>().sprite = backImages[0]; // ステージ背景を通常モードにする
+                backImageObjects[1].GetComponent<Image>().sprite = backImages[2]; // 観客背景を通常モードにする
                 animAi.SetBool("isStarMode", false); // アイのスターモードアニメーションを終了する
-                isStarMode = false; // isStarModeが偽のとき
+                starState = StarState.NormalMode; // 通常モードに変更
             }
         }
     }
 
     public void GetStar(float chain) // ゲットスター関数
     {
-        if (!isStarMode) // isStarModeが偽のとき
+        if (starState == StarState.NormalMode) // 通常モードのとき
         {
             // お星様ゲージの増加を処理
             if (chain >= 1)
@@ -45,8 +65,7 @@ public class StarDirector : MonoBehaviour
             // お星様ゲージが1になったら
             if (Gauge.fillAmount == 1)
             {
-                // isStarModeを真にする
-                isStarMode = true;
+                starState = StarState.StarMode; // スターモードに変更
             }
         }
     }

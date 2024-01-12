@@ -11,6 +11,7 @@ public class GameStartCountDownScript : MonoBehaviour
     public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
     public ButtonScript buttonScript; // ButtonScript変数
     public Animator animAi; // アイのアニメーション用変数
+    public AudioSource BGMAudioSource; // BGM用オーディオソース
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class GameStartCountDownScript : MonoBehaviour
     {
         timeDirector.gameStart = true; // 制限時間をスタートする
         buttonScript.gameStart = true; // ボタンのクリックを許可する
+        BGMAudioSource.Play(); // BGMを鳴らす
         animAi.SetTrigger("isDanceStart"); // アイのアニメーションをスタートする
         gameStartcd.SetActive(false); // カウントキャンパスを非表示にする
     }

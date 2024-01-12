@@ -394,6 +394,7 @@
 "Assets/Scripts/Matusita/ObjectPool.cs"
 "Assets/Scripts/Matusita/UiManager.cs"
 "Assets/Scripts/Misaki/ButtonScript.cs"
+"Assets/Scripts/Misaki/ClickEffectScript.cs"
 "Assets/Scripts/Misaki/DiamondMesh.cs"
 "Assets/Scripts/Misaki/EnumIndexAttribute.cs"
 "Assets/Scripts/Misaki/FadeManager.cs"

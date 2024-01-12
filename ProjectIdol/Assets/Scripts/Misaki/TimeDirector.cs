@@ -20,6 +20,7 @@ public class TimeDirector : MonoBehaviour
     public DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
     public DiamondMesh diamondGraph; // グラフ用DiamondMesh変数
     public Animator animAi; // アイのアニメーション用変数
+    public AudioSource SEAudioSource; // SE用オーディオソース
     Animator aniScd; // gameStartcdのanimator変数
 
     // Start is called before the first frame update
@@ -33,8 +34,8 @@ public class TimeDirector : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // ゲームがスタート,かつ,ゲームオーバーになっていない,かつ,スターモードではないのであれば
-        if (gameStart && !gameOver && starDirector.isStarMode == false)
+        // ゲームがスタート,かつ,ゲームオーバーになっていない,かつ,通常モードではないのであれば
+        if (gameStart && !gameOver && starDirector.starState == StarDirector.StarState.NormalMode)
         {
             // カウントダウンタイムを表示
             timeText.text = string.Format("TIME:{0:0}s", cdTime);

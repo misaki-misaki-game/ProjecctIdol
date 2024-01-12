@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class SceneScript : MonoBehaviour
 {
     [SerializeField] GameObject fadeCanvas; //prefabのFadeCanvasを入れる
+    public AudioSource SEAudioSource; // SE用オーディオソース
     GameObject scoreSaveObj;                //スコア保存用オブジェクト
 
 
@@ -31,6 +32,8 @@ public class SceneScript : MonoBehaviour
 
     public async void sceneChange(string sceneName)       // シーンチェンジ関数　ボタン操作などで呼び出す
     {
+        if (SEAudioSource) SEAudioSource.Play(); // 選択SEを鳴らす
+        await Task.Delay(600);                           // 音が鳴るまで待つ
         fadeCanvas.GetComponent<FadeManager>().fadeOut(); // フェードアウト関数を呼び出し
         await Task.Delay(1000);                           // 暗転するまで待つ
         SceneManager.LoadScene(sceneName);                // シーンチェンジ

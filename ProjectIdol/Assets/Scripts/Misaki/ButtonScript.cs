@@ -13,16 +13,17 @@ public class ButtonScript : MonoBehaviour
     public StarDirector StarDirector; // StarDirector変数
     public GameObject clickedGameObject; // クリックしたオブジェクトを格納する変数
     public GameObject[] signals; // シグナル格納用
+    public AudioSource SEAudioSource; // SE用オーディオソース
 
     // Update is called once per frame
     void Update()
     {
         // シグナルをクリックしたときの処理
-        if (Input.GetMouseButtonDown(0) && gameStart) // 左クリックしたら
+        if (Input.GetMouseButtonDown(0) && gameStart) // 左クリックしたらかつゲームがスタートしていれば
         {
+            // シグナルをクリックできたかの処理
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // rayにクリックしたポジションを格納
             RaycastHit2D hitSprite = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction); // hitSpriteにレイが当たったオブジェクトを格納
-
             if (hitSprite == true) // レイが当たったら
             {
                 chain = 0; // 初期化
@@ -48,6 +49,7 @@ public class ButtonScript : MonoBehaviour
 
     private void CheakChainSignal(GameObject gameObject) // クリックされたオブジェクトの8方向をチェックし、チェインを確認する関数
     {
+        SEAudioSource.Play(); // SEを鳴らす
         int centerSignalTP = 0; // 10の位 列
         int centerSignalDP = 0; // 1の位 行
         SignalScript centerSignalSS; // クリックしたオブジェクトのSignalScript格納用
@@ -167,7 +169,7 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    public void ButtonsDestroy()
+    public void ButtonsDestroy() // リザルト画面時にボタンを消す
     {
         for (int j = 0; j < 6; j++) // 列をチェック
         {
