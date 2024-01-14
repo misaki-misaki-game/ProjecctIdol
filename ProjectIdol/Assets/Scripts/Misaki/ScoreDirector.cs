@@ -62,6 +62,7 @@ public class ScoreDirector : SignalScript
     public GameObject graphObject; // グラフオブジェクト変数
     public AudioSource SEAudioSource; // SE用オーディオソース
     public AudioClip SEAudioClip; // 決定音クリップ
+    public DataManager dataManager; // DataManager変数
 
     // Start is called before the first frame update
     void Start()
@@ -215,6 +216,13 @@ public class ScoreDirector : SignalScript
         }
         UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
         UltRankText.text = string.Format(rank[4]); // ランク書き出し
+        // ハイスコアの更新
+        if(totalUltimateScore>dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
+        {
+            dataManager.data.puzzleHighScore = totalUltimateScore; // ハイスコアを更新する
+            dataManager.data.puzzleHighScoreRank = rank[4]; // ランクを更新する
+            dataManager.Save(dataManager.data); // セーブする
+        }
     }
     public void ShowResult()
     {

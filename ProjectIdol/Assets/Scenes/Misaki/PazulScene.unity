@@ -3505,6 +3505,7 @@ GameObject:
   - component: {fileID: 821901328}
   - component: {fileID: 821901327}
   - component: {fileID: 821901329}
+  - component: {fileID: 821901334}
   - component: {fileID: 821901330}
   - component: {fileID: 821901331}
   - component: {fileID: 821901333}
@@ -3623,6 +3624,7 @@ MonoBehaviour:
   graphObject: {fileID: 2091328431}
   SEAudioSource: {fileID: 821901333}
   SEAudioClip: {fileID: 8300000, guid: cb1eaa5b26f490043a5b7e1d78916614, type: 3}
+  dataManager: {fileID: 821901334}
 --- !u!114 &821901330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3818,6 +3820,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &821901334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821901326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd701d86bce929458fa21a51a9465dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    puzzleHighScore: 0
+    rhythmHighScore: 0
+    puzzleHighScoreRank: D
+    rhythmHighScoreRank: D
 --- !u!1001 &916038864
 PrefabInstance:
   m_ObjectHideFlags: 0
