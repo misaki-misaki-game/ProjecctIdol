@@ -10,7 +10,11 @@ public class DataManager : MonoBehaviour // MasterDataをjson形式に変えて保存・読
     string filepath; // jsonファイルのパス
     string fileName = "HighScoreData.json"; // jsonファイル名
 
-    void Awake() // 開始時にファイルチェック、読み込み
+    void Awake()
+    {
+        CheckSaveData(); // 開始時にファイルチェック、読み込み
+    }
+    private void CheckSaveData() // 開始時にファイルチェック、読み込みする関数
     {
         Debug.Log("起動ロード開始");
         data = new MasterData(); // dataにMasterData型を代入
@@ -31,7 +35,6 @@ public class DataManager : MonoBehaviour // MasterDataをjson形式に変えて保存・読
         writer.Close(); // ファイルを閉じる
         Debug.Log("セーブしています" + json);
     }
-
     MasterData Load(string path) // jsonデータを読み込む関数
     {
         if (File.Exists(path)) // jsonデータがあれば
@@ -48,18 +51,12 @@ public class DataManager : MonoBehaviour // MasterDataをjson形式に変えて保存・読
             return null; // nullを返す
         }
     }
-
     public void ResetHighScore() // データを初期化する関数
     {
         Debug.Log("ハイスコアの初期化を行います");
-        data.puzzleHighScore = default; // パズルハイスコアをデフォルトにする
-        data.rhythmHighScore = default; // リズムハイスコアをデフォルトにする
-        data.puzzleHighScoreRank = data.defaultRank; // パズルハイスコアランクをデフォルトにする
-        data.rhythmHighScoreRank = data.defaultRank; // リズムハイスコアランクをデフォルトにする
-
+        data = new MasterData(); // dataにMasterData型を代入
         Save(data); // セーブする
     }
-
     //void OnDestroy() // ゲーム終了時に保存
     //{
     //    Save(data);

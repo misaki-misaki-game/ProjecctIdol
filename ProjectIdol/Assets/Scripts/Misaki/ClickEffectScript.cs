@@ -10,6 +10,11 @@ public class ClickEffectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SummonEffect(); // クリックした場所にエフェクトを呼び出す
+    }
+
+    private void SummonEffect() // クリックした場所にエフェクトを呼び出す関数
+    {
         if (Input.GetMouseButtonDown(0) && clickEffect) // 左クリックしたらかつclickEffectがnullでなければ
         {
             // クリックした場所にエフェクトを呼び出す

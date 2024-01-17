@@ -34,6 +34,28 @@ public class TimeDirector : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        TimeCountDown(); // 時間のカウントダウンを行う
+        GameOver(); // ゲーム終了の処理を行う
+    }
+
+    private void GameOver() // ゲーム終了の処理関数
+    {
+        if (gameOver) // ゲームオーバーであれば
+        {
+            this.gameOver = false; // falseにすることでこのif文を1回だけ呼び出す
+            this.gameStart = false; // 上記を行うと上のif文が呼び出されるのでそれを行わないためにfalseにする
+            animAi.SetTrigger("isDanceEnd"); // アイのアニメーションを終了する
+            buttonScript.ButtonsDestroy(); // ボタンを全て破壊する
+            scoreDirector.SetRank(); // 各スコアに応じてランクを設定する
+            graphBackImage.SetActive(true); // グラフ用背景を表示
+            /// diamondFrameとdiamondGraphのセットアップを行う ///
+            diamondFrame.SetUp();
+            diamondGraph.SetUp();
+            nextButton.SetActive(true); // ボタンを表示する
+        }
+    }
+    private void TimeCountDown() // 時間のカウントダウンを行う
+    {
         // ゲームがスタート,かつ,ゲームオーバーになっていない,かつ,通常モードではないのであれば
         if (gameStart && !gameOver && starDirector.starState == StarDirector.StarState.NormalMode)
         {
@@ -47,19 +69,6 @@ public class TimeDirector : MonoBehaviour
                 cdTime = 0;
                 gameOver = true;
             }
-        }
-        if (gameOver) // ゲームオーバーであれば
-        {
-            this.gameOver = false; // falseにすることでこのif文を1回だけ呼び出す
-            this.gameStart = false; // 上記を行うと上のif文が呼び出されるのでそれを行わないためにfalseにする
-            animAi.SetTrigger("isDanceEnd"); // アイのアニメーションを終了する
-            buttonScript.ButtonsDestroy(); // ボタンを全て破壊する
-            scoreDirector.SetRank(); // 各スコアに応じてランクを設定する
-            graphBackImage.SetActive(true); // グラフ用背景を表示
-            // diamondFrameとdiamondGraphのセットアップを行う
-            diamondFrame.SetUp();
-            diamondGraph.SetUp();
-            nextButton.SetActive(true); // ボタンを表示する
         }
     }
     public void Count3()

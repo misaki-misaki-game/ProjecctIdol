@@ -10,10 +10,10 @@ public class ScoreDirector : SignalScript
 {
     // bool isgameOver = false; // ゲームオーバーかどうか
     bool isCombo = false; // コンボしているかどうか
-    public float comboTime; // コンボ持続タイム変数
+    public float comboTime = 0; // コンボ持続タイム変数
     public float scoreBaseValue = 50; // 基礎スコア変数
     public float comboDurationTime = 1f; // コンボ継続時間変数
-    public float totalScore; // トータルスコア変数
+    public float totalScore = 0; // トータルスコア変数
     public float totalUltimateScore; // 究極トータルスコア
 
     /// <summary> 各究極ランクの下限の値 </summary>
@@ -30,8 +30,7 @@ public class ScoreDirector : SignalScript
     public float minTotalC = 121f;
     /// <summary> 各究極トータルランクの下限の値 </summary>
 
-    public int combo; // コンボ変数
-    public int chain; // チェイン変数
+    public int combo = 0; // コンボ変数
     public enum UltimateType // スコア名称列挙型
     {
         intelligence = 0,
@@ -67,80 +66,67 @@ public class ScoreDirector : SignalScript
     // Start is called before the first frame update
     void Start()
     {
-        // トータルスコアを初期化
-        totalScore = 0;
-        // コンボを初期化
-        combo = 0;
-        // スコアを表示
-        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
-        // コンボを表示
-        comboText.text = string.Format("{0:0}combo", combo);
+        InitializationUI(); // コンボとトータルスコアを初期化する
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // コンボ持続の処理
-        if (isCombo ) // コンボしているのであれば
+        ContinuationCombo();
+    }
+
+    private void InitializationUI() // コンボとトータルスコアを初期化する関数
+    {
+        // トータルスコアを初期化
+        totalScore = default;
+        // コンボを初期化
+        combo = default;
+        // スコアを表示
+        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
+        // コンボを表示
+        comboText.text = string.Format("{0:0}combo", combo);
+    }
+    private void ContinuationCombo()　// コンボ持続の処理関数
+    {
+        if (isCombo) // コンボしているのであれば
         {
             // コンボ持続時間を減らす
             comboTime -= Time.deltaTime;
             // コンボを中断する処理
-            if ( comboTime < 0 ) // コンボ持続時間が0なら
+            if (comboTime < 0) // コンボ持続時間が0なら
             {
                 // 0を代入
-                comboTime = 0f;
+                comboTime = default;
                 // isCombo変数をfalseにする
-                isCombo = false;
+                isCombo = default;
                 // コンボ数をリセット
-                combo = 0;
+                combo = default;
                 // コンボを表示
                 comboText.text = string.Format("{0:0}combo", combo);
             }
         }
     }
-    
     public void GetScore(float chain,bool isChain, STATE state) // ゲットスコア関数
     {
         float score = 0; // スコア計算用変数
-        // 加算するスコアを計算
-        if (isChain) // チェインが発生していれば
-        {
-            // コンボを1加算
-            combo += 1;
-            // コンボ持続時間をリセット
-            comboTime = comboDurationTime;
-            // isCombo変数をtrueにする
-            isCombo = true;
-            if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
-            {
-                score = scoreBaseValue * 1.5f * (2 * chain); // 基礎スコア50を1.5倍
-            }
-            else
-            {
-                // 50に(chain×2)倍して加算
-                score = scoreBaseValue * (2 * chain);
-            }
-        }
-        else // チェインが発生していなければ
-        {
-            score = scoreBaseValue; // 50を加算
-        }
-        // 加算するスコアに倍率をかける
-        if (combo >= 50 && combo < 100) // コンボが50以上100未満
-        {
-            // 加算するスコアを1.1倍
-            score *= 1.1f; 
-        }
-        else if (combo >= 100) // コンボが100以上
-        {
-            // 加算するスコアを1.2倍
-            score *= 1.2f;
-        }
-        if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
-        {
-            score += score * 0.5f; // 獲得スコアに対して50%を加算する
-        }
+        // 基礎スコアを加算
+        score = AddBaseValue(chain, isChain);
+        // コンボによる倍率をかける
+        score = MultiplyCombo(score);
+        // スターモードによる倍率をかける
+        score = MultiplyStarMode(score);
+        // 究極スコアを計算する
+        CalculateUltimateScore(chain, state);
+        // トータルスコアに加算
+        totalScore += score;
+        // スコアを表示
+        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
+        // コンボを表示
+        comboText.text = string.Format("{0:0}combo", combo);
+    }
+    private void CalculateUltimateScore(float chain, STATE state) // アルティメットスコアを計算
+    {
         switch (state)
         {
             // stateによってステータスポイントを加算
@@ -157,12 +143,58 @@ public class ScoreDirector : SignalScript
                 ultimateScore[2] += chain + 1f;
                 break;
         }
-        // トータルスコアに加算
-        totalScore += score;
-        // スコアを表示
-        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
-        // コンボを表示
-        comboText.text = string.Format("{0:0}combo", combo);
+    }
+    private float MultiplyStarMode(float score) // スターモードによる倍率を掛ける
+    {
+        if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
+        {
+            score += score * 0.5f; // 獲得スコアに対して50%を加算する
+        }
+
+        return score;
+    }
+    private float MultiplyCombo(float score) // コンボ数による倍率を掛ける
+    {
+        if (combo >= 50 && combo < 100) // コンボが50以上100未満
+        {
+            // 加算するスコアを1.1倍
+            score *= 1.1f;
+        }
+        else if (combo >= 100) // コンボが100以上
+        {
+            // 加算するスコアを1.2倍
+            score *= 1.2f;
+        }
+
+        return score;
+    }
+    private float AddBaseValue(float chain, bool isChain)
+    {
+        float score;
+        if (isChain) // チェインが発生していれば
+        {
+            // コンボを1加算
+            combo += 1;
+            // コンボ持続時間をリセット
+            comboTime = comboDurationTime;
+            // isCombo変数をtrueにする
+            isCombo = true;
+            if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
+            {
+                score = scoreBaseValue * 1.5f * (2 * chain); // 基礎スコア50を1.5倍
+            }
+            else
+            {
+                // 50に(chain×2)倍
+                score = scoreBaseValue * (2 * chain);
+            }
+        }
+        else // チェインが発生していなければ
+        {
+            score = scoreBaseValue; // 50を加算
+        }
+
+        return score;
     }
     public void SetRank()
     {
@@ -216,8 +248,11 @@ public class ScoreDirector : SignalScript
         }
         UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
         UltRankText.text = string.Format(rank[4]); // ランク書き出し
-        // ハイスコアの更新
-        if(totalUltimateScore>dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
+        RecordUpdate(); // ハイスコアの更新
+    }
+    private void RecordUpdate() // ハイスコアの更新関数
+    {
+        if (totalUltimateScore > dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
         {
             dataManager.data.puzzleHighScore = totalUltimateScore; // ハイスコアを更新する
             dataManager.data.puzzleHighScoreRank = rank[4]; // ランクを更新する

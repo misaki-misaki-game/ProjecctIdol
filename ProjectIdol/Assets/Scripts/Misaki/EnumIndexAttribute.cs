@@ -7,11 +7,11 @@ using UnityEditor;
 
 /// <summary>
 /// Showing an array with Enum as keys in the property inspector. (Supported children)
-/// プロパティインスペクターで Enum をキーとして持つ配列を表示する。(扶養対象児童)
+/// プロパティインスペクターで Enum をキーとして持つ配列を表示する。
 /// </summary>
 public class EnumIndexAttribute : PropertyAttribute
 {
-    private string[] _names;
+    private string[] _names; // string配列
 
     /// <summary>
     /// Constructor コンストラクタ

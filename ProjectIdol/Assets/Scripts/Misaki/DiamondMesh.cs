@@ -21,7 +21,7 @@ public class DiamondMesh : MonoBehaviour
     {
         if (isSetUp) // 真なら
         {
-            CreateGraph();
+            CreateGraph(); // グラフを作成する
         }
     }
     public void SetUp() // ダイアモンド形のメッシュをセットアップする関数

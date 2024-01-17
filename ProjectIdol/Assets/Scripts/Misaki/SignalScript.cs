@@ -7,7 +7,6 @@ using static ScoreDirector;
 
 public class SignalScript : MonoBehaviour
 {
-    
     SpriteRenderer sp; // 画像を切り替える
 
     public enum STATE // ステータス
@@ -51,20 +50,17 @@ public class SignalScript : MonoBehaviour
     {
         if(setSignalPoint == needPoint && state == STATE.NOTHING) SetSignal(); // NOTHINGのシグナルが再セットまでのポイントを必要数満たしていたらシグナルをセットする
     }
+
     public void SetSignal() // セットシグナル関数
     {
-        if (effectState == Effect.NOTHINGEFFECT) // エフェクトステータスがなにもないなら
-        {
-            GameObject child = transform.GetChild(1).gameObject; // 子オブジェクト(エフェクト)を検索
-            Destroy(child); // 子オブジェクトを破壊する
-        }
+        EffectDestroy(Effect.NOTHINGEFFECT); // NOTHINGEFFECT時のエフェクトを消す
         effectState = Effect.RESURRECTIONEFFECT; // エフェクトステータスを復活するときに変更
         PlayEffect(effectState); // エフェクトを呼び出す
         int rnd = Random.Range(1, 5); // 1～4の範囲でランダム
         state = (STATE)Enum.ToObject(typeof(STATE), rnd); // stateをランダムで設定
-        switch(state)
+        switch (state)
         {
-            // stateによって色を変更
+            // stateによってイメージを変更
             case STATE.RED:
                 sp.sprite = signals[2]; // 赤シグナルを設定
                 //sp.color = Color.red;
@@ -82,7 +78,14 @@ public class SignalScript : MonoBehaviour
                 //sp.color = Color.white;
                 break;
         }
-
+    }
+    private void EffectDestroy(Effect effectCondition) // 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
+    {
+        if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
+        {
+            GameObject child = transform.GetChild(1).gameObject; // 子オブジェクト(エフェクト)を検索
+            Destroy(child); // 子オブジェクトを破壊する
+        }
     }
     public void BreakSignal(bool isChain) // ブレイクシグナル関数
     {
@@ -100,13 +103,11 @@ public class SignalScript : MonoBehaviour
         PlayEffect(effectState); // エフェクトを呼び出す
         // StartCoroutine(DelayCoroutine()); // ディレイコルーチンを呼び出し 仕様変更のためコメント化
     }
-
     public void AddSetSignalPoint() // SetSignalPointを加算する関数
     {
         setSignalPoint += 1;
     }
-
-    private void PlayEffect(Effect effectState)
+    private void PlayEffect(Effect effectState) // エフェクトを再生する関数
     {
         GameObject clone = null; // GameObjectを生成
         switch (effectState)
@@ -133,7 +134,6 @@ public class SignalScript : MonoBehaviour
                 break;
         }
     }
-
     /*
     private IEnumerator DelayCoroutine() // ディレイコルーチン　仕様変更のためコメント化
     {

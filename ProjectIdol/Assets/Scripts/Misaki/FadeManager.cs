@@ -10,8 +10,8 @@ using UnityEngine.UI;
 public class FadeManager : MonoBehaviour
 {
     public static bool isFadeInstance = false; // FadeCanvas召喚フラグ
-    public bool isFadeIn = false;                // フェードインするフラグ
-    public bool isFadeOut = false;               // フェードアウトするフラグ
+    public bool isFadeIn = false;              // フェードインするフラグ
+    public bool isFadeOut = false;             // フェードアウトするフラグ
     public float alpha = 0.0f;                 // 透過率
     public float fadeSpeed = 0.2f;             // フェードにかかる時間
 

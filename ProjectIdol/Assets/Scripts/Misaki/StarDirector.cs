@@ -36,6 +36,10 @@ public class StarDirector : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        ShowStarMode(); // スターモードの演出を行う
+    }
+    private void ShowStarMode() // スターモードの演出を行う関数
+    {
         if (starState == StarState.StarMode) // スターモードの時
         {
             animAi.SetBool("isStarMode", true); // アイのスターモードアニメーションをスタートする
@@ -51,7 +55,6 @@ public class StarDirector : MonoBehaviour
             }
         }
     }
-
     public void GetStar(float chain) // ゲットスター関数
     {
         if (starState == StarState.NormalMode) // 通常モードのとき

@@ -24,10 +24,4 @@ public class HighScoreWrite : MonoBehaviour
         scoreText[2].text = string.Format("{0:000}Pt", dataManager.data.rhythmHighScore); // リズムモードスコア書き出し
         scoreText[3].text = string.Format(dataManager.data.rhythmHighScoreRank); // リズムモードランク書き出し
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
