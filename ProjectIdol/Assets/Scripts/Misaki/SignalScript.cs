@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
 using static ScoreDirector;
+using TMPro;
 
 public class SignalScript : MonoBehaviour
 {
@@ -83,7 +84,7 @@ public class SignalScript : MonoBehaviour
     {
         if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
         {
-            GameObject child = transform.GetChild(1).gameObject; // 子オブジェクト(エフェクト)を検索
+            GameObject child = transform.GetChild(2).gameObject; // 子オブジェクト(エフェクト)を検索
             Destroy(child); // 子オブジェクトを破壊する
         }
     }

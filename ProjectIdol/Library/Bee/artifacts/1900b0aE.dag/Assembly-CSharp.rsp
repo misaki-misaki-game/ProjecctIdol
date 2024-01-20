@@ -406,6 +406,7 @@
 "Assets/Scripts/Misaki/ScoreDirector.cs"
 "Assets/Scripts/Misaki/SignalScript.cs"
 "Assets/Scripts/Misaki/StarDirector.cs"
+"Assets/Scripts/Misaki/TextHyde.cs"
 "Assets/Scripts/Misaki/TimeDirector.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs"

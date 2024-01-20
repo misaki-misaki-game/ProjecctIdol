@@ -26,7 +26,6 @@ public class DataManager : MonoBehaviour // MasterDataをjson形式に変えて保存・読
         }
         data = Load(filepath); // ファイルを読み込んでdataに格納
     }
-
     public void Save(MasterData data) // jsonとしてデータを保存する関数
     {
         string json = JsonUtility.ToJson(data); // jsonとして変換
