@@ -15,6 +15,7 @@ public class UiManager : MonoBehaviour
     int bonusScore = 50;
     int combo = 0;
     float time = 180;
+    float star = 0;
 
     public void Update()
     {
@@ -23,7 +24,7 @@ public class UiManager : MonoBehaviour
         //時間が0秒になるとリザルト画面に移動する
         if (time <= 0)
         {
-            SceneManager.LoadScene("ResultScene");
+            //
         }
 
         scoreText.text = "Score:" + score.ToString();
@@ -49,9 +50,35 @@ public class UiManager : MonoBehaviour
         }
     }
 
+    public void AddStar(int gauge)
+    {
+        star += gauge;
+
+        //お星さまモード
+        if (star <= 100)
+        {
+            Debug.Log("お星さまモード突入");
+        }
+        else if (star >= 100)
+        {
+            Debug.Log("お星さまモード終了");
+        }
+    }
+
     public void NoteMiss()
     {
-        combo = 0;
+        if (score <= 0 && star <= 0)
+        {
+            score = 0;
+            combo = 0;
+            star = 0;
+        }
+        else
+        {
+            score -= 25;
+            combo = 0;
+            star -= -1;
+        }
     }
 
 }
