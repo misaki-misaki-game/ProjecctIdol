@@ -227,7 +227,7 @@ public class ScoreDirector : SignalScript
             {
                 rank[i] = "D";
             }
-            UltText[i].text = string.Format("{0:000}Pt", ultimateScore[i]); // 各究極スコアを書き出し
+            UltText[i].text = string.Format(rank[i] + "  {0:000}Pt", ultimateScore[i]); // 各究極スコアを書き出し
             totalUltimateScore += ultimateScore[i]; // 各スコアを加算する
         }
 
@@ -254,13 +254,37 @@ public class ScoreDirector : SignalScript
         }
         UltText[4].text = string.Format("{0:0000}Pt", totalUltimateScore); // 各究極スコアを書き出し
         UltRankText.text = string.Format(rank[4]); // ランク書き出し
+        CheckMission(); // ミッションをクリアしたかの確認
         RecordUpdate(); // ハイスコアの更新
+    }
+    private void CheckMission() // ミッションをクリアしたかの確認する関数
+    {
+        // スターモードを2回以上クリアしたか
+        if (starDirector.starCount > 1)
+        {
+            totalScore += 20000;
+            Debug.Log("ミッション1クリア");
+        }
+        // いずれかの究極パラメータがAランク以上か
+        if (rank[0] == "A" || rank[0] == "S" || rank[1] == "A" || rank[1] == "S" || rank[2] == "A" || rank[2] == "S" || rank[3] == "A" || rank[3] == "S")
+        {
+            totalScore += 20000;
+            Debug.Log("ミッション2クリア");
+        }
+        // 総究極パラメータがAランク以上か
+        if (rank[4] == "A" || rank[4] == "S")
+        {
+            totalScore += 20000;
+            Debug.Log("ミッション3クリア");
+        }
+        // スコアを表示
+        scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
     }
     private void RecordUpdate() // ハイスコアの更新関数
     {
-        if (totalUltimateScore > dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
+        if (totalScore > dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
         {
-            dataManager.data.puzzleHighScore = totalUltimateScore; // ハイスコアを更新する
+            dataManager.data.puzzleHighScore = totalScore; // ハイスコアを更新する
             dataManager.data.puzzleHighScoreRank = rank[4]; // ランクを更新する
             dataManager.Save(dataManager.data); // セーブする
         }

@@ -7,6 +7,7 @@ using static SignalScript;
 
 public class StarDirector : MonoBehaviour
 {
+    public int starCount = 0; // お星様モードになった回数
     public enum StarState
     {
         NormalMode, // 通常状態 0
@@ -52,6 +53,7 @@ public class StarDirector : MonoBehaviour
                 backImageObjects[1].GetComponent<Image>().sprite = backImages[2]; // 観客背景を通常モードにする
                 animAi.SetBool("isStarMode", false); // アイのスターモードアニメーションを終了する
                 starState = StarState.NormalMode; // 通常モードに変更
+                starCount += 1; // お星様モードを加算する
             }
         }
     }

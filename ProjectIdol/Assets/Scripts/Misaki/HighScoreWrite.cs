@@ -19,9 +19,18 @@ public class HighScoreWrite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreText[0].text = string.Format("{0:000}Pt", dataManager.data.puzzleHighScore); // パズルモードスコア書き出し
+        ShowHighScore(); // ハイスコアを表示
+    }
+    public void ResetHighScore()
+    {
+        dataManager.ResetHighScore(); // ハイスコアをリセット
+        ShowHighScore(); // ハイスコアを表示する
+    }
+    private void ShowHighScore()
+    {
+        scoreText[0].text = string.Format("{0:00000000}Pt", dataManager.data.puzzleHighScore); // パズルモードスコア書き出し
         scoreText[1].text = string.Format(dataManager.data.puzzleHighScoreRank); // パズルモードランク書き出し
-        scoreText[2].text = string.Format("{0:000}Pt", dataManager.data.rhythmHighScore); // リズムモードスコア書き出し
+        scoreText[2].text = string.Format("{0:00000000}Pt", dataManager.data.rhythmHighScore); // リズムモードスコア書き出し
         scoreText[3].text = string.Format(dataManager.data.rhythmHighScoreRank); // リズムモードランク書き出し
     }
 }
