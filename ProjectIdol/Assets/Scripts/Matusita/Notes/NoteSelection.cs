@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteSelection: MonoBehaviour
+public class NoteSelection : MonoBehaviour
 {
     public GameObject l_prefabBlue;     //左側専用の青
     public GameObject l_prefabRed;      //左側専用の赤
@@ -24,7 +24,7 @@ public class NoteSelection: MonoBehaviour
             {
                 //生成位置
                 Vector3 pos = new Vector3(0, -23, 0);
-                //青と青を生成させる
+                //青と青を生成させる         (生成したいもの,場所,角度);
                 Instantiate(l_prefabBlue, pos, Quaternion.identity);
                 Instantiate(r_prefabBlue, pos, Quaternion.identity);
             }

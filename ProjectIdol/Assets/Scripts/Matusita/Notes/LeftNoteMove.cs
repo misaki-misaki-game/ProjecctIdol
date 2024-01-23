@@ -15,23 +15,19 @@ public class LeftNoteMove : MonoBehaviour
 
         if (noteRand == 0)
         {
-            //â∫
-            direction = new Vector3(0, -1, 0);
+            direction = new Vector3(-2.8f, -6.5f, 0).normalized;
         }
         else if (noteRand == 1)
         {
-            //ç∂
-            direction = new Vector3(-1, 0, 0);
+            direction = new Vector3(-6.5f, -2.8f, 0).normalized;
         }
         else if (noteRand == 2)
         {
-            //ç∂â∫
-            direction = new Vector3(-1, -1, 0).normalized;
+            direction = new Vector3(-6.5f, 2.8f, 0).normalized;
         }
         else if (noteRand == 3)
         {
-            //ç∂è„
-            direction = new Vector3(-1, 1, 0).normalized;
+            direction = new Vector3(-2.8f, 6.5f, 0).normalized;
         }
     }
 
