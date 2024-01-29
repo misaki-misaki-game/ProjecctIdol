@@ -13,11 +13,8 @@ public class NoteSelection : MonoBehaviour
     public GameObject r_prefabWhite;    //右側専用の白
     public GameObject r_prefabYellow;   //右側専用の黄
 
-    void Update()
+    public void SpawnNote()
     {
-        //30フレームごとにシーンにプレハブ生成
-        if (Time.frameCount % 240 == 0)
-        {
             int randNumber = Random.Range(0, 15);
 
             if (randNumber == 0)
@@ -147,8 +144,6 @@ public class NoteSelection : MonoBehaviour
                 //黄と黄を生成させる
                 Instantiate(l_prefabYellow, pos, Quaternion.identity);
                 Instantiate(r_prefabYellow, pos, Quaternion.identity);
-            }
-
         }
     }
 }

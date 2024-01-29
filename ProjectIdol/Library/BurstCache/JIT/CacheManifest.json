@@ -3,7 +3,7 @@
   "Assemblies": [
     {
       "FullName": "Unity.2D.Animation.Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:32.0312039Z"
+      "LastWriteTime": "2024-01-23T12:28:23.603884Z"
     },
     {
       "FullName": "UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -15,11 +15,11 @@
     },
     {
       "FullName": "Unity.Mathematics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:31.1854067Z"
+      "LastWriteTime": "2024-01-23T12:28:23.6318907Z"
     },
     {
       "FullName": "Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:31.1794051Z"
+      "LastWriteTime": "2024-01-23T12:28:23.624889Z"
     },
     {
       "FullName": "netstandard, Version=2.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
@@ -31,11 +31,11 @@
     },
     {
       "FullName": "Unity.2D.Common.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:30.8293248Z"
+      "LastWriteTime": "2024-01-23T12:28:23.6068848Z"
     },
     {
       "FullName": "Unity.2D.SpriteShape.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:30.8132819Z"
+      "LastWriteTime": "2024-01-23T12:28:23.6158867Z"
     },
     {
       "FullName": "UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -43,7 +43,7 @@
     },
     {
       "FullName": "Unity.RenderPipelines.Universal.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "LastWriteTime": "2024-01-23T11:39:31.3459709Z"
+      "LastWriteTime": "2024-01-23T12:28:23.650895Z"
     },
     {
       "FullName": "mscorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -168,6 +168,7 @@
       "AssemblyDependencyIndices": [
         6,
         10,
+        11,
         2,
         3,
         5
@@ -218,7 +219,6 @@
       "AssemblyDependencyIndices": [
         6,
         10,
-        11,
         3,
         2,
         5

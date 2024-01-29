@@ -15,6 +15,10 @@ public class ChangeScene : MonoBehaviour
         //リズムゲームに移動する
         SceneManager.LoadScene("RhythmGame");
     }
+    public void Retry_Rhythm()
+    {
+        SceneManager.LoadScene("RhythmGame");
+    }
     public void Change_Title()
     {
         //タイトルに移動する

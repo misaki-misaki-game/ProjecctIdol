@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638383874034988193
-    m_Hash: 680141602
+      ticks: 638421149967786781
+    m_Hash: 2588094934
   m_LockFileStatus:
     m_FilePath: "C:/Users/mo103/OneDrive/\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7/\u500B\u4EBA\u88FD\u4F5C/ProjecctIdol/ProjectIdol/Packages/packages-lock.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638383874034998195
-    m_Hash: 2912925151
+      ticks: 638417660372261834
+    m_Hash: 3564914703
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,65 @@ m_LocalPackages:
 m_ProjectPath: "C:/Users/mo103/OneDrive/\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7/\u500B\u4EBA\u88FD\u4F5C/ProjecctIdol/ProjectIdol/Packages"
 m_EditorVersion: 2021.3.7f1 (24e8595d6d43)
 m_ResolvedPackages:
+- packageId: jp.keijiro.klak.timeline.midi@1.0.5
+  testable: 0
+  isDirectDependency: 1
+  version: 1.0.5
+  source: 1
+  resolvedPath: "C:\\Users\\mo103\\OneDrive\\\u30C7\u30B9\u30AF\u30C8\u30C3\u30D7\\\u500B\u4EBA\u88FD\u4F5C\\ProjecctIdol\\ProjectIdol\\Library\\PackageCache\\jp.keijiro.klak.timeline.midi@1.0.5"
+  assetPath: Packages/jp.keijiro.klak.timeline.midi
+  name: jp.keijiro.klak.timeline.midi
+  displayName: MIDI Animation Track
+  author:
+    name: Keijiro Takahashi
+    email: 
+    url: 
+  category: 
+  type: 
+  description: MIDI Animation Track is a custom timeline/playables package that provides
+    functionality to control object properties based on sequence data contained in
+    a standard MIDI file
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.2
+    - 1.0.3
+    - 1.0.4
+    - 1.0.5
+    - 1.0.6
+    compatible:
+    - 1.0.2
+    - 1.0.3
+    - 1.0.4
+    - 1.0.5
+    - 1.0.6
+    verified: 
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - unity
+  registry:
+    id: scoped:Keijiro
+    name: Keijiro
+    url: https://registry.npmjs.com
+    scopes:
+    - jp.keijiro
+    isDefault: 0
+    capabilities: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 637768618470430000
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: git+https://github.com/keijiro/MidiAnimationTrack.git
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
 - packageId: com.unity.collab-proxy@1.17.1
   testable: 0
   isDirectDependency: 1

@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class RhythmManager : MonoBehaviour
 {
@@ -12,8 +13,13 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] GameObject countDownPanal;
     [SerializeField] TextMeshProUGUI countDownText;
 
-    //リザルトのパネル
+    [SerializeField] UiManager uiManager;
+    [SerializeField] TextMeshProUGUI rankText;
+
+    //リザルトパネル
     [SerializeField] GameObject resultPanel;
+
+    [SerializeField] GameObject noteController;
 
     //タイムラインを取得して再生
     [SerializeField] PlayableDirector playableDirector;
@@ -45,5 +51,7 @@ public class RhythmManager : MonoBehaviour
     {
         Debug.Log("game end");
         resultPanel.SetActive(true);
+        uiManager.Rank();
+        noteController.SetActive(false);
     }
 }
