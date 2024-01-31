@@ -10,12 +10,16 @@ public class ScoreDirector : SignalScript
 {
     // bool isgameOver = false; // ゲームオーバーかどうか
     bool isCombo = false; // コンボしているかどうか
+    bool isScoreCount = false; // スコアをカウントしているかどうか
+    float showScore = 0f; // 加算されるスコア変数
+    float timer = 0; // 加算する時間変数
     public float score = 0; // スコア計算用変数
     public float comboTime = 0; // コンボ持続タイム変数
     public float scoreBaseValue = 50; // 基礎スコア変数
     public float comboDurationTime = 1f; // コンボ継続時間変数
     public float totalScore = 0; // トータルスコア変数
     public float totalUltimateScore; // 究極トータルスコア
+    public float scoreAnimTime = 2f; // スコアのカウントアニメーションの時間変数
 
     /// <summary> 各究極ランクの下限の値 </summary>
     public float minRankS = 151f;
@@ -55,14 +59,18 @@ public class ScoreDirector : SignalScript
     public TextMeshProUGUI[] UltText = new TextMeshProUGUI[5]; // 究極パラメーターテキスト表示用
     public TextMeshProUGUI UltRankText; // ランクテキスト表示用
     public TextMeshProUGUI scoreText; // スコアテキスト表示用
+    public TextMeshProUGUI scoreShowText; // スコアテキスト表示用
     public TextMeshProUGUI comboText; // コンボテキスト表示用
     public StarDirector starDirector; // StarDirector変数
     public GameObject nextButton; // ボタン変数
     public GameObject resultObject; // リザルトオブジェクト変数
     public GameObject graphObject; // グラフオブジェクト変数
+    public GameObject currentScoreObject; // 現在のスコアオブジェクト変数
+    public GameObject rankingObject; // ランキングオブジェクト変数
     public AudioSource SEAudioSource; // SE用オーディオソース
     public AudioClip SEAudioClip; // 決定音クリップ
     public DataManager dataManager; // DataManager変数
+    public Ranking ranking; // Ranking変数
     public Image Gauge; // コンボゲージ
 
     // Start is called before the first frame update
@@ -76,6 +84,8 @@ public class ScoreDirector : SignalScript
     {
         // コンボ持続の処理
         ContinuationCombo();
+        // トータルスコアが確定したらスコアを加算するアニメーションを呼び出す
+        CountShowScore(totalScore, scoreAnimTime);
     }
 
     private void InitializationUI() // コンボとトータルスコアを初期化する関数
@@ -282,19 +292,57 @@ public class ScoreDirector : SignalScript
     }
     private void RecordUpdate() // ハイスコアの更新関数
     {
-        if (totalScore > dataManager.data.puzzleHighScore) // 今回のスコアがハイスコアを超えれば
+        if (totalScore > dataManager.data.puzzleRanking[0]) // 今回のスコアがハイスコアを超えれば
         {
             dataManager.data.puzzleHighScore = totalScore; // ハイスコアを更新する
             dataManager.data.puzzleHighScoreRank = rank[4]; // ランクを更新する
             dataManager.Save(dataManager.data); // セーブする
         }
     }
-    public void ShowResult()
+    /// <summary>
+    /// スコアを加算するアニメーション関数
+    /// </summary>
+    /// <param name="totalScore">今回のゲームのトータルスコア</param>
+    /// <param name="countTime">加算するアニメーションの秒数</param>
+    void CountShowScore(float totalScore, float countTime)
+    {
+        if (!isScoreCount) return; // isScoreCountがfalseならリターンを返す
+        if (showScore < totalScore)
+        {
+            timer += Time.deltaTime; // deltaTimeを加算する
+            float progress = Mathf.Clamp01(timer / countTime); // timer/countTimeの割合を代入
+            showScore = Mathf.Lerp(0, totalScore, progress); // 0からtotalScoreまでの値に対して割合(progress)を代入
+            scoreShowText.text = string.Format("{0:00000000}", showScore); // スコアを表示
+        }
+        // showScoreがtotalScoreを超えたら表記ずれしないようにtotalScoreを表示する
+        else
+        {
+            scoreShowText.text = string.Format("{0:00000000}", totalScore); // スコアを表示
+            isScoreCount = false; // CountShowScoreを呼び出さないようにfalseにする
+        }
+    }
+    public void ShowUltScore()
     {
         SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
         SEAudioSource.Play(); // SEを鳴らす
         nextButton.SetActive(false); // ボタンを非表示
         graphObject.SetActive(false); // グラフを非表示
         resultObject.SetActive(true); // リザルトを表示
+    }
+    public void ShowScore()
+    {
+        SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
+        SEAudioSource.Play(); // SEを鳴らす
+        resultObject.SetActive(false); // リザルトを非表示
+        currentScoreObject.SetActive(true); // スコア画面を表示
+        isScoreCount = true; // isScoreCountをtrueにしてCountShowScoreを呼び出すようにする
+    }
+    public void ShowRanking()
+    {
+        SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
+        SEAudioSource.Play(); // SEを鳴らす
+        currentScoreObject.SetActive(false); // スコア画面を非表示
+        rankingObject.SetActive(true); // ランキング画面を表示
+        ranking.CheckRankin(totalScore); // ランキングに入っているかのチェック
     }
 }

@@ -7,6 +7,7 @@ using System;
 public class MasterData // jsonデータとして保存するclass
 {
     public float puzzleHighScore = 0f; // パズルハイスコア
+    public float[] puzzleRanking = new float[10]; // パズルランキング
     public float rhythmHighScore = 0f; // リズムハイスコア
     public string puzzleHighScoreRank = "D"; // パズルハイスコアランク
     public string rhythmHighScoreRank = "D"; // リズムハイスコアランク
