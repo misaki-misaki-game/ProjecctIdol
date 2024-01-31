@@ -56,14 +56,12 @@ public class UiManager : MonoBehaviour
         {
             score = 0;
             combo = 0;
-            star = 0;
         }
-        //else
-        //{
-        //    score -= 25;
-        //    combo = 0;
-        //    star -= -1;
-        //}
+        else
+        {
+            score -= 25;
+            combo = 0;
+        }
     }
 
     public void BonusCalculate()
@@ -136,8 +134,7 @@ public class UiManager : MonoBehaviour
         Debug.Log("rank");
         if(score >= 0 && score <= 1000)
         {
-            Debug.Log("rank•\Ž¦");
-            rankText.text = "G";
+            rankText.text = "-G-";
         }
 
     }

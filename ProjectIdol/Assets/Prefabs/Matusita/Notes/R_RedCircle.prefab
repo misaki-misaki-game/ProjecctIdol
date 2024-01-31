@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6900093665810895429}
   - component: {fileID: 6772606074584842787}
   - component: {fileID: 908082580807835224}
-  - component: {fileID: 8906145310942897918}
+  - component: {fileID: 100079739470609302}
   m_Layer: 0
-  m_Name: R_RedCircle
+  m_Name: r_RedCircle
   m_TagString: Note
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b331240c15379418b52cc3fa303fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8906145310942897918
+--- !u!114 &100079739470609302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,6 +124,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 702260893607488953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe9a34891b733b444afb6f9476134432, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cbd0eb26a6a18e4cb82d8d4b4d38bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
