@@ -26,13 +26,13 @@ public class Ranking : MonoBehaviour
     /// <summary>
     /// ランクインしているかの関数
     /// </summary>
-    public void CheckRankin(float currentScore)
+    public void CheckRankin(float[] ranking, float currentScore)
     {
-        if (dataManager.data.puzzleRanking[9] < currentScore) // 10位より獲得スコアが大きい場合
+        if (ranking[9] < currentScore) // 10位より獲得スコアが大きい場合
         {
-            dataManager.data.puzzleRanking[9] = currentScore; // 10位を上書きする
-            UpdateRanking(); // ランキングの整理を行う
-            int element = SearchDescending(dataManager.data.puzzleRanking, currentScore);
+            ranking[9] = currentScore; // 10位を上書きする
+            UpdateRanking(ranking); // ランキングの整理を行う
+            int element = SearchDescending(ranking, currentScore);
             // ランクインしたスコア順位のanimatorのisCurrentScore変数を真にする
             nodeAnimator[element].SetBool("isCurrentScore", true);
             // スクロールの目標値をelementによって設定する
@@ -61,7 +61,7 @@ public class Ranking : MonoBehaviour
                 isScroll = true; // スクロールを許可する
             }
         }
-        WriteRanking(); // ランキングを表示
+        WriteRanking(ranking); // ランキングを表示
     }
     /// <summary>
     /// スクロールする関数
@@ -87,20 +87,20 @@ public class Ranking : MonoBehaviour
     /// <summary>
     /// ランキングの整理をする関数
     /// </summary>
-    void UpdateRanking()
+    void UpdateRanking(float[] ranking)
     {
         // クイックソート(降順)を行う
-        QuickSortDescending(dataManager.data.puzzleRanking, 0, dataManager.data.puzzleRanking.Length - 1);
+        QuickSortDescending(ranking, 0, ranking.Length - 1);
         dataManager.Save(dataManager.data); // セーブする
     }
     /// <summary>
     /// ランキングの書き込み関数
     /// </summary>
-    void WriteRanking()
+    void WriteRanking(float[] ranking)
     {
         for (int i = 0; i < rankingScoreText.Length; i++)
         {
-            rankingScoreText[i].text = string.Format("{0:0000000}Pt", dataManager.data.puzzleRanking[i]); // 各順位を書き出し
+            rankingScoreText[i].text = string.Format("{0:0000000}Pt", ranking[i]); // 各順位を書き出し
         }
     }
     /// <param name="array">対象の配列</param>

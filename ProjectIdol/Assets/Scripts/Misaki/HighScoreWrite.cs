@@ -30,7 +30,7 @@ public class HighScoreWrite : MonoBehaviour
     {
         scoreText[0].text = string.Format("{0:00000000}Pt", dataManager.data.puzzleHighScore); // パズルモードスコア書き出し
         scoreText[1].text = string.Format(dataManager.data.puzzleHighScoreRank); // パズルモードランク書き出し
-        scoreText[2].text = string.Format("{0:00000000}Pt", dataManager.data.rhythmHighScore); // リズムモードスコア書き出し
+        scoreText[2].text = string.Format("{0:00000000}Pt", dataManager.data.rhythmRanking[0]); // リズムモードスコア書き出し
         scoreText[3].text = string.Format(dataManager.data.rhythmHighScoreRank); // リズムモードランク書き出し
     }
 }

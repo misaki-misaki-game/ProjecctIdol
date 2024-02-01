@@ -333,7 +333,7 @@ public class ScoreDirector : SignalScript
     {
         SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
         SEAudioSource.Play(); // SEを鳴らす
-        resultObject.SetActive(false); // リザルトを非表示
+        if(resultObject) resultObject.SetActive(false); // リザルトを非表示
         currentScoreObject.SetActive(true); // スコア画面を表示
         isScoreCount = true; // isScoreCountをtrueにしてCountShowScoreを呼び出すようにする
     }
@@ -343,6 +343,6 @@ public class ScoreDirector : SignalScript
         SEAudioSource.Play(); // SEを鳴らす
         currentScoreObject.SetActive(false); // スコア画面を非表示
         rankingObject.SetActive(true); // ランキング画面を表示
-        ranking.CheckRankin(totalScore); // ランキングに入っているかのチェック
+        ranking.CheckRankin(dataManager.data.puzzleRanking, totalScore); // ランキングに入っているかのチェック
     }
 }

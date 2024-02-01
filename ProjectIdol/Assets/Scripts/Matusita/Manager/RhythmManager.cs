@@ -24,6 +24,8 @@ public class RhythmManager : MonoBehaviour
     //タイムラインを取得して再生
     [SerializeField] PlayableDirector playableDirector;
 
+    //キャラクターアニメーション
+    [SerializeField] Animator charaAnimator;
 
     void Start()
     {
@@ -42,6 +44,7 @@ public class RhythmManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         countDownText.text = " ";
         countDownPanal.SetActive(false);
+        charaAnimator.SetTrigger("isDanceStart"); // キャラクターのアニメーションをスタートする
         yield return new WaitForSeconds(0.3f);
         playableDirector.Play();
     }
@@ -50,8 +53,10 @@ public class RhythmManager : MonoBehaviour
     public void EndEvent()
     {
         Debug.Log("game end");
-        resultPanel.SetActive(true);
+        charaAnimator.SetTrigger("isDanceEnd"); // キャラクターのアニメーションを終了する
+        //resultPanel.SetActive(true);
         uiManager.Rank();
+        uiManager.ShowScore();
         noteController.SetActive(false);
     }
 }
