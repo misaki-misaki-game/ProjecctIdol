@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Misaki/PazulScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Misaki/ResultScene.unity
-    guid: fe2399731f8e1634a8765097da8e94b3
-  - enabled: 1
     path: Assets/Scenes/Matusita/RhythmGame.unity
     guid: 0901474deb46b2447a6854166ce73ee0
   m_configObjects: {}
