@@ -96,13 +96,12 @@ public class SignalScript : MonoBehaviour
         if (isChain)
         {
             setSignalPoint -= 1; // チェインしている場合はシグナルをクリックした時点でAddSetSignalPointが呼び出されてしまうので、
-                                  // setSignalPointを-1にすることで調整
+                                 // setSignalPointを-1にすることで調整
         }
         state = STATE.NOTHING; // stateをNOTHINGにする
         sp.sprite = null; // シグナル画像をnullにする
         effectState = Effect.NOTHINGEFFECT; // エフェクトステータスをなにもないときに変更
         PlayEffect(effectState); // エフェクトを呼び出す
-        // StartCoroutine(DelayCoroutine()); // ディレイコルーチンを呼び出し 仕様変更のためコメント化
     }
     public void AddSetSignalPoint() // SetSignalPointを加算する関数
     {
@@ -135,16 +134,4 @@ public class SignalScript : MonoBehaviour
                 break;
         }
     }
-    /*
-    private IEnumerator DelayCoroutine() // ディレイコルーチン　仕様変更のためコメント化
-    {
-        // delayTimeの値F(初期値20F)分待つ
-        for (var i = 0; i < setSignalDelayTime; i++)
-        {
-            yield return null;
-        }
-        // delayTimeの値Fに色を変更
-        SetSignal();
-    }
-    */
 }

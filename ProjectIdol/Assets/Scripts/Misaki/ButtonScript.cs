@@ -7,22 +7,22 @@ using Unity.VisualScripting;
 
 public class ButtonScript : MonoBehaviour
 {
-    GameObject textObject;
-    public TextMeshPro text;
-    SignalScript.STATE state; //SignalScriptのSTATE変数
-    public float chain = 0; // チェイン変数
-    public bool isChain = false; // チェインしているかどうか
-    public bool gameStart = false; // ゲームがスタートしているかどうか
-    public int resetStock = 3; // リセット回数
     int centerSignalTP = 0; // 10の位 列
     int centerSignalDP = 0; // 1の位 行
+    GameObject textObject;
+    SignalScript.STATE state; //SignalScriptのSTATE変数
     SignalScript centerSignalSS; // クリックしたオブジェクトのSignalScript格納用
     SignalScript comparisonSignalSS; // クリックしていないオブジェクトのSignalScript格納用
-    public ScoreDirector ScoreDirector; // ScoreDirector変数
-    public StarDirector StarDirector; // StarDirector変数
+    public bool isChain = false; // チェインしているかどうか
+    public bool gameStart = false; // ゲームがスタートしているかどうか
+    public float chain = 0; // チェイン変数
+    public int resetStock = 3; // リセット回数
+    public AudioSource SEAudioSource; // SE用オーディオソース
     public GameObject clickedGameObject; // クリックしたオブジェクトを格納する変数
     public GameObject[] signals; // シグナル格納用
-    public AudioSource SEAudioSource; // SE用オーディオソース
+    public ScoreDirector ScoreDirector; // ScoreDirector変数
+    public StarDirector StarDirector; // StarDirector変数
+    public TextMeshPro getScoreText; // 取得したスコアを表示するテキスト変数
 
     // Update is called once per frame
     void Update()
@@ -130,6 +130,7 @@ public class ButtonScript : MonoBehaviour
         if (chain > 0) // チェイン数が0より多いなら
         {
             isChain = true; // isChainを真にする
+            // ここでチェイン数がわかる //
         }
         state = centerSignalSS.state; // 押したボタンのstateを代入する
         // チェインしていたらtrueを返す
@@ -181,14 +182,14 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-     private void ShowGetScore() // ゲットしたスコアを表示する関数
+    private void ShowGetScore() // ゲットしたスコアを表示する関数
     {
         textObject = clickedGameObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
-        text = textObject.GetComponent<TextMeshPro>(); // TextMEshProを代入
-        text.text = string.Format("+ {0:0}", ScoreDirector.score); // ゲットしたスコアを代入
+        getScoreText = textObject.GetComponent<TextMeshPro>(); // TextMeshProを代入
+        getScoreText.text = string.Format("+ {0:0}", ScoreDirector.score); // ゲットしたスコアを代入
         textObject.GetComponent<Animator>().SetTrigger("GetScore"); // アニメーションを再生
     }
-   public void AllButtonsReset() // 全てのシグナルをリセットする
+    public void AllButtonsReset() // 全てのシグナルをリセットする
     {
         if (resetStock > 0)
         {
@@ -203,7 +204,15 @@ public class ButtonScript : MonoBehaviour
                     int childCount = signals[j * 10 + i].transform.childCount; // 子オブジェクトの個数を代入
                     if (childCount > 5) // 子オブジェクトの個数が5を超過している場合(復活待機中のエフェクトがあるものは子オブジェクトが6あるため)
                     {
-                        Destroy(signals[j * 10 + i].transform.GetChild(4).gameObject); // 復活待機中エフェクトを破壊する
+                        //Debug.Log(childCount);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(0).gameObject);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(1).gameObject);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(2).gameObject);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(3).gameObject);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(4).gameObject);
+                        //Debug.Log(signals[j * 10 + i].transform.GetChild(5).gameObject);
+                        Destroy(signals[j * 10 + i].transform.GetChild(3).gameObject); // 復活待機中エフェクトを破壊する
+                        Destroy(signals[j * 10 + i].transform.GetChild(5).gameObject); // 復活待機中エフェクトを破壊する
                     }
                 }
             }
