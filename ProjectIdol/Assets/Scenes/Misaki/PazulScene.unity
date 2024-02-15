@@ -3863,7 +3863,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   signals:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3953,13 +3955,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3feb969f769c8a84e9d60eb0106db534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
-  chain: 0
   isChain: 0
   gameStart: 0
+  chain: 0
   resetStock: 3
-  ScoreDirector: {fileID: 821901329}
-  StarDirector: {fileID: 821901330}
+  SEAudioSource: {fileID: 821901333}
   clickedGameObject: {fileID: 620272868}
   signals:
   - {fileID: 616786867}
@@ -4018,7 +4018,9 @@ MonoBehaviour:
   - {fileID: 319447120}
   - {fileID: 2033468640}
   - {fileID: 0}
-  SEAudioSource: {fileID: 821901333}
+  ScoreDirector: {fileID: 821901329}
+  StarDirector: {fileID: 821901330}
+  getScoreText: {fileID: 0}
 --- !u!82 &821901333
 AudioSource:
   m_ObjectHideFlags: 0

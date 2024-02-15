@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour
 {
     int centerSignalTP = 0; // 10の位 列
     int centerSignalDP = 0; // 1の位 行
-    GameObject textObject;
+    GameObject scoreTextObject; // テキストのオブジェクト変数
     SignalScript.STATE state; //SignalScriptのSTATE変数
     SignalScript centerSignalSS; // クリックしたオブジェクトのSignalScript格納用
     SignalScript comparisonSignalSS; // クリックしていないオブジェクトのSignalScript格納用
@@ -43,7 +43,7 @@ public class ButtonScript : MonoBehaviour
                 if (CheckSignalState(clickedGameObject)) return; // シグナルの色をチェックしてNOTHINGならリターンする
                 if (!CheckChainSignal(clickedGameObject)) return; // チェイン確認関数を呼び出し チェインしていなければリターンする
                 SEAudioSource.Play(); // SEを鳴らす
-                clickedGameObject.GetComponent<SignalScript>().BreakSignal(isChain); // ブレイク関数を呼び出し
+                clickedGameObject.GetComponent<SignalScript>().BreakSignal(isChain,chain); // ブレイク関数を呼び出し
                 ResurrectionSignal(); // stateがNOTHINGのシグナル全てにsetSignalPointを1加算する
                 ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
                 ShowGetScore(); // ゲットしたスコアを表示する
@@ -184,14 +184,14 @@ public class ButtonScript : MonoBehaviour
     }
     private void ShowGetScore() // ゲットしたスコアを表示する関数
     {
-        textObject = clickedGameObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
-        getScoreText = textObject.GetComponent<TextMeshPro>(); // TextMeshProを代入
+        scoreTextObject = clickedGameObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
+        getScoreText = scoreTextObject.GetComponent<TextMeshPro>(); // TextMeshProを代入
         getScoreText.text = string.Format("+ {0:0}", ScoreDirector.score); // ゲットしたスコアを代入
-        textObject.GetComponent<Animator>().SetTrigger("GetScore"); // アニメーションを再生
+        scoreTextObject.GetComponent<Animator>().SetTrigger("GetScore"); // アニメーションを再生
     }
     public void AllButtonsReset() // 全てのシグナルをリセットする
     {
-        if (resetStock > 0)
+        if (resetStock > 0) // 残りリセット回数が0を超過しているなら
         {
             for (int j = 0; j < 6; j++) // 列をチェック
             {
@@ -204,13 +204,6 @@ public class ButtonScript : MonoBehaviour
                     int childCount = signals[j * 10 + i].transform.childCount; // 子オブジェクトの個数を代入
                     if (childCount > 5) // 子オブジェクトの個数が5を超過している場合(復活待機中のエフェクトがあるものは子オブジェクトが6あるため)
                     {
-                        //Debug.Log(childCount);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(0).gameObject);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(1).gameObject);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(2).gameObject);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(3).gameObject);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(4).gameObject);
-                        //Debug.Log(signals[j * 10 + i].transform.GetChild(5).gameObject);
                         Destroy(signals[j * 10 + i].transform.GetChild(3).gameObject); // 復活待機中エフェクトを破壊する
                         Destroy(signals[j * 10 + i].transform.GetChild(5).gameObject); // 復活待機中エフェクトを破壊する
                     }
