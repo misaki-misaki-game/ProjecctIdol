@@ -181,7 +181,6 @@ public class ScoreDirector : SignalScript
             // 加算するスコアを1.2倍
             score *= 1.2f;
         }
-
         return score;
     }
     private float MultiplyStarMode(float score) // スターモードによる倍率を掛ける
