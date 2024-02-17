@@ -8,12 +8,10 @@ using System.Linq.Expressions;
 
 public class ButtonScript : MonoBehaviour
 {
-    bool checkTopRight = false; // 右上のシグナルを調べるかどうか
-    bool checkTopLeft = false; // 左上のシグナルを調べるかどうか 
-    bool checkBottomRight = false; // 右下のシグナルを調べるかどうか
-    bool checkBottomLeft = false; // 左下のシグナルを調べるかどうか
-    int centerSignalTP = 0; // 10の位 列
-    int centerSignalDP = 0; // 1の位 行
+    int centerSignalTP = 0; // 10の位 列(通常シグナル時)
+    int centerSignalDP = 0; // 1の位 行(通常シグナル時)
+    int detonationSignalTP = 0; // 10の位 列(誘爆時)
+    int detonationSignalDP = 0; // 1の位 行(誘爆時)
     GameObject scoreTextObject; // テキストのオブジェクト変数
     SignalScript.STATE state; //SignalScriptのSTATE変数
     SignalScript centerSignalSS; // クリックしたオブジェクトのSignalScript格納用
@@ -49,7 +47,8 @@ public class ButtonScript : MonoBehaviour
                 if (CheckSignalState(clickedGameObject)) return; // シグナルの色をチェックしてNOTHINGならリターンする
                 if (clickedGameObject.GetComponent<SignalScript>().state == SignalScript.STATE.SPECIAL) // X字ボムの場合
                 {
-                    CheckDetonation(clickedGameObject); // 
+                    CheckDetonation(clickedGameObject); // X字ボムの誘爆範囲を確認する
+                    DetonationBreak(); // 誘爆したシグナルを破壊する
                 }
                 else // それ以外の場合
                 {
@@ -64,6 +63,19 @@ public class ButtonScript : MonoBehaviour
                 Debug.Log(state + " 色シグナルをクリック");
             }
         }
+    }
+    /// <summary>
+    /// 誘爆したシグナルを破壊する関数
+    /// </summary>
+    private void DetonationBreak()
+    {
+        // 誘爆したシグナルのstateをdetonationStatesに代入してBreakSignal関数を呼び出す
+        for (int i = 0; i < detonationObjects.Count; i++)
+        {
+            ScoreDirector.detonationStates.Add(detonationObjects[i].GetComponent<SignalScript>().state);
+            detonationObjects[i].GetComponent<SignalScript>().BreakSignal(false);
+        }
+        detonationObjects = null; // 中身を空にする
     }
     private RaycastHit2D CheckHit() // ヒットしているかのチェック関数
     {
@@ -82,11 +94,11 @@ public class ButtonScript : MonoBehaviour
         return gameObject.GetComponent<SignalScript>().state == SignalScript.STATE.NOTHING;
     }
     /// <summary>
-    /// クリックされたオブジェクトの斜め4方向にあるシグナルを破壊する関数
+    /// クリックされたオブジェクトの斜め4方向にある全てのシグナル確認をする関数
     /// </summary>
     /// <param name="gameObject">クリックしたオブジェクト</param>
     /// <returns></returns>
-    private bool CheckDetonation(GameObject gameObject)
+    private void CheckDetonation(GameObject gameObject)
     {
         centerSignalTP = default; // 10の位 列
         centerSignalDP = default; // 1の位 行
@@ -94,141 +106,170 @@ public class ButtonScript : MonoBehaviour
         comparisonSignalSS = null; // クリックしていないオブジェクトのSignalScript格納用
 
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
+        SearchSignal(gameObject, ref centerSignalTP, ref centerSignalDP);
         // クリックしたオブジェクトのSignalScriptを格納
         centerSignalSS = signals[centerSignalTP * 10 + centerSignalDP].GetComponent<SignalScript>();
         if (centerSignalDP < 4) // クリックしたオブジェクトの行が右端でなければ 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
             detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP + 1]);
-            if (centerSignalDP % 2 == 0) checkBottomRight = true; // 右下を調べるためにtrueにする
-            else checkTopRight = true; // 右上を調べるためにtrueにする
+            if (centerSignalDP % 2 == 0) // 右下の場合
+            {
+                // 右下への探索を開始する
+                RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
+            }
+            else // 右上の場合
+            {
+                // 右上への探索を開始する
+                RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
+            }
         }
         if (centerSignalDP > 0) // クリックしたオブジェクトの行が左端でなければ
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
             detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP - 1]);
-            if (centerSignalDP % 2 == 0) checkBottomLeft = true; // 左下を調べるためにtrueにする
-            else checkTopLeft = true; // 左上を調べるためにtrueにする
+            if (centerSignalDP % 2 == 0) // 左下の場合
+            {
+                // 左下への探索を開始する
+                RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
+            }
+            else
+            {
+                // 左上への探索を開始する
+                RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
+            }
         }
         if (centerSignalTP > 0 && centerSignalDP < 4 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
         {
             // クリックしたオブジェクトの1つ右上のオブジェクトを格納
             detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1]);
-            checkTopRight = true; // 右上を調べるためにtrueにする
+            // 右上への探索を開始する
+            RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
         if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
         {
             // クリックしたオブジェクトの1つ左上のオブジェクトを格納
             detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1]);
-            checkTopLeft = true; // 左上を調べるためにtrueにする
+            // 左上への探索を開始する
+            RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
         if (centerSignalTP < 5 && centerSignalDP < 4 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
             detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1]);
-            checkBottomRight = true; // 右下を調べるためにtrueにする
+            // 右下への探索を開始する
+            RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
         if (centerSignalTP < 5 && centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
             detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1]);
-            checkBottomLeft = true; // 左下を調べるためにtrueにする
+            // 左下への探索を開始する
+            RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (chain > 0) // チェイン数が0より多いなら
-        {
-            isChain = true; // isChainを真にする
-            // ここでチェイン数がわかる //
-        }
-        // 再起関数(gameObject detonationObjects[detonationObjects.cont-1])
-
+        chain = (float)detonationObjects.Count; // detonationObjectsの要素数を代入
         state = centerSignalSS.state; // 押したボタンのstateを代入する
-        // チェインしていたらtrueを返す
-        return isChain == true;
+        isChain = true; // チェインしているのでtrueにする
     }
-    private void RecursiveCheckTopRight (GameObject gameObject, bool topRight)
+    /// <summary>
+    /// 右上への誘爆を探索する再帰関数
+    /// </summary>
+    /// <param name="gameObject">基準となるオブジェクト</param>
+    private void RecursiveCheckTopRight (GameObject gameObject)
     {
-        if (topRight == false) return; 
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
-        // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
-        if (centerSignalDP < 4 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの行が右端でなければ 
+        detonationSignalTP = default; // 10の位 列
+        detonationSignalDP = default; // 1の位 行
+        // 対象のオブジェクトが配列内オブジェクトのどれなのかを探す
+        SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
+        if (detonationSignalDP < 4 && detonationSignalDP % 2 > 0) // 対象のオブジェクトの行が右端でなければ 
         {
-            // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
-            detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP + 1]);
-            RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1], topRight);
+            // 対象のオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
+            detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP + 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (centerSignalTP > 0 && centerSignalDP < 4 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        else if (detonationSignalTP > 0 && detonationSignalDP < 4 && detonationSignalDP % 2 == 0) // 対象のオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
         {
-            // クリックしたオブジェクトの1つ右上のオブジェクトを格納
-            detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1]);
-            RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1], topRight);
+            // 対象のオブジェクトの1つ右上のオブジェクトを格納
+            detonationObjects.Add(signals[(detonationSignalTP - 1) * 10 + detonationSignalDP + 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else topRight = false;
     }
-    private void RecursiveCheckTopLeft(GameObject gameObject, bool topLeft)
+    /// <summary>
+    /// 左上への誘爆を探索する再帰関数
+    /// </summary>
+    /// <param name="gameObject">基準となるオブジェクト</param>
+    private void RecursiveCheckTopLeft(GameObject gameObject)
     {
-        if (topLeft == false) return;
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 列
+        detonationSignalDP = default; // 1の位 行
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
-        if (centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの行が左端でなければ
+        SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
+        if (detonationSignalDP > 0 && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの行が左端でなければ
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
-            detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP - 1]);
-            RecursiveCheckTopLeft(gameObject, topLeft);
+            detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP - 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        else if (detonationSignalTP > 0 && detonationSignalDP > 0 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
         {
             // クリックしたオブジェクトの1つ左上のオブジェクトを格納
-            detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1]);
-            RecursiveCheckTopLeft(gameObject, topLeft);
+            detonationObjects.Add(signals[(detonationSignalTP - 1) * 10 + detonationSignalDP - 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        else topLeft = false;
     }
-    private void RecursiveCheckBottomRight(GameObject gameObject, bool bottomRight)
+    /// <summary>
+    /// 右下への誘爆を探索する再帰関数
+    /// </summary>
+    /// <param name="gameObject">基準となるオブジェクト</param>
+    private void RecursiveCheckBottomRight(GameObject gameObject)
     {
-        if (bottomRight == false) return;
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 列
+        detonationSignalDP = default; // 1の位 行
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
-        if (centerSignalDP < 4 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの行が右端でなければ 
+        SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
+        if (detonationSignalDP < 4 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの行が右端でなければ 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
-            detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP + 1]);
-            RecursiveCheckBottomRight(gameObject, bottomRight);
+            detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP + 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (centerSignalTP < 5 && centerSignalDP < 4 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        else if (detonationSignalTP < 5 && detonationSignalDP < 4 && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
-            detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1]);
-            RecursiveCheckBottomRight(gameObject, bottomRight);
+            detonationObjects.Add(signals[(detonationSignalTP + 1) * 10 + detonationSignalDP + 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else bottomRight = false;
     }
-    private void RecursiveCheckBottomLeft(GameObject gameObject, bool bottomLeft)
+    /// <summary>
+    /// 左下への誘爆を探索する再帰関数
+    /// </summary>
+    /// <param name="gameObject">基準となるオブジェクト</param>
+    private void RecursiveCheckBottomLeft(GameObject gameObject)
     {
-        if (bottomLeft == false) return;
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 列
+        detonationSignalDP = default; // 1の位 行
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
-        if (centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの行が左端でなければ
+        SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
+        if (detonationSignalDP > 0 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの行が左端でなければ
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
-            detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP - 1]);
-            RecursiveCheckBottomLeft(gameObject, bottomLeft);
+            detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP - 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (centerSignalTP < 5 && centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        if (detonationSignalTP < 5 && detonationSignalDP > 0 && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
-            detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1]);
-            RecursiveCheckBottomLeft(gameObject, bottomLeft);
+            detonationObjects.Add(signals[(detonationSignalTP + 1) * 10 + detonationSignalDP - 1]);
+            // 条件を満たさなくなるまで探索する
+            RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        else bottomLeft = false;
     }
     private bool CheckChainSignal(GameObject gameObject) // クリックされたオブジェクトの6方向をチェックし、チェインを確認する関数
     {
@@ -238,7 +279,7 @@ public class ButtonScript : MonoBehaviour
         comparisonSignalSS = null; // クリックしていないオブジェクトのSignalScript格納用
 
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
-        SearchSignal(ref centerSignalTP, ref centerSignalDP);
+        SearchSignal(gameObject, ref centerSignalTP, ref centerSignalDP);
         // クリックしたオブジェクトのSignalScriptを格納
         centerSignalSS = signals[centerSignalTP * 10 + centerSignalDP].GetComponent<SignalScript>();
 
@@ -299,13 +340,13 @@ public class ButtonScript : MonoBehaviour
         // チェインしていたらtrueを返す
         return isChain == true;
     }
-    private void SearchSignal(ref int centerSignalTP, ref int centerSignalDP) // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す関数 ref...初期化必須
+    private void SearchSignal(GameObject gameObject, ref int centerSignalTP, ref int centerSignalDP) // 対象のオブジェクトが配列内オブジェクトのどれなのかを探す関数 ref...初期化必須
     {
         for (int j = 0; j < 6; j++) // 列をチェック
         {
             for (int i = 0; i < 5; i++) // 行をチェック
             {
-                if (clickedGameObject == signals[j * 10 + i]) // クリックしたオブジェクトと配列内のオブジェクトが同じなら
+                if (gameObject == signals[j * 10 + i]) // 対象のオブジェクトと配列内のオブジェクトが同じなら
                 {
                     centerSignalTP = j; // 列を格納
                     centerSignalDP = i; // 行を格納
@@ -313,7 +354,7 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private void CheckSameSignal(SignalScript centerSignalSS, SignalScript comparisonSignalSS)
+    private void CheckSameSignal(SignalScript centerSignalSS, SignalScript comparisonSignalSS) // 同じstateかどうかを確認する関数
     {
         if (centerSignalSS.state == comparisonSignalSS.state) // stateが同じなら
         {

@@ -72,6 +72,7 @@ public class ScoreDirector : SignalScript
     public DataManager dataManager; // DataManager変数
     public Ranking ranking; // Ranking変数
     public Image Gauge; // コンボゲージ
+    public List<STATE> detonationStates; // 誘爆したシグナルのstate格納用
 
     // Start is called before the first frame update
     void Start()
@@ -139,7 +140,7 @@ public class ScoreDirector : SignalScript
         // コンボを表示
         comboText.text = string.Format("{0:0}combo", combo);
     }
-    private float AddBaseValue(float chain, bool isChain)
+    private float AddBaseValue(float chain, bool isChain) // 基礎スコアを計算する関数
     {
         float score;
         if (isChain) // チェインが発生していれば
@@ -166,7 +167,6 @@ public class ScoreDirector : SignalScript
         {
             score = scoreBaseValue; // 50を加算
         }
-
         return score;
     }
     private float MultiplyCombo(float score) // コンボ数による倍率を掛ける
@@ -208,6 +208,27 @@ public class ScoreDirector : SignalScript
                 break;
             case STATE.WHITE:
                 ultimateScore[2] += chain + 1f;
+                break;
+            case STATE.SPECIAL:
+                // X字ボムによって壊したシグナルのstateによってステータスポイントを加算
+                for (int i = 0; i < detonationStates.Count; i++)
+                {
+                    switch (detonationStates[i])
+                    {
+                        case STATE.RED:
+                            ultimateScore[1] += 1f;
+                            break;
+                        case STATE.BLUE:
+                            ultimateScore[0] += 1f;
+                            break;
+                        case STATE.YELLOW:
+                            ultimateScore[3] += 1f;
+                            break;
+                        case STATE.WHITE:
+                            ultimateScore[2] += 1f;
+                            break;
+                    }
+                }
                 break;
         }
     }

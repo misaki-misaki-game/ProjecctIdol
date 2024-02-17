@@ -9,6 +9,8 @@ using TMPro;
 public class SignalScript : MonoBehaviour
 {
     bool isBomb = false; // そのシグナルがボムになるかどうかの真偽
+    int bomb = 0; // X字ボムの個数
+    int bombMax = 3; // X字ボムの個数上限
     SpriteRenderer sp; // 画像を切り替える
 
     public enum STATE // ステータス
@@ -37,9 +39,6 @@ public class SignalScript : MonoBehaviour
     public GameObject[] effects = new GameObject[4]; // エフェクト配列
     [EnumIndex(typeof(STATE))]
     public Sprite[] signals = new Sprite[6]; // シグナル画像配列
-
-
-    // public float setSignalDelayTime = 20; // シグナル再召喚までのフレーム変数 仕様変更のためコメント化
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +102,7 @@ public class SignalScript : MonoBehaviour
     }
     public void BreakSignal(bool isChain, float chain = 0) // ブレイクシグナル関数
     {
+        if (state == STATE.NOTHING) return; // stateがNOTHINGがリターンする
         setSignalPoint = default; // setSignalPointにdefaultPointを代入する
         if (isChain)
         {
@@ -111,18 +111,18 @@ public class SignalScript : MonoBehaviour
         }
         effectState = Effect.BREAKEFFECT; // エフェクトステータスを押されたときに変更
         PlayEffect(effectState); // エフェクトを呼び出す
-        state = STATE.NOTHING; // stateをNOTHINGにする
-        sp.sprite = null; // シグナル画像をnullにする
-        if (chain >= bombRequirement) // チェイン数がボムをセットする条件より多い場合
+        if (chain >= bombRequirement && state != STATE.SPECIAL) // チェイン数がボムをセットする条件より多い場合 かつ stateがSPECIAL以外の場合
         {
             effectState = Effect.BOMBSETEFFECT; // エフェクトステータスをシグナルが無し兼ボムをセットするときに変更
-            isBomb = true;
+            isBomb = true; // ボムにするためにtrueにする
         }
         else // それ以外
         {
             effectState = Effect.NOTHINGEFFECT; // エフェクトステータスをなにもないときに変更
-            isBomb = false;
+            isBomb = false; // ボムにしないためにtrueにする
         }
+        state = STATE.NOTHING; // stateをNOTHINGにする
+        sp.sprite = null; // シグナル画像をnullにする
         PlayEffect(effectState); // エフェクトを呼び出す
     }
     public void AddSetSignalPoint() // SetSignalPointを加算する関数
