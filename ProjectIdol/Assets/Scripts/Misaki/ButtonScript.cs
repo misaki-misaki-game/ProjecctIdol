@@ -23,6 +23,7 @@ public class ButtonScript : MonoBehaviour
     public AudioSource SEAudioSource; // SE用オーディオソース
     public GameObject clickedGameObject; // クリックしたオブジェクトを格納する変数
     public GameObject[] signals; // シグナル格納用
+    public List<GameObject> specialSignals; // X字ボム格納用
     public List<GameObject> detonationObjects; // 誘爆したシグナル格納用
     public ScoreDirector ScoreDirector; // ScoreDirector変数
     public StarDirector StarDirector; // StarDirector変数
@@ -58,24 +59,11 @@ public class ButtonScript : MonoBehaviour
                 clickedGameObject.GetComponent<SignalScript>().BreakSignal(isChain,chain); // ブレイク関数を呼び出し
                 ResurrectionSignal(); // stateがNOTHINGのシグナル全てにsetSignalPointを1加算する
                 ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
-                ShowGetScore(); // ゲットしたスコアを表示する
+                ShowGetScore(clickedGameObject); // ゲットしたスコアを表示する
                 StarDirector.GetStar(chain); // ゲットスター関数を呼び出し
                 Debug.Log(state + " 色シグナルをクリック");
             }
         }
-    }
-    /// <summary>
-    /// 誘爆したシグナルを破壊する関数
-    /// </summary>
-    private void DetonationBreak()
-    {
-        // 誘爆したシグナルのstateをdetonationStatesに代入してBreakSignal関数を呼び出す
-        for (int i = 0; i < detonationObjects.Count; i++)
-        {
-            ScoreDirector.detonationStates.Add(detonationObjects[i].GetComponent<SignalScript>().state);
-            detonationObjects[i].GetComponent<SignalScript>().BreakSignal(false);
-        }
-        detonationObjects = null; // 中身を空にする
     }
     private RaycastHit2D CheckHit() // ヒットしているかのチェック関数
     {
@@ -112,6 +100,7 @@ public class ButtonScript : MonoBehaviour
         if (centerSignalDP < 4) // クリックしたオブジェクトの行が右端でなければ 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
+            Debug.Log(centerSignalTP + "と" + centerSignalDP);
             detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP + 1]);
             if (centerSignalDP % 2 == 0) // 右下の場合
             {
@@ -167,7 +156,6 @@ public class ButtonScript : MonoBehaviour
             // 左下への探索を開始する
             RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        chain = (float)detonationObjects.Count; // detonationObjectsの要素数を代入
         state = centerSignalSS.state; // 押したボタンのstateを代入する
         isChain = true; // チェインしているのでtrueにする
     }
@@ -271,6 +259,24 @@ public class ButtonScript : MonoBehaviour
             RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
     }
+    /// <summary>
+    /// 誘爆したシグナルを破壊する関数
+    /// </summary>
+    private void DetonationBreak()
+    {
+        // 誘爆したシグナルのstateをdetonationStatesに代入してBreakSignal関数を呼び出す(NOTHING以外)
+        for (int i = 0; i < detonationObjects.Count; i++)
+        {
+            if (detonationObjects[i].GetComponent<SignalScript>().state != SignalScript.STATE.NOTHING)
+            {
+                chain = (float)detonationObjects.Count; // detonationObjectsの要素数を代入
+                ScoreDirector.detonationStates.Add(detonationObjects[i].GetComponent<SignalScript>().state);
+                detonationObjects[i].GetComponent<SignalScript>().BreakSignal(false);
+            }
+        }
+        detonationObjects = new List<GameObject>(); // 中身を空にする
+    }
+
     private bool CheckChainSignal(GameObject gameObject) // クリックされたオブジェクトの6方向をチェックし、チェインを確認する関数
     {
         centerSignalTP = default; // 10の位 列
@@ -386,9 +392,9 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private void ShowGetScore() // ゲットしたスコアを表示する関数
+    private void ShowGetScore(GameObject clickedObject) // ゲットしたスコアを表示する関数
     {
-        scoreTextObject = clickedGameObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
+        scoreTextObject = clickedObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
         getScoreText = scoreTextObject.GetComponent<TextMeshPro>(); // TextMeshProを代入
         getScoreText.text = string.Format("+ {0:0}", ScoreDirector.score); // ゲットしたスコアを代入
         scoreTextObject.GetComponent<Animator>().SetTrigger("GetScore"); // アニメーションを再生
@@ -415,5 +421,22 @@ public class ButtonScript : MonoBehaviour
             }
             resetStock -= 1; // 残りリセット回数を1減らす
         }
+    }
+    /// <summary>
+    /// ボムの自動爆破関数
+    /// </summary>
+    /// <param name="special">爆発させるボムオブジェクト</param>
+    public void BombTimeOver(GameObject special)
+    {
+        InitializationChain(); // チェイン系の変数を初期化
+        CheckDetonation(special); // X字ボムの誘爆範囲を確認する
+        DetonationBreak(); // 誘爆したシグナルを破壊する
+        SEAudioSource.Play(); // SEを鳴らす
+        special.GetComponent<SignalScript>().BreakSignal(isChain, chain); // ブレイク関数を呼び出し
+        ResurrectionSignal(); // stateがNOTHINGのシグナル全てにsetSignalPointを1加算する
+        ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
+        ShowGetScore(special); // ゲットしたスコアを表示する
+        StarDirector.GetStar(chain); // ゲットスター関数を呼び出し
+        Debug.Log(special + "が自動で爆発しました");
     }
 }

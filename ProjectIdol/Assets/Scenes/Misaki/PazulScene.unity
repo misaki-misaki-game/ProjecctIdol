@@ -3796,7 +3796,7 @@ GameObject:
   - component: {fileID: 821901333}
   m_Layer: 0
   m_Name: GameDirector
-  m_TagString: Untagged
+  m_TagString: GameDirector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3919,6 +3919,7 @@ MonoBehaviour:
   dataManager: {fileID: 821901334}
   ranking: {fileID: 821901335}
   Gauge: {fileID: 1684585386}
+  detonationStates: 
 --- !u!114 &821901330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4018,6 +4019,8 @@ MonoBehaviour:
   - {fileID: 319447120}
   - {fileID: 2033468640}
   - {fileID: 0}
+  specialSignals: []
+  detonationObjects: []
   ScoreDirector: {fileID: 821901329}
   StarDirector: {fileID: 821901330}
   getScoreText: {fileID: 0}
@@ -8097,6 +8100,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8375833085928299915, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
+      propertyPath: buttonScript
+      value: 
+      objectReference: {fileID: 821901331}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton0

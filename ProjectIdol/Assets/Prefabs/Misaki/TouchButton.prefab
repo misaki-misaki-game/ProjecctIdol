@@ -393,6 +393,8 @@ MonoBehaviour:
   state: 0
   effectState: 0
   setSignalPoint: 0
+  destroyDeleteTime: 1
+  buttonScript: {fileID: 0}
   needPoint: 3
   effects:
   - {fileID: 1459862227383078, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}

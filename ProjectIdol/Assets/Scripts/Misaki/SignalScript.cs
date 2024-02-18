@@ -9,9 +9,9 @@ using TMPro;
 public class SignalScript : MonoBehaviour
 {
     bool isBomb = false; // そのシグナルがボムになるかどうかの真偽
-    int bomb = 0; // X字ボムの個数
     int bombMax = 3; // X字ボムの個数上限
     SpriteRenderer sp; // 画像を切り替える
+    ButtonScript buttonScript; // ButtonScript変数
 
     public enum STATE // ステータス
     {
@@ -45,6 +45,8 @@ public class SignalScript : MonoBehaviour
     {
         // SpriteRenderer格納
         sp= GetComponent<SpriteRenderer>();
+        // ButtonScript格納
+        buttonScript = GameObject.FindGameObjectWithTag("GameDirector").GetComponent<ButtonScript>();
         // シグナルをセットする
         SetSignal();
     }
@@ -89,7 +91,14 @@ public class SignalScript : MonoBehaviour
         else // ボムが生成される場合
         {
             state = STATE.SPECIAL; // STATEをX字ボムに設定
+            buttonScript.specialSignals.Add(this.gameObject); // ボムを格納する
             sp.sprite = signals[5]; // X字ボムを設定
+            // ボムの個数制限を超えていたら
+            if (buttonScript.specialSignals.Count > bombMax ) 
+            {
+                // もっとも古いボムを自動爆破する
+                buttonScript.BombTimeOver(buttonScript.specialSignals[0]);
+            }
         }
     }
     private void EffectDestroy(Effect effectCondition) // 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
@@ -103,6 +112,11 @@ public class SignalScript : MonoBehaviour
     public void BreakSignal(bool isChain, float chain = 0) // ブレイクシグナル関数
     {
         if (state == STATE.NOTHING) return; // stateがNOTHINGがリターンする
+        if (state == STATE.SPECIAL) // stateがSPECIALなら
+        {
+            // X字ボムリストから自分を取り除く
+            buttonScript.specialSignals.Remove(this.gameObject);
+        }
         setSignalPoint = default; // setSignalPointにdefaultPointを代入する
         if (isChain)
         {

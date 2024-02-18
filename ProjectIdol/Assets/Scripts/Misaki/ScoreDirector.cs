@@ -229,6 +229,7 @@ public class ScoreDirector : SignalScript
                             break;
                     }
                 }
+                detonationStates = new List<STATE>(); // ƒŠƒXƒg‚ð‹ó‚É‚·‚é
                 break;
         }
     }
