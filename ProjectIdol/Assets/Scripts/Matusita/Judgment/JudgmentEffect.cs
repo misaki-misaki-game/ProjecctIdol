@@ -5,15 +5,15 @@ using TMPro;
 
 public class JudgmentEffect : MonoBehaviour
 {
-    //文字の変更
-    [SerializeField] TextMeshProUGUI effectText;
+    [SerializeField] TextMeshProUGUI effectText;        //色や表示する文字を変更するテキストオブジェクト
 
     public void SetText(string message, Color color)
     {
-        effectText.text = message;
-        StartCoroutine(MoveUp());
-        effectText.color = color;
-        //switch (message)
+        //JudmentAreaスクリプトのSpawnTextEffectで使用している
+        effectText.text = message;      //messageに表示したい文字を入れることで参照先で表示される文字を変更することができる
+        StartCoroutine(MoveUp());       //MoveUp()を使用する
+        effectText.color = color;       //colorに表示したい色を入れることで参照先で表示される色を変更することができる
+        //switch (message)              //もしswitch文でするときに切り替えれるように残している
         //{
         //    //パーフェクトが出たら色を黄色に変更する
         //    case "Parfect":

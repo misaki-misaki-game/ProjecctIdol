@@ -22,7 +22,7 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.2
+    m_Start: 0.05
     m_ClipIn: 0
     m_Asset: {fileID: -2053489181780858223}
     m_Duration: 213.288
@@ -102,7 +102,7 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: -7752510502740893646, guid: 251923eaef6dfbf4dbea5871f3e30872, type: 3}
+    m_Asset: {fileID: -9022384755526969050, guid: fcb8e9210a20ed446a2cb194506d2923, type: 3}
     m_Duration: 222
     m_TimeScale: 1
     m_ParentTrack: {fileID: -8598934843134735325}
@@ -167,7 +167,8 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: Infinity
     m_PreExtrapolationTime: 0
-    m_DisplayName: "Idol_\u300C\u30A2\u30A4\u30C9\u30EB\u300D_ver3 Track 1"
+    m_DisplayName: "Idol_\u300C\u30A2\u30A4\u30C9\u30EB\u300Dby\u5317\u5C4B\u6577\u3055\u3093
+      Track 1"
   m_Markers:
     m_Objects: []
   template:

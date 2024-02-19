@@ -5,12 +5,14 @@ using UnityEngine.Rendering;
 
 public class DestroyArea : MonoBehaviour
 {
-    [SerializeField] float radius;
-    [SerializeField] UiManager uiManager;
+    //プレイヤーが消せなかったシグナルを自動的に消して、ミス判定をするためのスクリプト
+
+    [SerializeField] float radius;          //シグナルの判定の半径を設定する
+    [SerializeField] UiManager uiManager;   //UIManagerを使うための変数
 
     private void Update()
     {
-        RaycastHit2D[] hits2D = Physics2D.CircleCastAll(transform.position, radius, Vector3.zero);
+        RaycastHit2D[] hits2D = Physics2D.CircleCastAll(transform.position, radius, Vector3.zero);      //Rayを飛ばして判定する
 
         if (hits2D.Length == 0)
         {
@@ -27,7 +29,7 @@ public class DestroyArea : MonoBehaviour
             Destroy(hit2D.collider.gameObject);
             hit2D.collider.gameObject.SetActive(false);
 
-            uiManager.NoteMiss();
+            uiManager.NoteMiss();   //UIManagerのNoteMissを使用してスコアに-25加算する
         }
 
     }
@@ -35,7 +37,7 @@ public class DestroyArea : MonoBehaviour
     //可視化ツール
     void OnDrawGizmosSelected()
     {
-        //判定場所を青く表示させる
+        //自動的に消す場所を青く表示させる
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, radius);
     }

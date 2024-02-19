@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class North_NorthWest : MonoBehaviour
 {
-    //北北西の方向に進む
-    int speed = 70;
-    Vector3 direction;
+    [SerializeField] int speed = 70;    //シグナルのスピードを設定する
+    Vector3 direction;                  //移動させたい方向を入れ込むための変数
 
     void Start()
     {
+    //北北西の方向に移動する
         direction = new Vector3(-2.8f, 6.5f, 0).normalized;
     }
 

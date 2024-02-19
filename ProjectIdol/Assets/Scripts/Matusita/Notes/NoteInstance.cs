@@ -16,76 +16,75 @@ public class NoteInstance : MonoBehaviour
 
     public void NoteEventCC()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabWhite, pos, Quaternion.identity);
+        //音階のC#がなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabWhite, pos, Quaternion.identity);   //白色のシグナルを西南西の方向に移動させる
     }
     public void NoteEventC()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabRed, pos, Quaternion.identity);
+        //音階のCがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabRed, pos, Quaternion.identity);     //赤色のシグナルを南南東の方向に移動させる
     }
     public void NoteEventDD()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabRed, pos, Quaternion.identity);
-
+        //音階のD#がなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabRed, pos, Quaternion.identity);     //赤色のシグナルを西北西の方向に移動させる
     }
     public void NoteEventD()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabWhite, pos, Quaternion.identity);
+        //音階のDがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabWhite, pos, Quaternion.identity);   //白色のシグナルを西南西の方向に移動させる
     }
     public void NoteEventE()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabBlue, pos, Quaternion.identity);
+        //音階のEがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabBlue, pos, Quaternion.identity);    //青色のシグナルを北北西の方向に移動させる
     }
     public void NoteEventFF()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabYellow, pos, Quaternion.identity);
+        //音階のF#がなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabYellow, pos, Quaternion.identity);  //黄色のシグナルを西南西の方向に移動させる
     }
     public void NoteEventF()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabBlue, pos, Quaternion.identity);
+        //音階のFがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabBlue, pos, Quaternion.identity);    //青色のシグナルを東南東の方向に移動させる
     }
     public void NoteEventGG()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabWhite, pos, Quaternion.identity);
+        //音階のG#がなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabWhite, pos, Quaternion.identity);   //白色のシグナルを東北東の方向に移動させる
     }
     public void NoteEventG()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabRed, pos, Quaternion.identity);
+        //音階のGがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabRed, pos, Quaternion.identity);     //赤色のシグナルを南南東の方向に移動させる
     }
     public void NoteEventAA()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(l_prefabYellow, pos, Quaternion.identity);
+        //音階のA#がなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(l_prefabYellow, pos, Quaternion.identity);  //黄色色のシグナルを南南西の方向に移動させる
     }
     public void NoteEventA()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabYellow, pos, Quaternion.identity);
+        //音階のAがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabYellow, pos, Quaternion.identity);  //黄色のシグナルを北北東の方向に移動させる
     }
     public void NoteEventB()
     {
-        //生成位置
-        Vector3 pos = new Vector3(0, -23, 0);
-        Instantiate(r_prefabBlue, pos, Quaternion.identity);
+        //音階のBがなった時にシグナルを生成させる
+        Vector3 pos = new Vector3(0, -23, 0);                   //円の中心に生成するように設定している
+        Instantiate(r_prefabBlue, pos, Quaternion.identity);    //青色のシグナルを東南東の方向に移動させる
     }
 }
 
