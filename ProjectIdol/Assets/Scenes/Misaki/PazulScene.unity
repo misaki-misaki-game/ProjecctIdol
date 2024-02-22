@@ -3878,11 +3878,11 @@ MonoBehaviour:
   totalScore: 0
   totalUltimateScore: 0
   scoreAnimTime: 2
-  minRankS: 151
+  minRankS: 141
   minRankA: 101
   minRankB: 61
   minRankC: 31
-  minTotalS: 701
+  minTotalS: 661
   minTotalA: 401
   minTotalB: 241
   minTotalC: 121
@@ -8100,10 +8100,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8375833085928299915, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
-      propertyPath: buttonScript
-      value: 
-      objectReference: {fileID: 821901331}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton0

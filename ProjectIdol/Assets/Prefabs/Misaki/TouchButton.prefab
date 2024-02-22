@@ -394,7 +394,6 @@ MonoBehaviour:
   effectState: 0
   setSignalPoint: 0
   destroyDeleteTime: 1
-  buttonScript: {fileID: 0}
   needPoint: 3
   effects:
   - {fileID: 1459862227383078, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
@@ -407,7 +406,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ea0bcf3e8a31a7c46975cef59f63d125, type: 3}
   - {fileID: 21300000, guid: 490a81de4bf1cb54eae70db498f883ac, type: 3}
   - {fileID: 21300000, guid: 12927fb72c9ab5649ba0589ab208307f, type: 3}
-  - {fileID: 21300000, guid: 5a576fdf65afc234b8b89c50ba6a00b1, type: 3}
+  - {fileID: 21300000, guid: 6eb78a1597ba8ed43a16b35168355139, type: 3}
 --- !u!58 &5087987153606715247
 CircleCollider2D:
   m_ObjectHideFlags: 0
