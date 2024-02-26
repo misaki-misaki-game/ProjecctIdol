@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6900093665810895429}
   - component: {fileID: 6772606074584842787}
   - component: {fileID: 908082580807835224}
-  - component: {fileID: -2632025159174756274}
+  - component: {fileID: 4461494155653805556}
   m_Layer: 0
   m_Name: R_WhiteCircle
-  m_TagString: Note
+  m_TagString: WhiteNotes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b331240c15379418b52cc3fa303fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2632025159174756274
+--- !u!114 &4461494155653805556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa343b33303e00a4c8de2d90e2637e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 70

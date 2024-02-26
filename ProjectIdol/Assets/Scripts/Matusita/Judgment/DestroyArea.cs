@@ -41,6 +41,4 @@ public class DestroyArea : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, radius);
     }
-
-
 }

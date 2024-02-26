@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6900093665810895429}
   - component: {fileID: 6772606074584842787}
   - component: {fileID: 908082580807835224}
-  - component: {fileID: -7993428980133708435}
+  - component: {fileID: -5498289311676512390}
   m_Layer: 0
   m_Name: L_RedCircle
-  m_TagString: Note
+  m_TagString: RedNotes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b331240c15379418b52cc3fa303fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-7993428980133708435
+--- !u!114 &-5498289311676512390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 702260893607488953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59257076c00118740886a836767cc9a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a2dab514eb102540a04f5eeeebb6ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 70
