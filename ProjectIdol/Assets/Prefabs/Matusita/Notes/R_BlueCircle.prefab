@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 9068412237014038953}
   - component: {fileID: 4814848805877312664}
   - component: {fileID: 3384216828111869463}
-  - component: {fileID: -6841995758887819683}
+  - component: {fileID: -1988779530276529668}
   m_Layer: 0
   m_Name: R_BlueCircle
-  m_TagString: Note
+  m_TagString: BlueNotes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b331240c15379418b52cc3fa303fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6841995758887819683
+--- !u!114 &-1988779530276529668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 459456307516431564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29de8a8c416687747bf184c206c1a60e, type: 3}
+  m_Script: {fileID: 11500000, guid: 58f6bbb9a0218a84bb2015d50998e336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 70

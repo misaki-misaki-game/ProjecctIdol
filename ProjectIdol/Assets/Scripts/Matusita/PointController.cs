@@ -16,108 +16,59 @@ public class PointController : MonoBehaviour
 
     [SerializeField] float delay = 0.1f;            //オブジェクトを非アクティブにする時間
 
-    private void Start()
-    {
-        pointTextJ      = transform.Find("Text_J").gameObject;          //子オブジェクトであるJテキストを見つけてくる
-        pointTextK      = transform.Find("Text_K").gameObject;          //子オブジェクトであるKテキストを見つけてくる
-        pointTextL      = transform.Find("Text_L").gameObject;          //子オブジェクトであるLテキストを見つけてくる
-        pointTextEquals = transform.Find("Text_Equals").gameObject;     //子オブジェクトである;(Equals)テキストを見つけてくる
-        pointTextF      = transform.Find("Text_F").gameObject;          //子オブジェクトであるFテキストを見つけてくる
-        pointTextD      = transform.Find("Text_D").gameObject;          //子オブジェクトであるDテキストを見つけてくる
-        pointTextS      = transform.Find("Text_S").gameObject;          //子オブジェクトであるSテキストを見つけてくる
-        pointTextA      = transform.Find("Text_A").gameObject;          //子オブジェクトであるAテキストを見つけてくる
-    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if(Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(OffToOn_J());
+            StartCoroutine(OffToOn(pointTextS));
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(OffToOn_K());
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartCoroutine(OffToOn_L());
-        }
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            StartCoroutine(OffToOn_Equals());
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartCoroutine(OffToOn_F());
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            StartCoroutine(OffToOn_D());
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(OffToOn_S());
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            StartCoroutine(OffToOn_A());
-        }
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    //Jキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextJ));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    //Kキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextK));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    //Lキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextL));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.Equals))
+        //{
+        //    //;(Equals)キーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextEquals)); //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    //Fキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextF));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    //Dキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextD));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    //Sキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextS));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    //Aキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextA));      //OffToOn()を使用して、一瞬表示を消す
+        //}
     }
 
-    IEnumerator OffToOn_J()
+    IEnumerator OffToOn(GameObject obj)
     {
-        //Jキーを押されたときに使用する
-        pointTextJ.SetActive(false);                //Jテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextJ.SetActive(true);                 //Jテキストを表示させる
-    }
-    IEnumerator OffToOn_K()
-    {
-        //Kキーを押されたときに使用する
-        pointTextK.SetActive(false);                //Kテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextK.SetActive(true);                 //Kテキストを表示させる
-    }
-    IEnumerator OffToOn_L()
-    {
-        //Lキーを押されたときに使用する
-        pointTextL.SetActive(false);                //Lテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextL.SetActive(true);                 //Lテキストを表示させる
-    }
-    IEnumerator OffToOn_Equals()
-    {
-        //;(equals)キーを押されたときに使用する
-        pointTextEquals.SetActive(false);           //;(Equals)テキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextEquals.SetActive(true);            //;(Equals)テキストを表示させる
-    }
-    IEnumerator OffToOn_F()
-    {
-        //Fキーを押されたときに使用する
-        pointTextF.SetActive(false);                //Fテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextF.SetActive(true);                 //Fテキストを表示させる
-    }
-    IEnumerator OffToOn_D()
-    {
-        //Dキーを押されたときに使用する
-        pointTextD.SetActive(false);                //Dテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextD.SetActive(true);                 //Dテキストを表示させる
-    }
-    IEnumerator OffToOn_S()
-    {
-        //Sキーを押されたときに使用する   
-        pointTextS.SetActive(false);                //Sテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextS.SetActive(true);                 //Sテキストを表示させる
-    }
-    IEnumerator OffToOn_A()
-    {
-        //Aキーを押されたときに使用する
-        pointTextA.SetActive(false);                //Aテキストを非表示にする
-        yield return new WaitForSeconds(delay);     //delayに設定した数値分だけ時間を空ける
-        pointTextA.SetActive(true);                 //Aテキストを表示させる
+        obj.SetActive(false);
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(true);
     }
 }

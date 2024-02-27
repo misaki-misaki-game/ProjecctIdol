@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Klak.Timeline.Midi;
+using System.Drawing;
+using static ScoreDirector;
+using static RhythmDiamondMesh;
+using System.Net.Http.Headers;
+
 
 public class UiManager : MonoBehaviour
 {
@@ -14,6 +19,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI rankText;          //ゲーム終了時にランクを表示するためのテキスト
 
     [SerializeField] DataManager dataManager;           // DataManager変数
+    [SerializeField] RhythmDiamondMesh rhythmDiamondMesh;
 
     //リザルト関係
     [SerializeField] GameObject currentScoreObject;     // 現在のスコアオブジェクト変数
@@ -27,12 +33,37 @@ public class UiManager : MonoBehaviour
     float showScore = 0f;                               // 加算されるスコア変数
     float timer = 0;                                    // 加算する時間変数
 
+
+
+    //岬さんのscoreDirectorからもってきた
+    [EnumIndex(typeof(UltimateType))]
+    public string[] rank = new string[5]; // ultimateScoreの要素数と同じ　[D,C,B,A,S]のどれかにする [5]は究極トータルスコア
+
+
+    [SerializeField] GameObject resultPanel;
     //public Animator AiAnimation;
 
     float score = 0;
     float bonusScore;
     int combo = 0;
     float time = 180;
+
+    [SerializeField] TextMeshProUGUI pointText;
+    [SerializeField] TextMeshProUGUI totalRankText;
+    [SerializeField] int bluePoints = 0;
+    [SerializeField] int redPoints = 0;
+    [SerializeField] int whitePoints = 0;
+    [SerializeField] int yellowPoints = 0;
+
+    int totalPoints = 0;
+    string colorPoint;
+
+
+    public string blueRank;
+    public string redRank;
+    public string whiteRank;
+    public string yellowRank;
+
 
     public void FixedUpdate()
     {
@@ -54,21 +85,18 @@ public class UiManager : MonoBehaviour
         CountShowScore(score, scoreAnimTime);
     }
 
-
     public void AddScore(int point)
     {
         //参照先でpointに数値を入れるとその数値分scoreにプラスすることができる
         //JudgmentAreaスクリプトのSignalJudgmentで使用している
         score += point;
     }
-
     public void AddCombo()
     {
         //参照先でcomboを1ずつプラスすることができる
         //JudgmentAreaスクリプトのSignalJudgmentで使用している
         combo++;
     }
-
     public void NoteMiss()
     {
         //参照先でシグナルを消すのを失敗したときに使用する
@@ -85,9 +113,9 @@ public class UiManager : MonoBehaviour
             combo = 0;
         }
     }
-
     public void BonusCalculate()
     {
+        //コンボ数に合わせてボーナススコアを獲得する
         if (combo <= 50 && combo >= 99)
         {
             // スコアに現在のスコアの10％を加算する
@@ -119,22 +147,106 @@ public class UiManager : MonoBehaviour
             score += bonusScore;
         }
     }
-
-    public void Rank()
+    public void AddBluePoint (int colorPoint)
     {
-        //ゲームが終わった時にランクを表示させるためのもの
-        Debug.Log("rank");
-        //スコアが0以上1000未満の場合にランクとしてGを表示する
-        if(score >= 0 && score <= 1000)
-        {
-            rankText.text = "-G-";
-        }
-        else if(score >= 1001 && score <= 2000)
-        {
-            rankText.text = "-A-";
-        }
-
+        bluePoints += colorPoint;
     }
+    public void AddRedPoint (int colorPoint)
+    {
+        redPoints += colorPoint;
+    }
+    public void AddWhitePoint (int colorPoint)
+    {
+        whitePoints += colorPoint;
+    }
+    public void AddYellowPoint (int colorPoint)
+    {
+        yellowPoints += colorPoint;
+    }
+
+    //各色のポイントのランクを表示する
+    public string EvaluateRank(int colorPoint, string tag)
+    {
+    //パラメーターの評価を行う関数を追加
+        string rank = "";
+        switch (tag)
+        {
+            case "BlueNotes":
+                if (colorPoint >= 7) rank = "S";
+                else if (colorPoint >= 5) rank = "A";
+                else if (colorPoint >= 3) rank = "B";
+                else if (colorPoint >= 1) rank = "C";
+                else rank = "D";
+                break;
+
+            case "RedNotes":
+                if (colorPoint >= 7) rank = "S";
+                else if (colorPoint >= 5) rank = "A";
+                else if (colorPoint >= 3) rank = "B";
+                else if (colorPoint >= 1) rank = "C";
+                else rank = "D";
+                break;
+
+            case "WhiteNotes":
+                if (colorPoint >= 7) rank = "S";
+                else if (colorPoint >= 5) rank = "A";
+                else if (colorPoint >= 3) rank = "B";
+                else if (colorPoint >= 1) rank = "C";
+                else rank = "D";
+                break;
+
+            case "YellowNotes":
+                if (colorPoint >= 7) rank = "S";
+                else if (colorPoint >= 5) rank = "A";
+                else if (colorPoint >= 3) rank = "B";
+                else if (colorPoint >= 1) rank = "C";
+                else rank = "D";
+                break;
+        }
+        return rank;
+    }
+
+    //ポイントの合計のランクを表示する
+    public void PointRank()
+    {
+        Debug.Log("rank");
+        //各シグナルのポイントの合計
+        totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
+        string rank = "";
+        if (totalPoints < 0 && totalPoints >= 2)        rank = "-D-";         //最終合計ポイントが0以上56未満の場合にランクとしてDを表示する
+        else if (totalPoints < 2 && totalPoints >= 3)   rank = "-C-";         //最終合計ポイントが57以上112未満の場合にランクとしてCを表示する
+        else if (totalPoints < 4 && totalPoints >= 5)   rank = "-B-";         //最終合計ポイントが113以上280未満の場合にランクとしてBを表示する
+        else if (totalPoints < 6 && totalPoints >= 7)   rank = "-A-";         //最終合計ポイントが281以上367未満の場合にランクとしてAを表示する
+        else if (totalPoints < 8 && totalPoints >= 500) rank = "-S-";         //最終合計ポイントが370以上506未満の場合にランクとしてSを表示する
+
+        totalRankText.text= rank;
+    }
+    public void ShowResult()
+    {
+        //各シグナルのポイントの合計
+        totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
+
+        // ゲーム終了時のランクを表示するメソッド
+        // 各パラメーターのランクを取得
+
+        blueRank = EvaluateRank(bluePoints, "BlueNotes");
+        redRank = EvaluateRank(redPoints, "RedNotes");
+        whiteRank = EvaluateRank(whitePoints, "WhiteNotes");
+        yellowRank = EvaluateRank(yellowPoints, "YellowNotes");
+
+        // ランクをテキストに表示
+        pointText.text =   blueRank + "  青シグナル: " + bluePoints   + "pt\n" +
+                           redRank  + "  赤シグナル: " + redPoints    + "pt\n" +
+                          whiteRank + "  白シグナル: " + whitePoints  + "pt\n" +
+                         yellowRank + "  黄シグナル: " + yellowPoints + "pt\n" +
+                         "最終ポイント" + totalPoints;
+        //                "Blue Rank: " + blueRank + "\n" +
+        //                "Red Rank: "  + redRank + "\n" +
+        //                "White Rank: " + whiteRank + "\n" +
+        //                "Yellow Rank: " + yellowRank + "\n" +
+        //                "totalRank;" + rank + "\n" +
+    }
+
     /// <summary>
     /// スコアを加算するアニメーション関数
     /// </summary>
