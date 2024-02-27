@@ -33,7 +33,7 @@ public class SignalScript : MonoBehaviour
     public Effect effectState; // エフェクト変数
     public int setSignalPoint = 0; // 再セットするためのポイントを数える変数
     public float destroyDeleteTime = 1.0f; // エフェクトを消すまでの時間変数
-    public const float bombRequirement = 4; // ボムをセットする条件変数
+    public const float bombRequirement = 3; // ボムをセットする条件変数
     [SerializeField] int needPoint = 3; // シグナル再セットに必要なポイント変数
     [EnumIndex(typeof(Effect))]
     public GameObject[] effects = new GameObject[4]; // エフェクト配列
