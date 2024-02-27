@@ -59,7 +59,7 @@ public class RhythmManager : MonoBehaviour
         parametorButton.SetActive(true);
         resultPanel.SetActive(true);
         uiManager.PointRank();                               //UIManagerのRank()を使用し、ゲームが終了したときにランクテキストを点数に応じて変更させる
-        uiManager.ShowScore();                          //UIManagerのShowScore()を使用し、スコアを加算しながら表示させる→これをボタンを押したら表示させるよに
+        //uiManager.ShowScore();                          //UIManagerのShowScore()を使用し、スコアを加算しながら表示させる→これをボタンを押したら表示させるよに
     }
 
 

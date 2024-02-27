@@ -11,6 +11,7 @@ public class ChangeScene : MonoBehaviour
     [SerializeField] GameObject pointObject;
     [SerializeField] GameObject scoreObject;
     [SerializeField] GameObject scrollObject;
+    [SerializeField] UiManager uiManager;
 
     public void Change_Puzzle()
     {
@@ -50,7 +51,9 @@ public class ChangeScene : MonoBehaviour
         //リザルト画面の各ポイントの評価表示からスコア表示に変更する
         resultPanel.SetActive(false);
         Debug.Log("スコア評価表示");
+        //uiManager.ShowScore();
     }
+
 
     public void ScoreToScroll()
     {
@@ -59,4 +62,7 @@ public class ChangeScene : MonoBehaviour
         Debug.Log("ベストスコアのスクロール表示");
         scrollObject.SetActive(true);
     }
+
+
+
 }

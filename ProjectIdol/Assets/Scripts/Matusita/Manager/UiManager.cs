@@ -147,27 +147,22 @@ public class UiManager : MonoBehaviour
             score += bonusScore;
         }
     }
-
     public void AddBluePoint (int colorPoint)
     {
         bluePoints += colorPoint;
     }
-
     public void AddRedPoint (int colorPoint)
     {
         redPoints += colorPoint;
     }
-
     public void AddWhitePoint (int colorPoint)
     {
         whitePoints += colorPoint;
     }
-
     public void AddYellowPoint (int colorPoint)
     {
         yellowPoints += colorPoint;
     }
-
 
     //各色のポイントのランクを表示する
     public string EvaluateRank(int colorPoint, string tag)
@@ -226,8 +221,6 @@ public class UiManager : MonoBehaviour
 
         totalRankText.text= rank;
     }
-
-
     public void ShowResult()
     {
         //各シグナルのポイントの合計
@@ -253,7 +246,6 @@ public class UiManager : MonoBehaviour
         //                "Yellow Rank: " + yellowRank + "\n" +
         //                "totalRank;" + rank + "\n" +
     }
-
 
     /// <summary>
     /// スコアを加算するアニメーション関数
