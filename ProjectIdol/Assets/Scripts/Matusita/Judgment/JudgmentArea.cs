@@ -14,11 +14,15 @@ public class JudgmentArea : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(keyCode))
+        if (Input.GetMouseButton(0))
         {
-            //Unityã‚Åİ’è‚³‚ê‚½KeyCode‚ª‰Ÿ‚³‚ê‚½ê‡SignalJudgment()‚ªÀs‚³‚ê‚é
             SignalJudgment();
         }
+        //if (Input.GetKeyDown(keyCode))
+        //{
+        //    //Unityã‚Åİ’è‚³‚ê‚½KeyCode‚ª‰Ÿ‚³‚ê‚½ê‡SignalJudgment()‚ªÀs‚³‚ê‚é
+        //    SignalJudgment();
+        //}
     }
 
     void SignalJudgment()

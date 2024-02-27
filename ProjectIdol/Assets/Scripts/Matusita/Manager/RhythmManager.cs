@@ -14,6 +14,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] UiManager uiManager;                       //UIManagerを使うための変数
     [SerializeField] TextMeshProUGUI rankText;                  //ゲーム終了時のランクを表示するためのテキスト
     [SerializeField] GameObject resultPanel;                    //ゲーム終了時の結果を表示するためのパネル
+    [SerializeField] GameObject parametorButton;
     [SerializeField] GameObject noteController;                 //MIDIの音源が終了したときに使用するゲームオブジェクト
     [SerializeField] PlayableDirector playableDirector;         //タイムラインを取得して再生
     [SerializeField] Animator charaAnimator;                    //キャラクターアニメーション
@@ -50,17 +51,15 @@ public class RhythmManager : MonoBehaviour
     {
         Debug.Log("game end");
         charaAnimator.SetTrigger("isDanceEnd");         // キャラクターのアニメーションを終了する
-        resultPanel.SetActive(true);
+        noteController.SetActive(false);                //noteContorollerのSetActiveをfalseに変更し、シグナルの出現をやめさせる
         uiManager.ShowResult();                         //UIManagerのShowResult()を使用し、ゲームが終了したときに消したシグナルの量を表示させる
-        //uiManager.PointRank();                               //UIManagerのRank()を使用し、ゲームが終了したときにランクテキストを点数に応じて変更させる
-        //uiManager.CalculateAndSetParameters();          //ランクを計算してパラメーターを設定する
-        //uiManager.ShowScore();                          //UIManagerのShowScore()を使用し、スコアを加算しながら表示させる→これをボタンを押したら表示させるよに
-
         /// diamondFrameとdiamondGraphのセットアップを行う ///
         diamondFrame.SetUp();
         diamondGraph.SetUp();
-
-        noteController.SetActive(false);                //noteContorollerのSetActiveをfalseに変更し、シグナルの出現をやめさせる
+        parametorButton.SetActive(true);
+        resultPanel.SetActive(true);
+        uiManager.PointRank();                               //UIManagerのRank()を使用し、ゲームが終了したときにランクテキストを点数に応じて変更させる
+        uiManager.ShowScore();                          //UIManagerのShowScore()を使用し、スコアを加算しながら表示させる→これをボタンを押したら表示させるよに
     }
 
 

@@ -49,6 +49,7 @@ public class UiManager : MonoBehaviour
     float time = 180;
 
     [SerializeField] TextMeshProUGUI pointText;
+    [SerializeField] TextMeshProUGUI totalRankText;
     [SerializeField] int bluePoints = 0;
     [SerializeField] int redPoints = 0;
     [SerializeField] int whitePoints = 0;
@@ -211,19 +212,22 @@ public class UiManager : MonoBehaviour
     }
 
     //ポイントの合計のランクを表示する
-    public void PointRank(int totalPoint)
+    public void PointRank()
     {
         Debug.Log("rank");
         //各シグナルのポイントの合計
         totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
         string rank = "";
-        if (totalPoints < 0 && totalPoints >= 2)        rank = "D";         //最終合計ポイントが0以上56未満の場合にランクとしてDを表示する
-        else if (totalPoints < 2 && totalPoints >= 3)   rank = "C";         //最終合計ポイントが57以上112未満の場合にランクとしてCを表示する
-        else if (totalPoints < 4 && totalPoints >= 5)   rank = "B";         //最終合計ポイントが113以上280未満の場合にランクとしてBを表示する
-        else if (totalPoints < 6 && totalPoints >= 7)   rank = "A";         //最終合計ポイントが281以上367未満の場合にランクとしてAを表示する
-        else if (totalPoints < 8 && totalPoints >= 500) rank = "S";         //最終合計ポイントが370以上506未満の場合にランクとしてSを表示する
+        if (totalPoints < 0 && totalPoints >= 2)        rank = "-D-";         //最終合計ポイントが0以上56未満の場合にランクとしてDを表示する
+        else if (totalPoints < 2 && totalPoints >= 3)   rank = "-C-";         //最終合計ポイントが57以上112未満の場合にランクとしてCを表示する
+        else if (totalPoints < 4 && totalPoints >= 5)   rank = "-B-";         //最終合計ポイントが113以上280未満の場合にランクとしてBを表示する
+        else if (totalPoints < 6 && totalPoints >= 7)   rank = "-A-";         //最終合計ポイントが281以上367未満の場合にランクとしてAを表示する
+        else if (totalPoints < 8 && totalPoints >= 500) rank = "-S-";         //最終合計ポイントが370以上506未満の場合にランクとしてSを表示する
+
+        totalRankText.text= rank;
     }
-    
+
+
     public void ShowResult()
     {
         //各シグナルのポイントの合計
@@ -238,16 +242,16 @@ public class UiManager : MonoBehaviour
         yellowRank = EvaluateRank(yellowPoints, "YellowNotes");
 
         // ランクをテキストに表示
-        pointText.text = "Blue Rank: " + blueRank + "\n" +
-                         "Red Rank: " + redRank + "\n" +
-                         "White Rank: " + whiteRank + "\n" +
-                         "Yellow Rank: " + yellowRank+"\n"+
-                         "totalRank;"+ rank + "\n"+
-                         "青シグナル: " + bluePoints + "こ\n" +
-                         "赤シグナル: " + redPoints + "こ\n" +
-                         "白シグナル: " + whitePoints + "こ\n" +
-                         "黄シグナル: " + yellowPoints + "こ\n" +
+        pointText.text =   blueRank + "  青シグナル: " + bluePoints   + "pt\n" +
+                           redRank  + "  赤シグナル: " + redPoints    + "pt\n" +
+                          whiteRank + "  白シグナル: " + whitePoints  + "pt\n" +
+                         yellowRank + "  黄シグナル: " + yellowPoints + "pt\n" +
                          "最終ポイント" + totalPoints;
+        //                "Blue Rank: " + blueRank + "\n" +
+        //                "Red Rank: "  + redRank + "\n" +
+        //                "White Rank: " + whiteRank + "\n" +
+        //                "Yellow Rank: " + yellowRank + "\n" +
+        //                "totalRank;" + rank + "\n" +
     }
 
 

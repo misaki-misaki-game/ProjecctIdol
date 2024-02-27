@@ -19,46 +19,50 @@ public class PointController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if(Input.GetMouseButtonDown(0))
         {
-            //Jキーが押された場合に
-            StartCoroutine(OffToOn(pointTextJ));      //OffToOn()を使用して、一瞬表示を消す
+            StartCoroutine(OffToOn(pointTextS));
         }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            //Kキーが押された場合に
-            StartCoroutine(OffToOn(pointTextK));      //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //Lキーが押された場合に
-            StartCoroutine(OffToOn(pointTextL));      //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.Equals))
-        {
-            //;(Equals)キーが押された場合に
-            StartCoroutine(OffToOn(pointTextEquals)); //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //Fキーが押された場合に
-            StartCoroutine(OffToOn(pointTextF));      //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            //Dキーが押された場合に
-            StartCoroutine(OffToOn(pointTextD));      //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //Sキーが押された場合に
-            StartCoroutine(OffToOn(pointTextS));      //OffToOn()を使用して、一瞬表示を消す
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            //Aキーが押された場合に
-            StartCoroutine(OffToOn(pointTextA));      //OffToOn()を使用して、一瞬表示を消す
-        }
+        //if (Input.GetKeyDown(KeyCode.J))
+        //{
+        //    //Jキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextJ));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    //Kキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextK));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    //Lキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextL));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.Equals))
+        //{
+        //    //;(Equals)キーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextEquals)); //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.F))
+        //{
+        //    //Fキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextF));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    //Dキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextD));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    //Sキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextS));      //OffToOn()を使用して、一瞬表示を消す
+        //}
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    //Aキーが押された場合に
+        //    StartCoroutine(OffToOn(pointTextA));      //OffToOn()を使用して、一瞬表示を消す
+        //}
     }
 
     IEnumerator OffToOn(GameObject obj)
