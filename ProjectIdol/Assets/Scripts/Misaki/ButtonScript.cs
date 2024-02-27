@@ -269,14 +269,13 @@ public class ButtonScript : MonoBehaviour
         {
             if (detonationObjects[i].GetComponent<SignalScript>().state != SignalScript.STATE.NOTHING)
             {
-                chain = (float)detonationObjects.Count; // detonationObjectsの要素数を代入
+                chain += 1; // チェイン数を1ずつ加算する
                 ScoreDirector.detonationStates.Add(detonationObjects[i].GetComponent<SignalScript>().state);
                 detonationObjects[i].GetComponent<SignalScript>().BreakSignal(false);
             }
         }
         detonationObjects = new List<GameObject>(); // 中身を空にする
     }
-
     private bool CheckChainSignal(GameObject gameObject) // クリックされたオブジェクトの6方向をチェックし、チェインを確認する関数
     {
         centerSignalTP = default; // 10の位 列
