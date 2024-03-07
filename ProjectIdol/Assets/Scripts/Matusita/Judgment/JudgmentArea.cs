@@ -3,7 +3,6 @@ using UnityEngine;
 public class JudgmentArea : MonoBehaviour
 {
     [SerializeField] float radius;                      //シグナルの判定の半径を設定する
-    [SerializeField] KeyCode keyCode;                   //Unity上で設定したKeyCodeを使用する
     [SerializeField] UiManager uiManager;               //UIManagerを使うための変数
     [SerializeField] GameObject textEffectPrefab;       //シグナルを消せたときに表示させたいテキストを設定するためのゲームオブジェクト
     [SerializeField] GameObject perfectEffectPrefab;    //判定がPerfectの場合のエフェクトのプレハブ
@@ -14,15 +13,28 @@ public class JudgmentArea : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            SignalJudgment();
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject == gameObject)
+                {
+                    SignalJudgment();
+                }
+            }
         }
-        //if (Input.GetKeyDown(keyCode))
+        //if (Input.GetMouseButton(0))
         //{
-        //    //Unity上で設定されたKeyCodeが押された場合SignalJudgment()が実行される
         //    SignalJudgment();
         //}
+        //    //if (Input.GetKeyDown(keyCode))
+        //    //{
+        //    //    //Unity上で設定されたKeyCodeが押された場合SignalJudgment()が実行される
+        //    //    SignalJudgment();
+        //    //}
     }
 
     void SignalJudgment()
@@ -45,7 +57,8 @@ public class JudgmentArea : MonoBehaviour
                 //もしシグナルを消したのが半径4以下なら
                 uiManager.AddScore(3000);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                SpawnTextEffect("Parfect", hit2D.transform.position, Color.yellow, perfectEffectPrefab, perfectSE);     //シグナルを消した場所に黄色でParfectと表示し、Parfect専用のエフェクトを表示する
+                //SpawnTextEffect("Parfect", hit2D.transform.position, Color.yellow, perfectEffectPrefab, perfectSE);     //シグナルを消した場所に黄色でParfectと表示し、Parfect専用のエフェクトを表示する
+                Debug.Log("perfect");
 
                 switch (hit2D.collider.gameObject.tag)
                 {
@@ -71,8 +84,8 @@ public class JudgmentArea : MonoBehaviour
                 //もしシグナルを消したのが半径7以下なら
                 uiManager.AddScore(1500);                                                                               //UIManagerのAddScoreを使用してスコアに25加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                SpawnTextEffect("Nomal", hit2D.transform.position, Color.red, nomalEffectPrefab, nomalSE);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
-
+                //SpawnTextEffect("Nomal", hit2D.transform.position, Color.red, nomalEffectPrefab, nomalSE);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
+                Debug.Log("nomal");
                 switch (hit2D.collider.gameObject.tag)
                 {
                 //ぶつかったオブジェクトのタグに応じてポイントを加算
@@ -96,9 +109,9 @@ public class JudgmentArea : MonoBehaviour
             {
                 //もしシグナルを消したのがそれ以外なら
                 uiManager.NoteMiss();                                                                                   //UIManagerのNoteMissを使用してスコアに-25加算する
-                SpawnTextEffect("Miss", hit2D.transform.position, Color.blue, null, null);                              //シグナルを消した場所に青色でMissと表示する、エフェクト、SEは無し
+                //SpawnTextEffect("Miss", hit2D.transform.position, Color.blue, null, null);                              //シグナルを消した場所に青色でMissと表示する、エフェクト、SEは無し
+                Debug.Log("miss");
             }
-
 
             //ぶつかったものを破壊する
             Destroy(hit2D.collider.gameObject);
@@ -123,10 +136,10 @@ public class JudgmentArea : MonoBehaviour
     }
 
     //可視化ツール
-    void OnDrawGizmosSelected()
-    {
-        //判定場所を赤く表示させる
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, radius);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    //判定場所を赤く表示させる
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawSphere(transform.position, radius);
+    //}
 }

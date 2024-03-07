@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b331240c15379418b52cc3fa303fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textEffectPrefab: {fileID: 4803561143753998820, guid: e522c8d3f4b230c4db9d07a9a74d836e, type: 3}
 --- !u!114 &-505575896515398430
 MonoBehaviour:
   m_ObjectHideFlags: 0
