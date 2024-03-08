@@ -17,6 +17,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] GameObject parametorButton;
     [SerializeField] GameObject noteController;                 //MIDIの音源が終了したときに使用するゲームオブジェクト
     [SerializeField] PlayableDirector playableDirector;         //タイムラインを取得して再生
+    [SerializeField] AudioSource audioSource;
     [SerializeField] Animator charaAnimator;                    //キャラクターアニメーション
 
     [SerializeField] RhythmDiamondMesh rhythmDiamondMesh;

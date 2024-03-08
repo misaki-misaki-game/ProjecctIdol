@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class JudgmentArea : MonoBehaviour
@@ -7,9 +8,15 @@ public class JudgmentArea : MonoBehaviour
     [SerializeField] GameObject textEffectPrefab;       //シグナルを消せたときに表示させたいテキストを設定するためのゲームオブジェクト
     [SerializeField] GameObject perfectEffectPrefab;    //判定がPerfectの場合のエフェクトのプレハブ
     [SerializeField] GameObject nomalEffectPrefab;      //判定がNomalの場合のエフェクトのプレハブ
-    [SerializeField] AudioClip perfectSE;               //判定がPerfectの場合のSE
-    [SerializeField] AudioClip nomalSE;                 //判定がNomalの場合のSE
     [SerializeField] float delay = 0.1f;                //オブジェクトを非アクティブにする時間
+    [SerializeField] private AudioClip se;               //判定がPerfectの場合のSE
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        // AudioSource コンポーネントの取得
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -20,27 +27,37 @@ public class JudgmentArea : MonoBehaviour
 
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject == gameObject)
+                if (hit.collider.tag == "BlueNotes")
                 {
-                    SignalJudgment();
+                    //audioSource.PlayOneShot(se);
+                    SignalJudgment(transform.position, hit.collider.transform.position);
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag == "RedNotes")
+                {
+                    //audioSource.PlayOneShot(se);
+                    SignalJudgment(transform.position, hit.collider.transform.position);
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag == "WhiteNotes")
+                {
+                    //audioSource.PlayOneShot(se);
+                    SignalJudgment(transform.position, hit.collider.transform.position);
+                    Destroy(hit.collider.gameObject);
+                }
+                if (hit.collider.tag == "YellowNotes")
+                {
+                    //audioSource.PlayOneShot(se);
+                    SignalJudgment(transform.position, hit.collider.transform.position);
+                    Destroy(hit.collider.gameObject);
                 }
             }
         }
-        //if (Input.GetMouseButton(0))
-        //{
-        //    SignalJudgment();
-        //}
-        //    //if (Input.GetKeyDown(keyCode))
-        //    //{
-        //    //    //Unity上で設定されたKeyCodeが押された場合SignalJudgment()が実行される
-        //    //    SignalJudgment();
-        //    //}
     }
 
-    void SignalJudgment()
+    void SignalJudgment(Vector3 lanePosition, Vector3 notePosition)
     {
-        RaycastHit2D[] hits2D = Physics2D.CircleCastAll(transform.position, radius, Vector3.zero);
-
+        RaycastHit2D[] hits2D = Physics2D.CircleCastAll(lanePosition, radius, Vector3.zero);
         if (hits2D.Length == 0)
         {
             return;
@@ -57,12 +74,12 @@ public class JudgmentArea : MonoBehaviour
                 //もしシグナルを消したのが半径4以下なら
                 uiManager.AddScore(3000);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                //SpawnTextEffect("Parfect", hit2D.transform.position, Color.yellow, perfectEffectPrefab, perfectSE);     //シグナルを消した場所に黄色でParfectと表示し、Parfect専用のエフェクトを表示する
+                SpawnTextEffect("Parfect", notePosition, Color.yellow, perfectEffectPrefab);
                 Debug.Log("perfect");
 
                 switch (hit2D.collider.gameObject.tag)
                 {
-                //ぶつかったオブジェクトのタグに応じてポイントを加算
+                    //ぶつかったオブジェクトのタグに応じてポイントを加算
                     case "BlueNotes":
                         uiManager.AddBluePoint(2);      //ブルーシグナルの場合、2ポイント加算
                         break;
@@ -84,11 +101,12 @@ public class JudgmentArea : MonoBehaviour
                 //もしシグナルを消したのが半径7以下なら
                 uiManager.AddScore(1500);                                                                               //UIManagerのAddScoreを使用してスコアに25加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                //SpawnTextEffect("Nomal", hit2D.transform.position, Color.red, nomalEffectPrefab, nomalSE);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
+                SpawnTextEffect("Nomal", notePosition, Color.red, nomalEffectPrefab);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
                 Debug.Log("nomal");
+
                 switch (hit2D.collider.gameObject.tag)
                 {
-                //ぶつかったオブジェクトのタグに応じてポイントを加算
+                    //ぶつかったオブジェクトのタグに応じてポイントを加算
                     case "BlueNotes":
                         uiManager.AddBluePoint(1);      //ブルーシグナルの場合、1ポイント加算
                         break;
@@ -109,37 +127,37 @@ public class JudgmentArea : MonoBehaviour
             {
                 //もしシグナルを消したのがそれ以外なら
                 uiManager.NoteMiss();                                                                                   //UIManagerのNoteMissを使用してスコアに-25加算する
-                //SpawnTextEffect("Miss", hit2D.transform.position, Color.blue, null, null);                              //シグナルを消した場所に青色でMissと表示する、エフェクト、SEは無し
+                SpawnTextEffect("Miss", notePosition, Color.blue, null);                              //シグナルを消した場所に青色でMissと表示する、エフェクト、SEは無し
                 Debug.Log("miss");
             }
 
-            //ぶつかったものを破壊する
-            Destroy(hit2D.collider.gameObject);
-            hit2D.collider.gameObject.SetActive(false);
+            ////ぶつかったものを破壊する
+            //Destroy(hit2D.collider.gameObject);
+            //hit2D.collider.gameObject.SetActive(false);
         }
     }
 
-    void SpawnTextEffect(string message, Vector3 position, Color color, GameObject effectPrefab, AudioClip se)
+    void SpawnTextEffect(string message, Vector3 position, Color color, GameObject effectPrefab)
     {
         //シグナルを消した場所に判定のエフェクトを生成する  判定によって表示するテキストと色を設定する
         GameObject effect = Instantiate(textEffectPrefab, position + Vector3.up * 1.5f, Quaternion.identity);
         JudgmentEffect judgmentEffect = effect.GetComponent<JudgmentEffect>();
         judgmentEffect.SetText(message, color);
 
-        if (effectPrefab != null && se != null)
+        if (effectPrefab != null)
         {
-            //PerfectエフェクトとSE、NomalエフェクトとSEを表示する
+            //Perfectエフェクト,Nomalエフェクトを表示する
             GameObject effectObject = Instantiate(effectPrefab, position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(se, position);
             Destroy(effectObject, 1.0f);
         }
     }
 
     //可視化ツール
-    //void OnDrawGizmosSelected()
-    //{
-    //    //判定場所を赤く表示させる
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawSphere(transform.position, radius);
-    //}
+    void OnDrawGizmosSelected()
+    {
+        //判定場所を赤く表示させる
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, radius);
+    }
 }
+
