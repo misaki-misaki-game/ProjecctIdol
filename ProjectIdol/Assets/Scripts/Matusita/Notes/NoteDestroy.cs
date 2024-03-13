@@ -4,35 +4,6 @@ using UnityEngine;
 
 public class NoteDestroy : MonoBehaviour
 {
-    //JudgmentArea judgmentArea;
-    //MonoBehaviour
-    //private UiManager uiManagerCS;
-    //public void Start()
-    //{
-    //    uiManagerCS = GetComponent<UiManager>();
-    //}
-
-    //[SerializeField] GameObject textEffectPrefab;
-    //float radius = 8;
-
-    //public void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-    //        if (hit.collider != null)
-    //        {
-    //            Debug.Log("a");
-    //            if (hit.collider.gameObject == gameObject)
-    //            {
-    //                SignalJudgment();
-    //            }
-    //        }
-    //    }
-    //}
-
 
     //public void SignalJudgment()
     //{

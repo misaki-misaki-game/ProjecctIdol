@@ -57,7 +57,7 @@ public class JudgmentArea : MonoBehaviour
 
     void SignalJudgment(Vector3 lanePosition, Vector3 notePosition)
     {
-        RaycastHit2D[] hits2D = Physics2D.CircleCastAll(lanePosition, radius, Vector3.zero);
+            RaycastHit2D[] hits2D = Physics2D.CircleCastAll(lanePosition, radius, Vector3.zero);
         if (hits2D.Length == 0)
         {
             return;
