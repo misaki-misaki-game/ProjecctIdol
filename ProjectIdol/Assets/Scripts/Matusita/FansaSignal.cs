@@ -81,7 +81,6 @@ public class FansaSignal : MonoBehaviour
                 {
                     miss_Text.SetActive(true);                              //ミステキストを生成する
                     MissAnimation.Play("Miss_Anim");                        //ミスアニメーションを生成する
-                    Debug.Log("MISS!!");
                     miss_Text.SetActive(false);                             //ミステキストを破壊する
                 }
                 fansaSignals.Remove(target);

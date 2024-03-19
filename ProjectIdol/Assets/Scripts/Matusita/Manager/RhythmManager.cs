@@ -23,6 +23,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] RhythmDiamondMesh rhythmDiamondMesh;
     [SerializeField] RhythmDiamondMesh diamondFrame;
     [SerializeField] RhythmDiamondMesh diamondGraph;
+    [SerializeField] float bgmF = 0.3f;
 
     void Start()
     {
@@ -43,8 +44,9 @@ public class RhythmManager : MonoBehaviour
         countDownText.text = " ";                               //カウントダウンパネルに何も表示しないようにするために空白を表示させる
         countDownPanal.SetActive(false);                        //カウントダウンパネルを非表示にする
         charaAnimator.SetTrigger("isDanceStart");               //キャラクターのアニメーションをスタートする
-        yield return new WaitForSeconds(0.3f);                  //1秒開ける
+        yield return new WaitForSeconds(0.3f);                  //0.3秒開ける
         playableDirector.Play();                                //playableDirectorのPlay()を開始させる　音ゲーの音源となるものを再生させる
+
     }
 
     //アイドルの音源が終了したのが分かるイベント
