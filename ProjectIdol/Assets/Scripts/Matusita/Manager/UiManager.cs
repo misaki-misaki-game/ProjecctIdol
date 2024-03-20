@@ -56,8 +56,36 @@ public class UiManager : MonoBehaviour
     [SerializeField] int yellowPoints = 0;
 
     int totalPoints = 0;
+    [SerializeField] int totalRankPointS = 506;
+    [SerializeField] int totalRankPointA = 369;
+    [SerializeField] int totalRankPointB = 280;
+    [SerializeField] int totalRankPointC =  112;
+    [SerializeField] int totalRankPointD = 56;
     string colorPoint;
 
+    [SerializeField] int blueRankPointS=132;
+    [SerializeField] int blueRankPointA=94;
+    [SerializeField] int blueRankPointB=78;
+    [SerializeField] int blueRankPointC=36;
+    [SerializeField] int blueRankPointD=18;
+
+    [SerializeField] int redRankPointS=128;
+    [SerializeField] int redRankPointA=96;
+    [SerializeField] int redRankPointB=72;
+    [SerializeField] int redRankPointC=28;
+    [SerializeField] int redRankPointD=14;
+
+    [SerializeField] int whiteRankPointS=120;
+    [SerializeField] int whiteRankPointA=83;
+    [SerializeField] int whiteRankPointB=60;
+    [SerializeField] int whiteRankPointC=20;
+    [SerializeField] int whiteRankPointD=10;
+
+    [SerializeField] int yellowRankPointS=126;
+    [SerializeField] int yellowRankPointA=96;
+    [SerializeField] int yellowRankPointB=70;
+    [SerializeField] int yellowRankPointC=28;
+    [SerializeField] int yellowRankPointD=14;
 
     public string blueRank;
     public string redRank;
@@ -172,35 +200,35 @@ public class UiManager : MonoBehaviour
         switch (tag)
         {
             case "BlueNotes":
-                if (colorPoint >= 7) rank = "S";
-                else if (colorPoint >= 5) rank = "A";
-                else if (colorPoint >= 3) rank = "B";
-                else if (colorPoint >= 1) rank = "C";
-                else rank = "D";
+                if      (colorPoint <= blueRankPointS) rank = "S";
+                else if (colorPoint <= blueRankPointA) rank = "A";
+                else if (colorPoint <= blueRankPointB) rank = "B";
+                else if (colorPoint <= blueRankPointC) rank = "C";
+                else if (colorPoint <= blueRankPointD) rank = "D";
                 break;
 
             case "RedNotes":
-                if (colorPoint >= 7) rank = "S";
-                else if (colorPoint >= 5) rank = "A";
-                else if (colorPoint >= 3) rank = "B";
-                else if (colorPoint >= 1) rank = "C";
-                else rank = "D";
+                if      (colorPoint <= redRankPointS) rank = "S";
+                else if (colorPoint <= redRankPointA) rank = "A";
+                else if (colorPoint <= redRankPointB) rank = "B";
+                else if (colorPoint <= redRankPointC) rank = "C";
+                else if (colorPoint <= redRankPointD) rank = "D";
                 break;
 
             case "WhiteNotes":
-                if (colorPoint >= 7) rank = "S";
-                else if (colorPoint >= 5) rank = "A";
-                else if (colorPoint >= 3) rank = "B";
-                else if (colorPoint >= 1) rank = "C";
-                else rank = "D";
+                if      (colorPoint <= whiteRankPointS) rank = "S";
+                else if (colorPoint <= whiteRankPointA) rank = "A";
+                else if (colorPoint <= whiteRankPointB) rank = "B";
+                else if (colorPoint <= whiteRankPointC) rank = "C";
+                else if (colorPoint <= whiteRankPointD) rank = "D";
                 break;
 
             case "YellowNotes":
-                if (colorPoint >= 7) rank = "S";
-                else if (colorPoint >= 5) rank = "A";
-                else if (colorPoint >= 3) rank = "B";
-                else if (colorPoint >= 1) rank = "C";
-                else rank = "D";
+                if      (colorPoint <= yellowRankPointS) rank = "S";
+                else if (colorPoint <= yellowRankPointA) rank = "A";
+                else if (colorPoint <= yellowRankPointB) rank = "B";
+                else if (colorPoint <= yellowRankPointC) rank = "C";
+                else if (colorPoint <= yellowRankPointD) rank = "D";
                 break;
         }
         return rank;
@@ -213,11 +241,11 @@ public class UiManager : MonoBehaviour
         //各シグナルのポイントの合計
         totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
         string rank = "";
-        if (totalPoints < 0 && totalPoints >= 2)        rank = "-D-";         //最終合計ポイントが0以上56未満の場合にランクとしてDを表示する
-        else if (totalPoints < 2 && totalPoints >= 3)   rank = "-C-";         //最終合計ポイントが57以上112未満の場合にランクとしてCを表示する
-        else if (totalPoints < 4 && totalPoints >= 5)   rank = "-B-";         //最終合計ポイントが113以上280未満の場合にランクとしてBを表示する
-        else if (totalPoints < 6 && totalPoints >= 7)   rank = "-A-";         //最終合計ポイントが281以上367未満の場合にランクとしてAを表示する
-        else if (totalPoints < 8 && totalPoints >= 500) rank = "-S-";         //最終合計ポイントが370以上506未満の場合にランクとしてSを表示する
+        if      (0               < totalPoints && totalPoints <= totalRankPointD) rank = "-D-";
+        else if (totalRankPointD < totalPoints && totalPoints <= totalRankPointC) rank = "-C-";
+        else if (totalRankPointC < totalPoints && totalPoints <= totalRankPointB) rank = "-B-";
+        else if (totalRankPointB < totalPoints && totalPoints <= totalRankPointA) rank = "-A-";
+        else if (totalRankPointA < totalPoints && totalPoints <= totalRankPointS) rank = "-S-";
 
         totalRankText.text= rank;
     }
@@ -240,11 +268,6 @@ public class UiManager : MonoBehaviour
                           whiteRank + "  白シグナル: " + whitePoints  + "pt\n" +
                          yellowRank + "  黄シグナル: " + yellowPoints + "pt\n" +
                          "最終ポイント" + totalPoints;
-        //                "Blue Rank: " + blueRank + "\n" +
-        //                "Red Rank: "  + redRank + "\n" +
-        //                "White Rank: " + whiteRank + "\n" +
-        //                "Yellow Rank: " + yellowRank + "\n" +
-        //                "totalRank;" + rank + "\n" +
     }
 
     /// <summary>

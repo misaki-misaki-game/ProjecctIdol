@@ -12,6 +12,10 @@ public class JudgmentArea : MonoBehaviour
     [SerializeField] GameObject pereffectPerfab;      //判定がNomalの場合のエフェクトのプレハブ
     [SerializeField] float delay = 0.1f;                //オブジェクトを非アクティブにする時間
     [SerializeField] AudioSource SEaudio;
+    [SerializeField] int perfectScorePoint = 3000;
+    [SerializeField] int nomalScorePoint = 1500;
+    [SerializeField] int perfectPoint = 2;
+    [SerializeField] int nomalPoint = 1;
 
     private void Start()
     {
@@ -21,10 +25,6 @@ public class JudgmentArea : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-
-        }
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -38,40 +38,14 @@ public class JudgmentArea : MonoBehaviour
                 // エフェクトプレハブを生成する
                 GameObject perEffect = Instantiate(pereffectPerfab, hit.collider.transform.position, Quaternion.identity);
                 StartCoroutine(effectOnToOff(perEffect));
-
                 SEaudio.PlayOneShot(SEaudio.clip);
 
-                if (hit.collider.tag == "BlueNotes")
+                if (hit.collider.tag == "BlueNotes"|| hit.collider.tag == "RedNotes"|| hit.collider.tag == "WhiteNotes"|| hit.collider.tag == "YellowNotes")
                 {
                     SignalJudgment();
                     //SignalJudgment(transform.position, hit.collider.transform.position);
                     //SignalJudgment(hit.collider.transform.position);
                     //Destroy(hit.collider.gameObject);
-                    uiManager.AddBluePoint(1);
-
-                }
-                if (hit.collider.tag == "RedNotes")
-                {
-                    SignalJudgment();
-                    //SignalJudgment(hit.collider.transform.position);
-                    //Destroy(hit.collider.gameObject);
-                    uiManager.AddRedPoint(1);
-
-                }
-                if (hit.collider.tag == "WhiteNotes")
-                {
-                    SignalJudgment();
-                    //SignalJudgment(hit.collider.transform.position);
-                    //Destroy(hit.collider.gameObject);
-                    uiManager.AddWhitePoint(1);
-
-                }
-                if (hit.collider.tag == "YellowNotes")
-                {
-                    SignalJudgment();
-                    //SignalJudgment(hit.collider.transform.position);
-                    //Destroy(hit.collider.gameObject);
-                    uiManager.AddYellowPoint(1);
                 }
             }
         }
@@ -107,21 +81,59 @@ public class JudgmentArea : MonoBehaviour
             {
                 Debug.Log("黄色パーフェクト");
                 //もしシグナルを消したのが半径4以下なら
-                uiManager.AddScore(3000);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
+                uiManager.AddScore(perfectScorePoint);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
                 //SpawnTextEffect("Parfect", notePosition, Color.yellow);
                 SpawnTextEffect("Parfect", hit2D.transform.position, Color.yellow);
-
                 Debug.Log("perfect");
+
+                switch (hit2D.collider.gameObject.tag)
+                {
+                    //ぶつかったオブジェクトのタグに応じてポイントを加算
+                    case "BlueNotes":
+                        uiManager.AddBluePoint(perfectPoint);
+                        break;
+                    case "RedNotes":
+                        uiManager.AddRedPoint(perfectPoint);
+                        break;
+                    case "WhiteNotes":
+                        uiManager.AddWhitePoint(perfectPoint);
+                        break;
+                    case "YellowNotes":
+                        uiManager.AddYellowPoint(perfectPoint);
+                        break;
+                    default:
+                        break;
+                }
             }
             else if (distance < 7)
             {
                 //もしシグナルを消したのが半径7以下なら
-                uiManager.AddScore(1500);                                                                               //UIManagerのAddScoreを使用してスコアに25加算する
+                uiManager.AddScore(nomalScorePoint);                                                                               //UIManagerのAddScoreを使用してスコアに25加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
                 //SpawnTextEffect("Nomal", notePosition, Color.red);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
                 SpawnTextEffect("Nomal", hit2D.transform.position, Color.red);
                 Debug.Log("nomal");
+
+                switch (hit2D.collider.gameObject.tag)
+                {
+                    //ぶつかったオブジェクトのタグに応じてポイントを加算
+                    case "BlueNotes":
+                        uiManager.AddBluePoint(nomalPoint);      //ブルーシグナルの場合、1ポイント加算
+                        break;
+                    case "RedNotes":
+                        uiManager.AddRedPoint(nomalPoint);       //レッドシグナルの場合、1ポイント加算
+                        break;
+                    case "WhiteNotes":
+                        uiManager.AddWhitePoint(nomalPoint);     //ホワイトシグナルの場合、1ポイント加算
+                        break;
+                    case "YellowNotes":
+                        uiManager.AddYellowPoint(nomalPoint);    //イエローシグナルの場合、1ポイント加算
+                        break;
+                    default:
+                        break;
+                }
+
             }
             else
             {
@@ -153,13 +165,12 @@ public class JudgmentArea : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position, radius);
     }
-
-
     IEnumerator effectOnToOff(GameObject effect)
     {
         yield return new WaitForSeconds(1f); // 1秒待つ
         //effect.SetActive(false); // エフェクトを非アクティブにする
         Destroy(effect);
     }
+
 }
 
