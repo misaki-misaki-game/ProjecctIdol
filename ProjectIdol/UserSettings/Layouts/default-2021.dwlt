@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 158
+  controlID: 85
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 163
+  controlID: 47
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 103
+  controlID: 58
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1044,9 +1044,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: be6d0000
-      m_LastClickedID: 28094
-      m_ExpandedIDs: 26fbffff766f0000f66f0000
+      m_SelectedIDs: e8d60000
+      m_LastClickedID: 0
+      m_ExpandedIDs: cea1ffff18a5ffffe8a6ffff1ada0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1139,7 +1139,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Matusita/Manager
+    - Assets/Scenes/Matusita
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0700000
     m_LastClickedID: 28848
-    m_ExpandedIDs: 0000000066750000687500006a7500006c7500006e75000070750000727500007475000076750000787500007a7500007c7500007e75000080750000827500008475000086750000887500008a7500008c7500008e75000090750000927500009475000096750000987500009a7500009c7500009e750000a0750000a2750000a4750000a6750000a8750000aa750000ac750000ae750000b0750000b2750000b4750000b6750000b8750000ba750000
+    m_ExpandedIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1181,7 +1181,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff0000000066750000687500006a7500006c7500006e75000070750000727500007475000076750000787500007a7500007c7500007e75000080750000827500008475000086750000887500008a7500008c7500008e75000090750000927500009475000096750000987500009a7500009c7500009e750000a0750000a2750000a4750000a6750000a8750000aa750000ac750000ae750000b0750000b2750000b4750000b6750000b8750000ba750000
+    m_ExpandedIDs: ffffffff86d60000e2d60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

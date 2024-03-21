@@ -202,6 +202,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &11074642
 AudioSource:
   m_ObjectHideFlags: 0
@@ -377,6 +381,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &24503038
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1212,6 +1220,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &96978009
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2377,6 +2389,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &370430036
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3639,6 +3655,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &656938561
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4471,6 +4491,31 @@ MonoBehaviour:
   redPoints: 0
   whitePoints: 0
   yellowPoints: 0
+  totalRankPointS: 506
+  totalRankPointA: 369
+  totalRankPointB: 280
+  totalRankPointC: 112
+  totalRankPointD: 56
+  blueRankPointS: 132
+  blueRankPointA: 94
+  blueRankPointB: 78
+  blueRankPointC: 36
+  blueRankPointD: 18
+  redRankPointS: 128
+  redRankPointA: 96
+  redRankPointB: 72
+  redRankPointC: 28
+  redRankPointD: 14
+  whiteRankPointS: 120
+  whiteRankPointA: 83
+  whiteRankPointB: 60
+  whiteRankPointC: 20
+  whiteRankPointD: 10
+  yellowRankPointS: 126
+  yellowRankPointA: 96
+  yellowRankPointB: 70
+  yellowRankPointC: 28
+  yellowRankPointD: 14
   blueRank: 
   redRank: 
   whiteRank: 
@@ -4746,6 +4791,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &768263371
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6539,6 +6588,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &1220594850
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9270,6 +9323,10 @@ MonoBehaviour:
   pereffectPerfab: {fileID: 6345846751495885841, guid: 20d472039d9c22c4cb1f8b7a82352f05, type: 3}
   delay: 0.1
   SEaudio: {fileID: 0}
+  perfectScorePoint: 250
+  nomalScorePoint: 150
+  perfectPoint: 2
+  nomalPoint: 1
 --- !u!82 &1693546736
 AudioSource:
   m_ObjectHideFlags: 0
