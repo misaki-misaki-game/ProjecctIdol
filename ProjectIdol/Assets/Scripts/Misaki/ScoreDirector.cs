@@ -310,6 +310,7 @@ public class ScoreDirector : SignalScript
     }
     private void RecordUpdate() // ハイスコアの更新関数
     {
+        Debug.Log("RecordUpdate関数に入りました");
         if (totalScore > dataManager.data.puzzleRanking[0]) // 今回のスコアがハイスコアを超えれば
         {
             dataManager.data.puzzleHighScore = totalScore; // ハイスコアを更新する

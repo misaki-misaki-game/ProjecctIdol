@@ -16,7 +16,13 @@ public class DataManager : MonoBehaviour // MasterDataをjson形式に変えて保存・読
     {
         Debug.Log("起動ロード開始");
         data = new MasterData(); // dataにMasterData型を代入
+#if UNITY_ANDROID
+        // Path.Combine()を使用してアプリの永続的なデータ保存用ディレクトリにファイルパスを作成し、そこにJSONデータを書き込む
+        // Application.persistentDataPathは、各プラットフォームでアプリケーションの永続的なデータ保存先を示す
+        filepath = Path.Combine(Application.persistentDataPath, fileName);
+#elif UNITY_EDITOR || UNITY_STANDALONE
         filepath = Application.dataPath + "/" + fileName; // パス名取得
+#endif
         if (!File.Exists(filepath)) // ファイルがないとき
         {
             Debug.Log("saveデータを作ろうとしています");

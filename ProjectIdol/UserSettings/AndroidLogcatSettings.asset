@@ -1,13 +1,26 @@
 {
     "m_SelectedDeviceId": "8592SACEAG00005461",
     "m_SelectedProcess": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "8592SACEAG00005461",
+        "name": "com.DefaultCompany.ProjectIdol",
+        "processId": 21117,
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownProcessesForSerialization": [],
+    "m_KnownProcessesForSerialization": [
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 20783,
+            "exited": true
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 21117,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
