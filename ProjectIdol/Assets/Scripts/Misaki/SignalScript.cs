@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
-using static ScoreDirector;
-using TMPro;
 
 public class SignalScript : MonoBehaviour
 {

@@ -1,12 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Security.Cryptography;
-using UnityEngine.UIElements;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class Ranking : MonoBehaviour
 {

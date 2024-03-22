@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Data.Common;
 
 // 自動的にコンポーネントを追加 MeshFilter,MeshRendererを追加
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]

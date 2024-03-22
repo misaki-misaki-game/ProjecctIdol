@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 // maincameraなど常にいるものにアタッチすること推奨
