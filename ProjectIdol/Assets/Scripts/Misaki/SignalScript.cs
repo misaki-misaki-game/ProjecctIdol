@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class SignalScript : MonoBehaviour
 {
@@ -101,8 +102,29 @@ public class SignalScript : MonoBehaviour
     {
         if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
         {
-            GameObject child = transform.GetChild(2).gameObject; // 子オブジェクト(エフェクト)を検索
-            Destroy(child); // 子オブジェクトを破壊する
+            // 親オブジェクトのTransformコンポーネントを取得
+            Transform parentTransform = transform;
+
+            // 子オブジェクトを格納するリストを作成
+            List<GameObject> childrenWithTag = new List<GameObject>();
+
+            // 親オブジェクトの子オブジェクトを再帰的に探索
+            foreach (Transform childTransform in parentTransform)
+            {
+                // 子オブジェクトが特定のタグを持っているか確認
+                if (childTransform.CompareTag("Eternity"))
+                {
+                    // 子オブジェクトが特定のタグを持っている場合、リストに追加
+                    childrenWithTag.Add(childTransform.gameObject);
+                }
+            }
+
+            // リスト内のオブジェクトを処理する
+            foreach (GameObject childObject in childrenWithTag)
+            {
+                // 子オブジェクトの処理を行う
+                Destroy(childObject); // 子オブジェクトを破壊する
+            }
         }
     }
     public void BreakSignal(bool isChain, float chain = 0) // ブレイクシグナル関数

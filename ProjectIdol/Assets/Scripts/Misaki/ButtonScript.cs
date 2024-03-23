@@ -404,14 +404,6 @@ public class ButtonScript : MonoBehaviour
                 {
                     signals[j * 10 + i].GetComponent<SignalScript>().BreakSignal(false); // ブレイクシグナルを呼び出す
                     signals[j * 10 + i].GetComponent<SignalScript>().SetSignal(); // セットシグナルを呼び出す
-                    GameObject child = signals[j * 10 + i].transform.GetChild(3).gameObject; // 子オブジェクト(エフェクト)を検索
-                    Destroy(child.gameObject); // 子オブジェクトを破壊する
-                    int childCount = signals[j * 10 + i].transform.childCount; // 子オブジェクトの個数を代入
-                    if (childCount > 5) // 子オブジェクトの個数が5を超過している場合(復活待機中のエフェクトがあるものは子オブジェクトが6あるため)
-                    {
-                        Destroy(signals[j * 10 + i].transform.GetChild(3).gameObject); // 復活待機中エフェクトを破壊する
-                        Destroy(signals[j * 10 + i].transform.GetChild(5).gameObject); // 復活待機中エフェクトを破壊する
-                    }
                 }
             }
             resetStock -= 1; // 残りリセット回数を1減らす
