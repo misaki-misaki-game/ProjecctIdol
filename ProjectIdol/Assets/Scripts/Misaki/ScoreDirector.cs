@@ -5,9 +5,10 @@ using TMPro;
 
 public class ScoreDirector : SignalScript
 {
-    // bool isgameOver = false; // ゲームオーバーかどうか
     bool isCombo = false; // コンボしているかどうか
     bool isScoreCount = false; // スコアをカウントしているかどうか
+    bool isOverRank = false;
+    bool isOverTotalRank = false;
     float showScore = 0f; // 加算されるスコア変数
     float timer = 0; // 加算する時間変数
     public float score = 0; // スコア計算用変数
@@ -85,8 +86,10 @@ public class ScoreDirector : SignalScript
         // トータルスコアが確定したらスコアを加算するアニメーションを呼び出す
         CountShowScore(totalScore, scoreAnimTime);
     }
-
-    private void InitializationUI() // コンボとトータルスコアを初期化する関数
+    /// <summary>
+    /// コンボとトータルスコアを初期化する関数
+    /// </summary>
+    private void InitializationUI()
     {
         // トータルスコアを初期化
         totalScore = default;
@@ -97,7 +100,10 @@ public class ScoreDirector : SignalScript
         // コンボを表示
         comboText.text = string.Format("{0:0}combo", combo);
     }
-    private void ContinuationCombo()　// コンボ持続の処理関数
+    /// <summary>
+    /// コンボ持続の処理関数
+    /// </summary>
+    private void ContinuationCombo()
     {
         if (isCombo) // コンボしているのであれば
         {
@@ -120,7 +126,13 @@ public class ScoreDirector : SignalScript
             }
         }
     }
-    public void GetScore(float chain,bool isChain, STATE state) // ゲットスコア関数
+    /// <summary>
+    /// ゲットスコア関数
+    /// </summary>
+    /// <param name="chain">消したシグナルのチェイン数</param>
+    /// <param name="isChain">消したシグナルがチェインしているかどうか</param>
+    /// <param name="state">消したシグナルのステータス</param>
+    public void GetScore(float chain,bool isChain, STATE state)
     {
         // 基礎スコアを加算
         score = AddBaseValue(chain, isChain);
@@ -137,7 +149,13 @@ public class ScoreDirector : SignalScript
         // コンボを表示
         comboText.text = string.Format("{0:0}combo", combo);
     }
-    private float AddBaseValue(float chain, bool isChain) // 基礎スコアを計算する関数
+    /// <summary>
+    /// 基礎スコアを計算する関数
+    /// </summary>
+    /// <param name="chain">消したシグナルのチェイン数</param>
+    /// <param name="isChain">消したシグナルがチェインしているかどうか</param>
+    /// <returns>計算後のスコア</returns>
+    private float AddBaseValue(float chain, bool isChain)
     {
         float score;
         if (isChain) // チェインが発生していれば
@@ -166,7 +184,12 @@ public class ScoreDirector : SignalScript
         }
         return score;
     }
-    private float MultiplyCombo(float score) // コンボ数による倍率を掛ける
+    /// <summary>
+    /// コンボ数による倍率を掛ける関数
+    /// </summary>
+    /// <param name="score">基礎スコア計算後のスコア</param>
+    /// <returns>コンボ倍率計算後のスコア</returns>
+    private float MultiplyCombo(float score)
     {
         if (combo >= 50 && combo < 100) // コンボが50以上100未満
         {
@@ -180,7 +203,12 @@ public class ScoreDirector : SignalScript
         }
         return score;
     }
-    private float MultiplyStarMode(float score) // スターモードによる倍率を掛ける
+    /// <summary>
+    /// スターモードによる倍率を掛ける
+    /// </summary>
+    /// <param name="score">コンボ計算後のスコア</param>
+    /// <returns>スターモード倍率計算後のスコア</returns>
+    private float MultiplyStarMode(float score) 
     {
         if (starDirector.starState == StarDirector.StarState.StarMode) // お星様モードであれば
         {
@@ -189,7 +217,12 @@ public class ScoreDirector : SignalScript
 
         return score;
     }
-    private void CalculateUltimateScore(float chain, STATE state) // アルティメットスコアを計算
+    /// <summary>
+    /// アルティメットスコアを計算する関数
+    /// </summary>
+    /// <param name="chain">消したシグナルのチェイン数</param>
+    /// <param name="state">消したシグナルのステータス</param>
+    private void CalculateUltimateScore(float chain, STATE state)
     {
         switch (state)
         {
@@ -230,6 +263,9 @@ public class ScoreDirector : SignalScript
                 break;
         }
     }
+    /// <summary>
+    /// 各ステータスのランクをつける関数
+    /// </summary>
     public void SetRank()
     {
         // 各パラメータにランクを付ける+totalUltimateScoreを算出
@@ -285,8 +321,12 @@ public class ScoreDirector : SignalScript
         CheckMission(); // ミッションをクリアしたかの確認
         RecordUpdate(); // ハイスコアの更新
     }
-    private void CheckMission() // ミッションをクリアしたかの確認する関数
+    /// <summary>
+    /// ミッションをクリアしたかの確認する関数
+    /// </summary>
+    private void CheckMission()
     {
+        OverRankA(); // 究極パラメータがAランクを超えているかをチェック
         // スターモードを2回以上クリアしたか
         if (starDirector.starCount > 1)
         {
@@ -294,13 +334,13 @@ public class ScoreDirector : SignalScript
             Debug.Log("ミッション1クリア");
         }
         // いずれかの究極パラメータがAランク以上か
-        if (rank[0] == "A" || rank[0] == "S" || rank[1] == "A" || rank[1] == "S" || rank[2] == "A" || rank[2] == "S" || rank[3] == "A" || rank[3] == "S")
+        if (isOverRank)
         {
             totalScore += 20000;
             Debug.Log("ミッション2クリア");
         }
         // 総究極パラメータがAランク以上か
-        if (rank[4] == "A" || rank[4] == "S")
+        if (isOverTotalRank)
         {
             totalScore += 20000;
             Debug.Log("ミッション3クリア");
@@ -308,7 +348,26 @@ public class ScoreDirector : SignalScript
         // スコアを表示
         scoreText.text = string.Format("SCORE:\n{0:00000000}", totalScore);
     }
-    private void RecordUpdate() // ハイスコアの更新関数
+    /// <summary>
+    /// 究極パラメータがAランクを超えているかをチェックする関数
+    /// </summary>
+    private void OverRankA()
+    {
+        // 各究極パラメータがAランクを超えているかをチェック　超えていればisOverRankまたはisOverTotalRankがtrueになる
+        for (int i = 0; i < ultimateScore.Length; i++)
+        {
+            if (minRankA <= ultimateScore[i])
+            {
+                isOverRank = true;
+                break;
+            }
+        }
+        if (minTotalA <= totalUltimateScore) isOverTotalRank = true;
+    }
+    /// <summary>
+    /// ハイスコアの更新関数
+    /// </summary>
+    private void RecordUpdate() 
     {
         Debug.Log("RecordUpdate関数に入りました");
         if (totalScore > dataManager.data.puzzleRanking[0]) // 今回のスコアがハイスコアを超えれば
@@ -340,6 +399,9 @@ public class ScoreDirector : SignalScript
             isScoreCount = false; // CountShowScoreを呼び出さないようにfalseにする
         }
     }
+    /// <summary>
+    /// 究極パラメータを表示する関数
+    /// </summary>
     public void ShowUltScore()
     {
         SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
@@ -348,6 +410,9 @@ public class ScoreDirector : SignalScript
         graphObject.SetActive(false); // グラフを非表示
         resultObject.SetActive(true); // リザルトを表示
     }
+    /// <summary>
+    /// スコアを表示する関数
+    /// </summary>
     public void ShowScore()
     {
         SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす
@@ -356,6 +421,9 @@ public class ScoreDirector : SignalScript
         currentScoreObject.SetActive(true); // スコア画面を表示
         isScoreCount = true; // isScoreCountをtrueにしてCountShowScoreを呼び出すようにする
     }
+    /// <summary>
+    /// ランキングを表示する関数
+    /// </summary>
     public void ShowRanking()
     {
         SEAudioSource.clip = SEAudioClip; // SEAudioClipを代入して次のボタンのときにも同じ音を鳴らす

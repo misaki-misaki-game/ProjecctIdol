@@ -10,8 +10,10 @@ public class ClickEffectScript : MonoBehaviour
     {
         SummonEffect(); // クリックした場所にエフェクトを呼び出す
     }
-
-    private void SummonEffect() // クリックした場所にエフェクトを呼び出す関数
+    /// <summary>
+    /// クリックした場所にエフェクトを呼び出す関数
+    /// </summary>
+    private void SummonEffect() 
     {
         if (Input.GetMouseButtonDown(0) && clickEffect) // 左クリックしたらかつclickEffectがnullでなければ
         {

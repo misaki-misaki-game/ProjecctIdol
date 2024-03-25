@@ -56,13 +56,18 @@ public class FadeManager : MonoBehaviour
         }
     }
 
-    public void fadeIn()   // フェードイン関数
+    /// <summary>
+    /// フェードイン関数
+    /// </summary>
+    public void fadeIn()
     {
         isFadeIn = true;   // フェードインフラグをtrueにする
         isFadeOut = false; // フェードアウトフラグをfalseにして誤発動を防ぐ
     }
-
-    public void fadeOut() // フェードアウト関数
+    /// <summary>
+    /// フェードアウト関数
+    /// </summary>
+    public void fadeOut()
     {
         isFadeOut = true; // フェードアウトフラグをtrueにする
         isFadeIn = false; // フェードインフラグをfalseにして誤発動を防ぐ

@@ -16,7 +16,7 @@ public class TimeDirector : MonoBehaviour
     public ScoreDirector scoreDirector; // ScoreDirector変数
     public DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
     public DiamondMesh diamondGraph; // グラフ用DiamondMesh変数
-    public Animator animAi; // アイのアニメーション用変数
+    public Animator animAi; // キャラクターのアニメーション用変数
     public AudioSource SEAudioSource; // SE用オーディオソース
     Animator aniScd; // gameStartcdのanimator変数
 
@@ -25,7 +25,7 @@ public class TimeDirector : MonoBehaviour
     {
         Application.targetFrameRate = 60; // 60fpsに固定
         aniScd = gameStartcd.GetComponent<Animator>(); // Animetorを格納する
-        Count3(); // ゲームが始まるまでのカウントダウンをスタートする
+        aniScd.GetComponent<GameStartCountDownScript>().CountDown();
     }
 
     // Update is called once per frame
@@ -34,8 +34,10 @@ public class TimeDirector : MonoBehaviour
         TimeCountDown(); // 時間のカウントダウンを行う
         GameOver(); // ゲーム終了の処理を行う
     }
-
-    private void GameOver() // ゲーム終了の処理関数
+    /// <summary>
+    /// ゲーム終了の処理関数
+    /// </summary>
+    private void GameOver() 
     {
         if (gameOver) // ゲームオーバーであれば
         {
@@ -52,7 +54,10 @@ public class TimeDirector : MonoBehaviour
             nextButton.SetActive(true); // ボタンを表示する
         }
     }
-    private void TimeCountDown() // 時間のカウントダウンを行う
+    /// <summary>
+    /// 時間のカウントダウンを行う
+    /// </summary>
+    private void TimeCountDown()
     {
         // ゲームがスタート,かつ,ゲームオーバーになっていない,かつ,通常モードではないのであれば
         if (gameStart && !gameOver && starDirector.starState == StarDirector.StarState.NormalMode)
@@ -68,10 +73,5 @@ public class TimeDirector : MonoBehaviour
                 gameOver = true;
             }
         }
-    }
-    public void Count3()
-    {
-        gameStartcd.SetActive(true); // gameStartcdを表示する
-        aniScd.SetBool("isCountdownStart", true); // animatorのisCountdownStart変数を真にする
     }
 }

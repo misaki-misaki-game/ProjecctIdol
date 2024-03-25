@@ -50,7 +50,7 @@ public class Ranking : MonoBehaviour
                 scrollTargetValue = 0.25f;
                 isScroll = true; // スクロールを許可する
             }
-            else // 8以上のとき
+            else // 7以上のとき
             {
                 scrollTargetValue = 0f;
                 isScroll = true; // スクロールを許可する
@@ -66,16 +66,17 @@ public class Ranking : MonoBehaviour
     void ScrollAnim(Scrollbar scrollbar, float scrollTarget)
     {
         if (!isScroll) return; // isScrollがfalseならリターンする
-        if (scrollTargetValue < scrollbar.value)
+        if (scrollTarget < scrollbar.value)
         {
+            Debug.Log("スクロールします");
             scrollValue -= Time.deltaTime; // deltaTimeを加算する
             float progress = Mathf.Clamp01(scrollValue / scrollTime); // scrollValue / scrollTimeの割合を代入
-            scrollbar.value = Mathf.Lerp(0, scrollTargetValue, progress); // 0からscrollTargetValueまでの値に対して割合(progress)を代入
+            scrollbar.value -= Mathf.Lerp(0, scrollTarget, progress); // 0からscrollTargetValueまでの値に対して割合(progress)を代入
         }
         // showScoreがtotalScoreを超えたら表記ずれしないようにtotalScoreを表示する
         else
         {
-            scrollbar.value = scrollTargetValue; // scrollTargetValueを代入する
+            scrollbar.value = scrollTarget; // scrollTargetValueを代入する
             isScroll = false; // ScrollAnimを呼び出さないようにfalseにする
         }
     }

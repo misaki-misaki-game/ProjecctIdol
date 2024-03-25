@@ -10,27 +10,41 @@ public class GameStartCountDownScript : MonoBehaviour
     public ButtonScript buttonScript; // ButtonScript変数
     public Animator animAi; // アイのアニメーション用変数
     public AudioSource BGMAudioSource; // BGM用オーディオソース
+    int count = 3; // カウントダウンの値
 
     void Start()
     {
         aniScd = gameObject.GetComponent<Animator>(); // Animatorを格納
     }
-
-    public void Count2()
+    /// <summary>
+    /// ゲームのカウントダウン開始の関数
+    /// </summary>
+    public void CountDown()
     {
-        gameStartText.text = string.Format("2"); // テキストの文字を2にする
-        aniScd.SetBool("isCount3", true); // AnimatorのisCount3を変更
+        // countの値によって表示する文字を変更
+        // count == 0の場合のみGameStartのアニメーションを開始
+        switch (count)
+        {
+            case 3:
+                gameStartText.text = string.Format("3");
+                break;
+            case 2:
+                gameStartText.text = string.Format("2");
+                break;
+            case 1:
+                gameStartText.text = string.Format("1");
+                break;
+            case 0:
+                gameStartText.text = string.Format("Live\nStart!!");
+                aniScd.SetTrigger("GameStart");
+                return;
+        }
+        count--; // 次のアニメーションの際に別の文字を表示させるためにcountを減らす
+        aniScd.SetTrigger("CountDown"); // カウントダウンのアニメーションを動かす
     }
-    public void Count1()
-    {
-        gameStartText.text = string.Format("1"); // テキストの文字を1にする
-        aniScd.SetBool("isCount2", true); // AnimatorのisCount2を変更
-    }
-    public void Count0()
-    {
-        gameStartText.text = string.Format("Live\nStart!!"); // テキストの文字をLiveStart!!にする
-        aniScd.SetBool("isCount1", true); // AnimatorのisCount1を変更
-    }
+    /// <summary>
+    /// ゲームスタート関数
+    /// </summary>
     public void GameStart()
     {
         timeDirector.gameStart = true; // 制限時間をスタートする

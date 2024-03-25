@@ -98,7 +98,11 @@ public class SignalScript : MonoBehaviour
             }
         }
     }
-    private void EffectDestroy(Effect effectCondition) // 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
+    /// <summary>
+    /// 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
+    /// </summary>
+    /// <param name="effectCondition">エフェクトステータス</param>
+    private void EffectDestroy(Effect effectCondition)
     {
         if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
         {
@@ -127,7 +131,12 @@ public class SignalScript : MonoBehaviour
             }
         }
     }
-    public void BreakSignal(bool isChain, float chain = 0) // ブレイクシグナル関数
+    /// <summary>
+    /// ブレイクシグナル関数
+    /// </summary>
+    /// <param name="isChain">チェインしているか</param>
+    /// <param name="chain">チェイン数</param>
+    public void BreakSignal(bool isChain, float chain = 0)
     {
         if (state == STATE.NOTHING) return; // stateがNOTHINGがリターンする
         if (state == STATE.SPECIAL) // stateがSPECIALなら
@@ -157,11 +166,18 @@ public class SignalScript : MonoBehaviour
         sp.sprite = null; // シグナル画像をnullにする
         PlayEffect(effectState); // エフェクトを呼び出す
     }
-    public void AddSetSignalPoint() // SetSignalPointを加算する関数
+    /// <summary>
+    /// SetSignalPointを加算する関数
+    /// </summary>
+    public void AddSetSignalPoint()
     {
         setSignalPoint += 1;
     }
-    private void PlayEffect(Effect effectState) // エフェクトを再生する関数
+    /// <summary>
+    /// エフェクトを再生する関数
+    /// </summary>
+    /// <param name="effectState">エフェクトステータス</param>
+    private void PlayEffect(Effect effectState)
     {
         GameObject clone = null; // GameObjectを生成
         switch (effectState)

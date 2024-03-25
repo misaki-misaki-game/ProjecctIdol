@@ -2381,7 +2381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeCanvas: {fileID: 3903828754788970129, guid: 8c7a822626b1c1347a57a76825040c30, type: 3}
-  SEAudioSource: {fileID: 0}
+  SEAudioSource: {fileID: 821901333}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3263,7 +3263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3a8331347cf2fe647aea9fc23ca71d8c, type: 2}
   m_sharedMaterial: {fileID: -874602635625285415, guid: 3a8331347cf2fe647aea9fc23ca71d8c, type: 2}
@@ -4237,7 +4237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42ff9a3e1ecf2141afeeaffc46341ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollTime: 240
+  scrollTime: 10
   dataManager: {fileID: 821901334}
   rankingScoreText:
   - {fileID: 1372974400}

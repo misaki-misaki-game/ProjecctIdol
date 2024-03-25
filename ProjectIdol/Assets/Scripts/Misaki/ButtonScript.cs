@@ -30,8 +30,10 @@ public class ButtonScript : MonoBehaviour
     {
         SignalClick(); // シグナルをクリックしたときの処理
     }
-
-    private void SignalClick() // シグナルをクリックしたときの関数
+    /// <summary>
+    /// シグナルをクリックしたときの関数
+    /// </summary>
+    private void SignalClick()
     {
         if (Input.GetMouseButtonDown(0) && gameStart) // 左クリックしたらかつゲームがスタートしていれば
         {
@@ -61,18 +63,30 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private RaycastHit2D CheckHit() // ヒットしているかのチェック関数
+    /// <summary>
+    /// ヒットしているかのチェック関数
+    /// </summary>
+    /// <returns>ヒットしたRaycastHit2D</returns>
+    private RaycastHit2D CheckHit()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // rayにクリックしたポジションを格納
         RaycastHit2D hitSprite = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction); // hitSpriteにレイが当たったオブジェクトを格納
         return hitSprite; //  hitSpriteをリターンする
     }
-    private void InitializationChain() // チェイン系の変数を初期化する関数
+    /// <summary>
+    /// チェイン系の変数を初期化する関数
+    /// </summary>
+    private void InitializationChain()
     {
         chain = default; // 初期化
         isChain = default; // 初期化
     }
-    private bool CheckSignalState(GameObject gameObject) // シグナルの色チェック
+    /// <summary>
+    /// シグナルの色チェック
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <returns>STATEがNOTHINGならtrue</returns>
+    private bool CheckSignalState(GameObject gameObject)
     {
         // STATEがNOTHINGならtrueを返す
         return gameObject.GetComponent<SignalScript>().state == SignalScript.STATE.NOTHING;
@@ -81,7 +95,6 @@ public class ButtonScript : MonoBehaviour
     /// クリックされたオブジェクトの斜め4方向にある全てのシグナル確認をする関数
     /// </summary>
     /// <param name="gameObject">クリックしたオブジェクト</param>
-    /// <returns></returns>
     private void CheckDetonation(GameObject gameObject)
     {
         centerSignalTP = default; // 10の位 列
@@ -272,7 +285,12 @@ public class ButtonScript : MonoBehaviour
         }
         detonationObjects = new List<GameObject>(); // 中身を空にする
     }
-    private bool CheckChainSignal(GameObject gameObject) // クリックされたオブジェクトの6方向をチェックし、チェインを確認する関数
+    /// <summary>
+    /// クリックされたオブジェクトの6方向をチェックし、チェインを確認する関数
+    /// </summary>
+    /// <param name="gameObject">クリックしたオブジェクト</param>
+    /// <returns>チェインしているかどうか</returns>
+    private bool CheckChainSignal(GameObject gameObject)
     {
         centerSignalTP = default; // 10の位 列
         centerSignalDP = default; // 1の位 行
@@ -341,7 +359,13 @@ public class ButtonScript : MonoBehaviour
         // チェインしていたらtrueを返す
         return isChain == true;
     }
-    private void SearchSignal(GameObject gameObject, ref int centerSignalTP, ref int centerSignalDP) // 対象のオブジェクトが配列内オブジェクトのどれなのかを探す関数 ref...初期化必須
+    /// <summary>
+    ///  対象のオブジェクトが配列内オブジェクトのどれなのかを探す関数 ref...初期化必須
+    /// </summary>
+    /// <param name="gameObject">クリックしたオブジェクト</param>
+    /// <param name="centerSignalTP">10の位</param>
+    /// <param name="centerSignalDP">1の位</param>
+    private void SearchSignal(GameObject gameObject, ref int centerSignalTP, ref int centerSignalDP)
     {
         for (int j = 0; j < 6; j++) // 列をチェック
         {
@@ -355,7 +379,12 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private void CheckSameSignal(SignalScript centerSignalSS, SignalScript comparisonSignalSS) // 同じstateかどうかを確認する関数
+    /// <summary>
+    /// 同じstateかどうかを確認する関数
+    /// </summary>
+    /// <param name="centerSignalSS">比較元のオブジェクト</param>
+    /// <param name="comparisonSignalSS">比較先のオブジェクト</param>
+    private void CheckSameSignal(SignalScript centerSignalSS, SignalScript comparisonSignalSS)
     {
         if (centerSignalSS.state == comparisonSignalSS.state) // stateが同じなら
         {
@@ -363,7 +392,10 @@ public class ButtonScript : MonoBehaviour
             comparisonSignalSS.BreakSignal(true);
         }
     }
-    public void ButtonsDestroy() // リザルト画面時にボタンを消す
+    /// <summary>
+    /// リザルト画面時にボタンを消す関数
+    /// </summary>
+    public void ButtonsDestroy()
     {
         for (int j = 0; j < 6; j++) // 列をチェック
         {
@@ -373,7 +405,10 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private void ResurrectionSignal() // stateがNOTHINGのシグナル全てにsetSignalPointを1加算する関数
+    /// <summary>
+    /// stateがNOTHINGのシグナル全てにsetSignalPointを1加算する関数
+    /// </summary>
+    private void ResurrectionSignal()
     {
         if (!isChain) return; // チェインしていないならリターンする
         for (int j = 0; j < 6; j++) // 列をチェック
@@ -387,14 +422,21 @@ public class ButtonScript : MonoBehaviour
             }
         }
     }
-    private void ShowGetScore(GameObject clickedObject) // ゲットしたスコアを表示する関数
+    /// <summary>
+    /// ゲットしたスコアを表示する関数
+    /// </summary>
+    /// <param name="clickedObject">クリックしたオブジェクト</param>
+    private void ShowGetScore(GameObject clickedObject)
     {
         scoreTextObject = clickedObject.transform.GetChild(1).gameObject; // クリックしたボタンのテキストを取得
         getScoreText = scoreTextObject.GetComponent<TextMeshPro>(); // TextMeshProを代入
         getScoreText.text = string.Format("+ {0:0}", ScoreDirector.score); // ゲットしたスコアを代入
         scoreTextObject.GetComponent<Animator>().SetTrigger("GetScore"); // アニメーションを再生
     }
-    public void AllButtonsReset() // 全てのシグナルをリセットする
+    /// <summary>
+    /// 全てのシグナルをリセットする関数
+    /// </summary>
+    public void AllButtonsReset()
     {
         if (resetStock > 0) // 残りリセット回数が0を超過しているなら
         {

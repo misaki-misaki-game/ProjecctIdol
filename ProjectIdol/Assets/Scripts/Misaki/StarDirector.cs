@@ -35,7 +35,10 @@ public class StarDirector : MonoBehaviour
     {
         ShowStarMode(); // スターモードの演出を行う
     }
-    private void ShowStarMode() // スターモードの演出を行う関数
+    /// <summary>
+    /// スターモードの演出を行う関数
+    /// </summary>
+    private void ShowStarMode()
     {
         if (starState == StarState.StarMode) // スターモードの時
         {
@@ -53,7 +56,11 @@ public class StarDirector : MonoBehaviour
             }
         }
     }
-    public void GetStar(float chain) // ゲットスター関数
+    /// <summary>
+    /// ゲットスター関数
+    /// </summary>
+    /// <param name="chain">消したシグナルのチェイン数</param>
+    public void GetStar(float chain)
     {
         if (starState == StarState.NormalMode) // 通常モードのとき
         {

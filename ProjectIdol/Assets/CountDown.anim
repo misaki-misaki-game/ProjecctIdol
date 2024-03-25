@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Count3
+  m_Name: CountDown
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -139,7 +139,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1
-    functionName: Count2
+    functionName: CountDown
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
