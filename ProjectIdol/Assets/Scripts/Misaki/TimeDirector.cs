@@ -60,7 +60,8 @@ public class TimeDirector : MonoBehaviour
     private void TimeCountDown()
     {
         // ゲームがスタート,かつ,ゲームオーバーになっていない,かつ,通常モードではないのであれば
-        if (gameStart && !gameOver && starDirector.starState == StarDirector.StarState.NormalMode)
+        // 追記　お星様モード時に時間を止めないように変更(2024-03-29)
+        if (gameStart && !gameOver)
         {
             // カウントダウンタイムを表示
             timeText.text = string.Format("TIME:{0:0}s", cdTime);

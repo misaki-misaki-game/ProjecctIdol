@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "8592SACEAG00005461",
         "name": "com.DefaultCompany.ProjectIdol",
-        "processId": 21117,
+        "processId": 7962,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -18,6 +18,18 @@
             "deviceId": "8592SACEAG00005461",
             "name": "com.DefaultCompany.ProjectIdol",
             "processId": 21117,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 30740,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 7962,
             "exited": false
         }
     ],

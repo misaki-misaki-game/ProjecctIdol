@@ -20,15 +20,21 @@ public class DiamondMesh : MonoBehaviour
             CreateGraph(); // グラフを作成する
         }
     }
-    public void SetUp() // ダイアモンド形のメッシュをセットアップする関数
+    /// <summary>
+    /// ダイアモンド形のメッシュをセットアップする関数
+    /// </summary>
+    public void SetUp()
     {
-        CreateDiamond(defaultVerticalVertex, defaulttHorizontalVertex);
+        CreateDiamond(defaultVerticalVertex, defaulttHorizontalVertex); // ダイヤモンド型の生成
         Vector3[] vectices = GetComponent<MeshFilter>().mesh.vertices; // メッシュの頂点座標を取得
         string[] rank = scoreDirector.rank; // ScoreDirectorのrankを代入
-        SetRankCorrectionRate(rank, vectices);
+        SetRankCorrectionRate(rank, vectices); // グラフを伸ばす上限を決める
         isSetUp = true; // CreateGraphを呼び出すためにtrueに変更
     }
-    void CreateGraph() // 各パラメータを上,右,下,左の順でグラフにする関数
+    /// <summary>
+    /// 各パラメータを上,右,下,左の順でグラフにする関数
+    /// </summary>
+    void CreateGraph()
     {
         Vector3[] vectices = GetComponent<MeshFilter>().mesh.vertices; // メッシュの頂点座標を取得
 
@@ -53,7 +59,12 @@ public class DiamondMesh : MonoBehaviour
         // 変更した頂点座標をメッシュにセット
         GetComponent<MeshFilter>().mesh.vertices = vectices;
     }
-    void SetRankCorrectionRate(string[]rank, Vector3[] vectices) // グラフを伸ばす上限を決める関数
+    /// <summary>
+    /// グラフを伸ばす上限を決める関数
+    /// </summary>
+    /// <param name="rank">各究極パラメータのランク</param>
+    /// <param name="vectices"></param>
+    void SetRankCorrectionRate(string[]rank, Vector3[] vectices)
     {
         // 各パラメータのランクによって掛け率をrank配列に代入
         for (int i = 0; i < 4; i++)
@@ -83,7 +94,12 @@ public class DiamondMesh : MonoBehaviour
         vertexOffset[2] = ((maxVerticalVertex * correctionRate[2]) - defaultVerticalVertex) / 60f;
         vertexOffset[3] = ((maxHorizontalVertex * correctionRate[3]) - defaulttHorizontalVertex) / 60f;
     }
-    void CreateDiamond(float verticalVertex, float horizontalVertex) // ダイアモンド形を生成する関数
+    /// <summary>
+    /// ダイアモンド形を生成する関数
+    /// </summary>
+    /// <param name="verticalVertex"></param>
+    /// <param name="horizontalVertex"></param>
+    void CreateDiamond(float verticalVertex, float horizontalVertex) 
     {
         Mesh mesh = new Mesh(); // メッシュインスタンスを生成
         GetComponent<MeshFilter>().mesh = mesh; // 生成したメッシュインスタンスを代入

@@ -32,9 +32,12 @@ public class SceneScript : MonoBehaviour
     /// <param name="sceneName">遷移したいシーン名</param>
     public async void sceneChange(string sceneName)       // シーンチェンジ関数　ボタン操作などで呼び出す
     {
-        if (SEAudioSource) SEAudioSource.Play(); // 選択SEを鳴らす
-        int timeSE = (int)SEAudioSource.clip.length * 100; // SEの長さを代入
-        await Task.Delay(timeSE);                           // 音が鳴るまで待つ
+        if (SEAudioSource)
+        {
+            SEAudioSource.Play(); // 選択SEを鳴らす
+            int timeSE = (int)SEAudioSource.clip.length * 100; // SEの長さを代入
+            await Task.Delay(timeSE); // 音が鳴るまで待つ
+        }
         fadeCanvas.GetComponent<FadeManager>().fadeOut(); // フェードアウト関数を呼び出し
         await Task.Delay((int)fadeCanvas.GetComponent<FadeManager>().fadeSpeed * 1000); // 暗転するまで待つ
         SceneManager.LoadScene(sceneName);                // シーンチェンジ
