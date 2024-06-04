@@ -93,16 +93,7 @@ public partial class StarDirector
         NormalMode, // 通常状態 0
         StarMode // スターモード 1
     }
-    public enum BackImageState
-    {
-        StageNormal, // 通常ステージ背景 0
-        StageStar, // スターステージ背景 1
-        ArenaNormal, // 通常アリーナ背景 2
-        ArenaStar // スターアリーナ背景 3
-    }
     public StarState starState = StarState.NormalMode; // StarState変数
-    [EnumIndex(typeof(BackImageState))]
-    public Sprite[] backImages = new Sprite[4]; // 背景画像配列
 
     /// -------public変数------- ///
     /// -----protected変数------ ///

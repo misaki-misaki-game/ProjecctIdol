@@ -1,18 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class GameStartCountDownScript : MonoBehaviour
+public partial class GameStartCountDownScript : MonoBehaviour
 {
-    public TextMeshProUGUI gameStartText; // ゲームスタート時のカウントダウンテキスト表示用
-    Animator aniScd; // gameStartcdのanimator変数
-    public TimeDirector timeDirector; // timeDirector変数
-    public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
-    public ButtonScript buttonScript; // ButtonScript変数
-    public Animator animAi; // アイのアニメーション用変数
-    public AudioSource BGMAudioSource; // BGM用オーディオソース
-    int count = 3; // カウントダウンの値
-
-    void Start()
+    private void Start()
     {
         aniScd = gameObject.GetComponent<Animator>(); // Animatorを格納
     }
@@ -53,4 +44,59 @@ public class GameStartCountDownScript : MonoBehaviour
         animAi.SetTrigger("isDanceStart"); // アイのアニメーションをスタートする
         gameStartcd.SetActive(false); // カウントキャンパスを非表示にする
     }
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
+
+
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class GameStartCountDownScript
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+    public TextMeshProUGUI gameStartText; // ゲームスタート時のカウントダウンテキスト表示用
+
+    public TimeDirector timeDirector; // timeDirector変数
+
+    public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
+
+    public ButtonScript buttonScript; // ButtonScript変数
+
+    public Animator animAi; // アイのアニメーション用変数
+
+    public AudioSource BGMAudioSource; // BGM用オーディオソース
+
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private int count = 3; // カウントダウンの値
+
+    private Animator aniScd; // gameStartcdのanimator変数
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }

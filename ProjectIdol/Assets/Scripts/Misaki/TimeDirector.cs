@@ -1,43 +1,39 @@
 using UnityEngine;
 using TMPro;
 
-public class TimeDirector : MonoBehaviour
+public partial class TimeDirector : MonoBehaviour
 {
-    bool gameOver = false; // ゲームオーバーかどうか
-    public bool gameStart = false; // ゲームがスタートしたかどうか
-    public float cdTime; // カウントダウンタイム変数
-    public TextMeshProUGUI timeText; // カウントダウンテキスト表示用
-    public StarDirector starDirector; // StarDirector変数
-    public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
-    public GameObject graphBackImage; // グラフ背景用変数
-    public GameObject nextButton; // ボタン変数
-    public GameObject buttonFrame; // フレーム変数
-    public ButtonScript buttonScript; // ButtonScript変数
-    public ScoreDirector scoreDirector; // ScoreDirector変数
-    public DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
-    public DiamondMesh diamondGraph; // グラフ用DiamondMesh変数
-    public Animator animAi; // キャラクターのアニメーション用変数
-    public AudioSource SEAudioSource; // SE用オーディオソース
-    Animator aniScd; // gameStartcdのanimator変数
 
-    // Start is called before the first frame update
-    void Start()
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
+
+
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void Start()
     {
         Application.targetFrameRate = 60; // 60fpsに固定
         aniScd = gameStartcd.GetComponent<Animator>(); // Animetorを格納する
         aniScd.GetComponent<GameStartCountDownScript>().CountDown();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         TimeCountDown(); // 時間のカウントダウンを行う
         GameOver(); // ゲーム終了の処理を行う
     }
+
     /// <summary>
     /// ゲーム終了の処理関数
     /// </summary>
-    private void GameOver() 
+    private void GameOver()
     {
         if (gameOver) // ゲームオーバーであれば
         {
@@ -54,6 +50,7 @@ public class TimeDirector : MonoBehaviour
             nextButton.SetActive(true); // ボタンを表示する
         }
     }
+
     /// <summary>
     /// 時間のカウントダウンを行う
     /// </summary>
@@ -75,4 +72,47 @@ public class TimeDirector : MonoBehaviour
             }
         }
     }
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class TimeDirector
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+    public bool gameStart = false; // ゲームがスタートしたかどうか
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private bool gameOver = false; // ゲームオーバーかどうか
+    private Animator aniScd; // gameStartcdのanimator変数
+
+    [SerializeField] private float cdTime; // カウントダウンタイム変数
+    [SerializeField] private TextMeshProUGUI timeText; // カウントダウンテキスト表示用
+    [SerializeField] private StarDirector starDirector; // StarDirector変数
+    [SerializeField] private GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
+    [SerializeField] private GameObject graphBackImage; // グラフ背景用変数
+    [SerializeField] private GameObject nextButton; // ボタン変数
+    [SerializeField] private GameObject buttonFrame; // フレーム変数
+    [SerializeField] private ButtonScript buttonScript; // ButtonScript変数
+    [SerializeField] private ScoreDirector scoreDirector; // ScoreDirector変数
+    [SerializeField] private DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
+    [SerializeField] private DiamondMesh diamondGraph; // グラフ用DiamondMesh変数
+    [SerializeField] private AudioSource SEAudioSource; // SE用オーディオソース
+    [SerializeField] private Animator animAi; // キャラクターのアニメーション用変数
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }

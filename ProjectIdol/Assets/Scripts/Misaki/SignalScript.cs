@@ -3,56 +3,10 @@ using System;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
 
-public class SignalScript : MonoBehaviour
+public partial class SignalScript : MonoBehaviour
 {
-    bool isBomb = false; // そのシグナルがボムになるかどうかの真偽
-    int bombMax = 3; // X字ボムの個数上限
-    SpriteRenderer sp; // 画像を切り替える
-    ButtonScript buttonScript; // ButtonScript変数
-
-    public enum STATE // ステータス
-    {
-        NOTHING, // シグナル無し 0
-        BLUE, // 青シグナル 1
-        RED, // 赤シグナル 2
-        WHITE, // 白シグナル 3
-        YELLOW, // 黄シグナル 4
-        SPECIAL // X字ボム 5
-    }
-    public STATE state; // state変数
-    public enum Effect // エフェクトステータス
-    {
-        RESURRECTIONEFFECT, // シグナルが復活するとき 0
-        NOTHINGEFFECT, // シグナル無しのとき 1
-        BOMBSETEFFECT, // シグナルが無し兼ボムをセットするとき 2
-        BREAKEFFECT // シグナルが押されたとき 3
-    }
-    public Effect effectState; // エフェクト変数
-    public int setSignalPoint = 0; // 再セットするためのポイントを数える変数
-    public float destroyDeleteTime = 1.0f; // エフェクトを消すまでの時間変数
-    public const float bombRequirement = 3; // ボムをセットする条件変数
-    [SerializeField] int needPoint = 3; // シグナル再セットに必要なポイント変数
-    [EnumIndex(typeof(Effect))]
-    public GameObject[] effects = new GameObject[4]; // エフェクト配列
-    [EnumIndex(typeof(STATE))]
-    public Sprite[] signals = new Sprite[6]; // シグナル画像配列
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // SpriteRenderer格納
-        sp= GetComponent<SpriteRenderer>();
-        // ButtonScript格納
-        buttonScript = GameObject.FindGameObjectWithTag("GameDirector").GetComponent<ButtonScript>();
-        // シグナルをセットする
-        SetSignal();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(setSignalPoint == needPoint && state == STATE.NOTHING) SetSignal(isBomb); // NOTHINGのシグナルが再セットまでのポイントを必要数満たしていたらシグナルをセットする
-    }
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
 
     /// <summary>
     /// セットシグナル関数
@@ -84,53 +38,23 @@ public class SignalScript : MonoBehaviour
                     sp.sprite = signals[3]; // 白シグナルを設定
                     break;
             }
+            spgl.EnableInstancing = true; // 画像を光らせない
         }
         else // ボムが生成される場合
         {
             state = STATE.SPECIAL; // STATEをX字ボムに設定
             buttonScript.specialSignals.Add(this.gameObject); // ボムを格納する
             sp.sprite = signals[5]; // X字ボムを設定
+            spgl.EnableInstancing = false; // 画像を光らせる
             // ボムの個数制限を超えていたら
-            if (buttonScript.specialSignals.Count > bombMax ) 
+            if (buttonScript.specialSignals.Count > bombMax)
             {
                 // もっとも古いボムを自動爆破する
                 buttonScript.BombTimeOver(buttonScript.specialSignals[0]);
             }
         }
     }
-    /// <summary>
-    /// 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
-    /// </summary>
-    /// <param name="effectCondition">エフェクトステータス</param>
-    private void EffectDestroy(Effect effectCondition)
-    {
-        if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
-        {
-            // 親オブジェクトのTransformコンポーネントを取得
-            Transform parentTransform = transform;
 
-            // 子オブジェクトを格納するリストを作成
-            List<GameObject> childrenWithTag = new List<GameObject>();
-
-            // 親オブジェクトの子オブジェクトを再帰的に探索
-            foreach (Transform childTransform in parentTransform)
-            {
-                // 子オブジェクトが特定のタグを持っているか確認
-                if (childTransform.CompareTag("Eternity"))
-                {
-                    // 子オブジェクトが特定のタグを持っている場合、リストに追加
-                    childrenWithTag.Add(childTransform.gameObject);
-                }
-            }
-
-            // リスト内のオブジェクトを処理する
-            foreach (GameObject childObject in childrenWithTag)
-            {
-                // 子オブジェクトの処理を行う
-                Destroy(childObject); // 子オブジェクトを破壊する
-            }
-        }
-    }
     /// <summary>
     /// ブレイクシグナル関数
     /// </summary>
@@ -166,6 +90,7 @@ public class SignalScript : MonoBehaviour
         sp.sprite = null; // シグナル画像をnullにする
         PlayEffect(effectState); // エフェクトを呼び出す
     }
+
     /// <summary>
     /// SetSignalPointを加算する関数
     /// </summary>
@@ -173,6 +98,67 @@ public class SignalScript : MonoBehaviour
     {
         setSignalPoint += 1;
     }
+
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void Start()
+    {
+        // SpriteRenderer格納
+        sp = GetComponent<SpriteRenderer>();
+        // ButtonScript格納
+        buttonScript = GameObject.FindGameObjectWithTag("GameDirector").GetComponent<ButtonScript>();
+        // SpriteGlowEffect格納
+        spgl = GetComponent<SpriteGlow.SpriteGlowEffect>();
+        // シグナルをセットする
+        SetSignal();
+    }
+
+    private void Update()
+    {
+        if (setSignalPoint >= needPoint && state == STATE.NOTHING) SetSignal(isBomb); // NOTHINGのシグナルが再セットまでのポイントを必要数満たしていたらシグナルをセットする
+    }
+
+    /// <summary>
+    /// 仮引数と同じエフェクトステータスなら子オブジェクト(エフェクト)を破壊する関数
+    /// </summary>
+    /// <param name="effectCondition">エフェクトステータス</param>
+    private void EffectDestroy(Effect effectCondition)
+    {
+        if (effectState == effectCondition) // エフェクトステータスが仮引数と同じなら
+        {
+            // 親オブジェクトのTransformコンポーネントを取得
+            Transform parentTransform = transform;
+
+            // 子オブジェクトを格納するリストを作成
+            List<GameObject> childrenWithTag = new List<GameObject>();
+
+            // 親オブジェクトの子オブジェクトを再帰的に探索
+            foreach (Transform childTransform in parentTransform)
+            {
+                // 子オブジェクトが特定のタグを持っているか確認
+                if (childTransform.CompareTag("Eternity"))
+                {
+                    // 子オブジェクトが特定のタグを持っている場合、リストに追加
+                    childrenWithTag.Add(childTransform.gameObject);
+                }
+            }
+
+            // リスト内のオブジェクトを処理する
+            foreach (GameObject childObject in childrenWithTag)
+            {
+                // 子オブジェクトの処理を行う
+                Destroy(childObject); // 子オブジェクトを破壊する
+            }
+        }
+    }
+
     /// <summary>
     /// エフェクトを再生する関数
     /// </summary>
@@ -210,4 +196,71 @@ public class SignalScript : MonoBehaviour
                 break;
         }
     }
+
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class SignalScript
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+    public enum STATE // ステータス
+    {
+        NOTHING, // シグナル無し 0
+        BLUE, // 青シグナル 1
+        RED, // 赤シグナル 2
+        WHITE, // 白シグナル 3
+        YELLOW, // 黄シグナル 4
+        SPECIAL // X字ボム 5
+    }
+    public STATE state; // state変数
+
+    public enum Effect // エフェクトステータス
+    {
+        RESURRECTIONEFFECT, // シグナルが復活するとき 0
+        NOTHINGEFFECT, // シグナル無しのとき 1
+        BOMBSETEFFECT, // シグナルが無し兼ボムをセットするとき 2
+        BREAKEFFECT // シグナルが押されたとき 3
+    }
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private bool isBomb = false; // そのシグナルがボムになるかどうかの真偽
+
+    private int bombMax = 3; // X字ボムの個数上限
+    private int setSignalPoint = 0; // 再セットするためのポイントを数える変数
+
+    [SerializeField] private int needPoint = 3; // シグナル再セットに必要なポイント変数
+
+    [SerializeField] private float destroyDeleteTime = 1.0f; // エフェクトを消すまでの時間変数
+    [SerializeField] private const float bombRequirement = 3; // ボムをセットする条件変数
+
+    [EnumIndex(typeof(Effect))]
+    [SerializeField] private GameObject[] effects = new GameObject[4]; // エフェクト配列
+    [EnumIndex(typeof(STATE))]
+    [SerializeField] private Sprite[] signals = new Sprite[6]; // シグナル画像配列
+
+    private Effect effectState; // エフェクト変数
+
+    private SpriteRenderer sp; // 画像を切り替える
+
+    private ButtonScript buttonScript; // ButtonScript変数
+
+    private SpriteGlow.SpriteGlowEffect spgl; // SpriteGlowEffect変数
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }
