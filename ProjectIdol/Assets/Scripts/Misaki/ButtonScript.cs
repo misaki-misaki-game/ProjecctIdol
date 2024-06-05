@@ -88,6 +88,7 @@ public partial class ButtonScript : MonoBehaviour
         bottom = signals.Length / 10; // 最下段を代入
         row = signals.Length % 10; // 行数を代入
         column = (signals.Length / 10) + 1; // 列数を代入
+        resetButton.GetComponent <Button>().interactable = false; // ボタンを押せないようにする
     }
 
     private void Update()
@@ -525,6 +526,8 @@ public partial class ButtonScript
 
     public List<GameObject> specialSignals; // X字ボム格納用
 
+    public Image resetButton; // リセットボタン変数
+
     /// -------public変数------- ///
     /// -----protected変数------ ///
 
@@ -564,8 +567,6 @@ public partial class ButtonScript
     [SerializeField] private StarDirector StarDirector; // StarDirector変数
 
     [SerializeField] private TextMeshPro getScoreText; // 取得したスコアを表示するテキスト変数
-
-    [SerializeField] private Image resetButton; // リセットボタン変数
 
     [SerializeField] private Sprite[] resetImage = new Sprite[3]; // リセットボタンのimage変数
 

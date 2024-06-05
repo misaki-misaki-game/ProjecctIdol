@@ -8895,6 +8895,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7330689961989390236, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
+      propertyPath: enableInstancing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton0

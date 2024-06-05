@@ -60,7 +60,7 @@ public partial class SignalScript : MonoBehaviour
     /// </summary>
     /// <param name="isChain">チェインしているか</param>
     /// <param name="chain">チェイン数</param>
-    public void BreakSignal(bool isChain, float chain = 0)
+    public void BreakSignal(bool isChain, float chain = 0, bool isDetonation = false)
     {
         if (state == STATE.NOTHING) return; // stateがNOTHINGがリターンする
         if (state == STATE.SPECIAL) // stateがSPECIALなら
@@ -68,7 +68,9 @@ public partial class SignalScript : MonoBehaviour
             // X字ボムリストから自分を取り除く
             buttonScript.specialSignals.Remove(this.gameObject);
         }
-        setSignalPoint = default; // setSignalPointにdefaultPointを代入する
+        // setSignalPointがneedPointを超過していたら超過分を代入　それ以外は0にする
+        if (setSignalPoint > needPoint) setSignalPoint -= needPoint;
+        else setSignalPoint = default; // setSignalPointにdefaultを代入する
         if (isChain)
         {
             setSignalPoint -= 1; // チェインしている場合はシグナルをクリックした時点でAddSetSignalPointが呼び出されてしまうので、

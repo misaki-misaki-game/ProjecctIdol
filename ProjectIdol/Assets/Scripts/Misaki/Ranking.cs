@@ -3,21 +3,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Ranking : MonoBehaviour
+public partial class Ranking : MonoBehaviour
 {
-    bool isScroll = false; // スクロールするかどうか
-    float scrollValue = 1f; // スクロールの現在値
-    float scrollTargetValue = 0f; // スクロールの目標値
-    public float scrollTime = 1f; // スクロールに掛かる時間
-    public DataManager dataManager; // DataManager変数
-    public TextMeshProUGUI[] rankingScoreText = new TextMeshProUGUI[10]; // ランキングスコアの配列
-    public Animator[] nodeAnimator= new Animator[10]; // ノードのAnimator配列
-    public Scrollbar scrollbar; // Scrollbar変数
 
-    private void FixedUpdate()
-    {
-        ScrollAnim(scrollbar, scrollTargetValue); // スクロールアニメーションを呼び出す
-    }
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
+
     /// <summary>
     /// ランクインしているかの関数
     /// </summary>
@@ -58,47 +49,7 @@ public class Ranking : MonoBehaviour
         }
         WriteRanking(ranking); // ランキングを表示
     }
-    /// <summary>
-    /// スクロールする関数
-    /// </summary>
-    /// <param name="scrollbar">対象のスクロールバー</param>
-    /// <param name="scrollTarget">スクロールの目標値</param>
-    void ScrollAnim(Scrollbar scrollbar, float scrollTarget)
-    {
-        if (!isScroll) return; // isScrollがfalseならリターンする
-        if (scrollTarget < scrollbar.value)
-        {
-            Debug.Log("スクロールします");
-            scrollValue -= Time.deltaTime; // deltaTimeを加算する
-            float progress = Mathf.Clamp01(scrollValue / scrollTime); // scrollValue / scrollTimeの割合を代入
-            scrollbar.value -= Mathf.Lerp(0, scrollTarget, progress); // 0からscrollTargetValueまでの値に対して割合(progress)を代入
-        }
-        // showScoreがtotalScoreを超えたら表記ずれしないようにtotalScoreを表示する
-        else
-        {
-            scrollbar.value = scrollTarget; // scrollTargetValueを代入する
-            isScroll = false; // ScrollAnimを呼び出さないようにfalseにする
-        }
-    }
-    /// <summary>
-    /// ランキングの整理をする関数
-    /// </summary>
-    void UpdateRanking(float[] ranking)
-    {
-        // クイックソート(降順)を行う
-        QuickSortDescending(ranking, 0, ranking.Length - 1);
-        dataManager.Save(dataManager.data); // セーブする
-    }
-    /// <summary>
-    /// ランキングの書き込み関数
-    /// </summary>
-    void WriteRanking(float[] ranking)
-    {
-        for (int i = 0; i < rankingScoreText.Length; i++)
-        {
-            rankingScoreText[i].text = string.Format("{0:0000000}Pt", ranking[i]); // 各順位を書き出し
-        }
-    }
+
     /// <param name="array">対象の配列</param>
     /// <param name="left">ソート範囲の最初のインデックス</param>
     /// <param name="right">ソート範囲の最後のインデックス</param>
@@ -132,17 +83,7 @@ public class Ranking : MonoBehaviour
         // 配列の中央より右側の要素でクイックソート
         QuickSortAscending(array, i, right);
     }
-    /// <summary>
-    /// 中央値を求める
-    /// </summary>
-    private static T MedianAscending<T>(T x, T y, T z) where T : IComparable<T>
-    {
-        // 左の変数 > 右の変数 なら1以上の整数値が返される
-        if (x.CompareTo(y) > 0) Swap(ref x, ref y);
-        if (x.CompareTo(z) > 0) Swap(ref x, ref z);
-        if (y.CompareTo(z) > 0) Swap(ref y, ref z);
-        return y;
-    }
+
     /// <summary>
     /// クイックソート（降順）
     /// </summary>
@@ -178,26 +119,7 @@ public class Ranking : MonoBehaviour
         QuickSortDescending(array, left, i - 1);
         QuickSortDescending(array, i, right);
     }
-    /// <summary>
-    /// 中央値を求める（降順）
-    /// </summary>
-    private static T MedianDescending<T>(T x, T y, T z) where T : IComparable<T>
-    {
-        // 左の変数 < 右の変数 なら-1以下の整数値が返される
-        if (x.CompareTo(y) < 0) Swap(ref x, ref y);
-        if (x.CompareTo(z) < 0) Swap(ref x, ref z);
-        if (y.CompareTo(z) < 0) Swap(ref y, ref z);
-        return y;
-    }
-    /// <summary>
-    /// 参照を入れ替える(値型だと変数のコピーになってしまうため)
-    /// </summary>
-    private static void Swap<T>(ref T x, ref T y) where T : IComparable<T>
-    {
-        var tmp = x;
-        x = y;
-        y = tmp;
-    }
+
     /// <summary>
     /// 2分探索関数昇順用
     /// </summary>
@@ -233,6 +155,7 @@ public class Ranking : MonoBehaviour
         // ターゲットが見つからない場合
         return -1;
     }
+
     /// <summary>
     /// 2分探索関数降順用
     /// </summary>
@@ -270,4 +193,136 @@ public class Ranking : MonoBehaviour
         Debug.Log(-1);
         return -1;
     }
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void FixedUpdate()
+    {
+        ScrollAnim(scrollbar, scrollTargetValue); // スクロールアニメーションを呼び出す
+    }
+
+    /// <summary>
+    /// スクロールする関数
+    /// </summary>
+    /// <param name="scrollbar">対象のスクロールバー</param>
+    /// <param name="scrollTarget">スクロールの目標値</param>
+    private void ScrollAnim(Scrollbar scrollbar, float scrollTarget)
+    {
+        if (!isScroll) return; // isScrollがfalseならリターンする
+        if (scrollTarget < scrollbar.value)
+        {
+            Debug.Log("スクロールします");
+            scrollValue -= Time.deltaTime; // deltaTimeを加算する
+            float progress = Mathf.Clamp01(scrollValue / scrollTime); // scrollValue / scrollTimeの割合を代入
+            scrollbar.value -= Mathf.Lerp(0, scrollTarget, progress); // 0からscrollTargetValueまでの値に対して割合(progress)を代入
+        }
+        // showScoreがtotalScoreを超えたら表記ずれしないようにtotalScoreを表示する
+        else
+        {
+            scrollbar.value = scrollTarget; // scrollTargetValueを代入する
+            isScroll = false; // ScrollAnimを呼び出さないようにfalseにする
+        }
+    }
+
+    /// <summary>
+    /// ランキングの整理をする関数
+    /// </summary>
+    private void UpdateRanking(float[] ranking)
+    {
+        // クイックソート(降順)を行う
+        QuickSortDescending(ranking, 0, ranking.Length - 1);
+        dataManager.Save(dataManager.data); // セーブする
+    }
+
+    /// <summary>
+    /// ランキングの書き込み関数
+    /// </summary>
+    private void WriteRanking(float[] ranking)
+    {
+        for (int i = 0; i < rankingScoreText.Length; i++)
+        {
+            rankingScoreText[i].text = string.Format("{0:0000000}Pt", ranking[i]); // 各順位を書き出し
+        }
+    }
+
+    /// <summary>
+    /// 中央値を求める
+    /// </summary>
+    private static T MedianAscending<T>(T x, T y, T z) where T : IComparable<T>
+    {
+        // 左の変数 > 右の変数 なら1以上の整数値が返される
+        if (x.CompareTo(y) > 0) Swap(ref x, ref y);
+        if (x.CompareTo(z) > 0) Swap(ref x, ref z);
+        if (y.CompareTo(z) > 0) Swap(ref y, ref z);
+        return y;
+    }
+
+    /// <summary>
+    /// 中央値を求める（降順）
+    /// </summary>
+    private static T MedianDescending<T>(T x, T y, T z) where T : IComparable<T>
+    {
+        // 左の変数 < 右の変数 なら-1以下の整数値が返される
+        if (x.CompareTo(y) < 0) Swap(ref x, ref y);
+        if (x.CompareTo(z) < 0) Swap(ref x, ref z);
+        if (y.CompareTo(z) < 0) Swap(ref y, ref z);
+        return y;
+    }
+
+    /// <summary>
+    /// 参照を入れ替える(値型だと変数のコピーになってしまうため)
+    /// </summary>
+    private static void Swap<T>(ref T x, ref T y) where T : IComparable<T>
+    {
+        var tmp = x;
+        x = y;
+        y = tmp;
+    }
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class Ranking
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private bool isScroll = false; // スクロールするかどうか
+
+    private float scrollValue = 1f; // スクロールの現在値
+    private float scrollTargetValue = 0f; // スクロールの目標値
+
+    [SerializeField] private float scrollTime = 1f; // スクロールに掛かる時間
+
+    [SerializeField] private DataManager dataManager; // DataManager変数
+
+    [SerializeField] private TextMeshProUGUI[] rankingScoreText = new TextMeshProUGUI[10]; // ランキングスコアの配列
+
+    [SerializeField] private Animator[] nodeAnimator = new Animator[10]; // ノードのAnimator配列
+
+    [SerializeField] private Scrollbar scrollbar; // Scrollbar変数
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }

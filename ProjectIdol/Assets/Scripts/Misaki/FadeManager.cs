@@ -5,16 +5,39 @@ using UnityEngine.UI;
 // キャンパスはプレハブ化し、ヒエラルキー上には存在させないこと
 // スクリプト「SceneScript」と共に使用する
 // 
-public class FadeManager : MonoBehaviour
+public partial class FadeManager : MonoBehaviour
 {
-    public static bool isFadeInstance = false; // FadeCanvas召喚フラグ
-    public bool isFadeIn = false;              // フェードインするフラグ
-    public bool isFadeOut = false;             // フェードアウトするフラグ
-    public float alpha = 0.0f;                 // 透過率
-    public float fadeSpeed = 0.2f;             // フェードにかかる時間
 
-    // Start is called before the first frame update
-    void Start()
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
+
+    /// <summary>
+    /// フェードイン関数
+    /// </summary>
+    public void fadeIn()
+    {
+        isFadeIn = true;   // フェードインフラグをtrueにする
+        isFadeOut = false; // フェードアウトフラグをfalseにして誤発動を防ぐ
+    }
+
+    /// <summary>
+    /// フェードアウト関数
+    /// </summary>
+    public void fadeOut()
+    {
+        isFadeOut = true; // フェードアウトフラグをtrueにする
+        isFadeIn = false; // フェードインフラグをfalseにして誤発動を防ぐ
+    }
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void Start()
     {
         if (!isFadeInstance)           // FadeCanvas召喚フラグがfalseなら
         {
@@ -28,8 +51,7 @@ public class FadeManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isFadeIn)                                                                      // フェードインフラグがtrueなら
         {
@@ -56,21 +78,35 @@ public class FadeManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// フェードイン関数
-    /// </summary>
-    public void fadeIn()
-    {
-        isFadeIn = true;   // フェードインフラグをtrueにする
-        isFadeOut = false; // フェードアウトフラグをfalseにして誤発動を防ぐ
-    }
-    /// <summary>
-    /// フェードアウト関数
-    /// </summary>
-    public void fadeOut()
-    {
-        isFadeOut = true; // フェードアウトフラグをtrueにする
-        isFadeIn = false; // フェードインフラグをfalseにして誤発動を防ぐ
-    }
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
 }
+public partial class FadeManager
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
 
+    public static bool isFadeInstance = false; // FadeCanvas召喚フラグ
+    public bool isFadeIn = false;              // フェードインするフラグ
+    public bool isFadeOut = false;             // フェードアウトするフラグ
+    public float alpha = 0.0f;                 // 透過率
+    public float fadeSpeed = 0.2f;             // フェードにかかる時間
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
+}

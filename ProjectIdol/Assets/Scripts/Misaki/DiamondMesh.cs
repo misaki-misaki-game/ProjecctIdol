@@ -2,24 +2,11 @@ using UnityEngine;
 
 // 自動的にコンポーネントを追加 MeshFilter,MeshRendererを追加
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class DiamondMesh : MonoBehaviour
+public partial class DiamondMesh : MonoBehaviour
 {
-    public float[] vertexOffset = new float[4]; // 頂点のオフセット
-    public float maxVerticalVertex = 3f; // 上と下の頂点の最大位置
-    public float maxHorizontalVertex = 2f; // 右と左の頂点の最大位置
-    public float defaultVerticalVertex = 0f; // 上と下の頂点の現在位置
-    public float defaulttHorizontalVertex = 0f; // 右と左の頂点の現在位置
-    public ScoreDirector scoreDirector; // ScoreDirector変数
-    float[] correctionRate = new float[4]; // 各スコアのグラフの上限補正率 [0,1,2,3]...[上,右,下,左] 
-    bool isSetUp = false; // セットアップが出来たかどうか
-   
-    private void FixedUpdate()
-    {
-        if (isSetUp) // 真なら
-        {
-            CreateGraph(); // グラフを作成する
-        }
-    }
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
+
     /// <summary>
     /// ダイアモンド形のメッシュをセットアップする関数
     /// </summary>
@@ -31,10 +18,29 @@ public class DiamondMesh : MonoBehaviour
         SetRankCorrectionRate(rank, vectices); // グラフを伸ばす上限を決める
         isSetUp = true; // CreateGraphを呼び出すためにtrueに変更
     }
+
+
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void FixedUpdate()
+    {
+        if (isSetUp) // 真なら
+        {
+            CreateGraph(); // グラフを作成する
+        }
+    }
+
     /// <summary>
     /// 各パラメータを上,右,下,左の順でグラフにする関数
     /// </summary>
-    void CreateGraph()
+    private void CreateGraph()
     {
         Vector3[] vectices = GetComponent<MeshFilter>().mesh.vertices; // メッシュの頂点座標を取得
 
@@ -59,12 +65,13 @@ public class DiamondMesh : MonoBehaviour
         // 変更した頂点座標をメッシュにセット
         GetComponent<MeshFilter>().mesh.vertices = vectices;
     }
+
     /// <summary>
     /// グラフを伸ばす上限を決める関数
     /// </summary>
     /// <param name="rank">各究極パラメータのランク</param>
     /// <param name="vectices"></param>
-    void SetRankCorrectionRate(string[]rank, Vector3[] vectices)
+    private void SetRankCorrectionRate(string[] rank, Vector3[] vectices)
     {
         // 各パラメータのランクによって掛け率をrank配列に代入
         for (int i = 0; i < 4; i++)
@@ -86,7 +93,7 @@ public class DiamondMesh : MonoBehaviour
                 case "S":
                     correctionRate[i] = 1f;
                     break;
-            };            
+            };
         }
         // 各パラメータの上限を計算し、1fで座標移動させる値をvertexOffset配列に代入(60fで上限まで座標を移動させるように計算)
         vertexOffset[0] = ((maxVerticalVertex * correctionRate[0]) - defaultVerticalVertex) / 60f;
@@ -94,12 +101,13 @@ public class DiamondMesh : MonoBehaviour
         vertexOffset[2] = ((maxVerticalVertex * correctionRate[2]) - defaultVerticalVertex) / 60f;
         vertexOffset[3] = ((maxHorizontalVertex * correctionRate[3]) - defaulttHorizontalVertex) / 60f;
     }
+
     /// <summary>
     /// ダイアモンド形を生成する関数
     /// </summary>
     /// <param name="verticalVertex"></param>
     /// <param name="horizontalVertex"></param>
-    void CreateDiamond(float verticalVertex, float horizontalVertex) 
+    private void CreateDiamond(float verticalVertex, float horizontalVertex)
     {
         Mesh mesh = new Mesh(); // メッシュインスタンスを生成
         GetComponent<MeshFilter>().mesh = mesh; // 生成したメッシュインスタンスを代入
@@ -120,4 +128,42 @@ public class DiamondMesh : MonoBehaviour
         mesh.triangles = new int[] { 0, 1, 2, 2, 3, 0 }; // 三角形の順序
         mesh.RecalculateNormals(); // 三角形と頂点からメッシュの法線を再計算
     }
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class DiamondMesh
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private bool isSetUp = false; // セットアップが出来たかどうか
+
+    private float[] correctionRate = new float[4]; // 各スコアのグラフの上限補正率 [0,1,2,3]...[上,右,下,左]
+                                                   // 
+    [SerializeField] private float[] vertexOffset = new float[4]; // 頂点のオフセット
+    [SerializeField] private float maxVerticalVertex = 3f; // 上と下の頂点の最大位置
+    [SerializeField] private float maxHorizontalVertex = 2f; // 右と左の頂点の最大位置
+    [SerializeField] private float defaultVerticalVertex = 0f; // 上と下の頂点の現在位置
+    [SerializeField] private float defaulttHorizontalVertex = 0f; // 右と左の頂点の現在位置
+
+    [SerializeField] private ScoreDirector scoreDirector; // ScoreDirector変数
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }
