@@ -54,7 +54,6 @@ public partial class StarDirector : MonoBehaviour
     {
         if (starState == StarState.StarMode && !backImageObjects[0].activeSelf) // スターモードの時
         {
-            animAi.SetBool("isStarMode", true); // アイのスターモードアニメーションをスタートする
             // お星様モード用の背景に変更
             for (int i = 0; i < backImageObjects.Length; i++)
             {
@@ -72,7 +71,6 @@ public partial class StarDirector : MonoBehaviour
                 {
                     backImageObjects[i].SetActive(false); // ステージ背景を通常モードにする
                 }
-                animAi.SetBool("isStarMode", false); // アイのスターモードアニメーションを終了する
                 starState = StarState.NormalMode; // 通常モードに変更
                 starCount += 1; // お星様モードを加算する
             }
@@ -106,8 +104,6 @@ public partial class StarDirector
     [SerializeField] private float starTime = 10; // お星様モードの制限時間
     [SerializeField] private GameObject[] backImageObjects = new GameObject[2]; // 背景オブジェクト配列
     [SerializeField] private Image Gauge; // お星様ゲージ
-    [SerializeField] private Animator animAi; // アイのアニメーション用変数
-
 
     /// ------private変数------- ///
     /// -------プロパティ------- ///
