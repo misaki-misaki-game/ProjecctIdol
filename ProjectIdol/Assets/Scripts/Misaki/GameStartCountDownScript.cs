@@ -1,21 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameStartCountDownScript : MonoBehaviour
+public partial class GameStartCountDownScript : MonoBehaviour
 {
-    public TextMeshProUGUI gameStartText; // ゲームスタート時のカウントダウンテキスト表示用
-    Animator aniScd; // gameStartcdのanimator変数
-    public TimeDirector timeDirector; // timeDirector変数
-    public GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
-    public ButtonScript buttonScript; // ButtonScript変数
-    public Animator animAi; // アイのアニメーション用変数
-    public AudioSource BGMAudioSource; // BGM用オーディオソース
-    int count = 3; // カウントダウンの値
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
 
-    void Start()
-    {
-        aniScd = gameObject.GetComponent<Animator>(); // Animatorを格納
-    }
     /// <summary>
     /// ゲームのカウントダウン開始の関数
     /// </summary>
@@ -42,6 +33,7 @@ public class GameStartCountDownScript : MonoBehaviour
         count--; // 次のアニメーションの際に別の文字を表示させるためにcountを減らす
         aniScd.SetTrigger("CountDown"); // カウントダウンのアニメーションを動かす
     }
+
     /// <summary>
     /// ゲームスタート関数
     /// </summary>
@@ -49,8 +41,67 @@ public class GameStartCountDownScript : MonoBehaviour
     {
         timeDirector.gameStart = true; // 制限時間をスタートする
         buttonScript.gameStart = true; // ボタンのクリックを許可する
+        buttonScript.resetButton.GetComponent<Button>().interactable = true; // ボタンを押せるようにする
         BGMAudioSource.Play(); // BGMを鳴らす
         animAi.SetTrigger("isDanceStart"); // アイのアニメーションをスタートする
         gameStartcd.SetActive(false); // カウントキャンパスを非表示にする
     }
+
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void Start()
+    {
+        aniScd = gameObject.GetComponent<Animator>(); // Animatorを格納
+    }
+
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class GameStartCountDownScript
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    private int count = 3; // カウントダウンの値
+
+    private Animator aniScd; // gameStartcdのanimator変数
+
+    [SerializeField] private TextMeshProUGUI gameStartText; // ゲームスタート時のカウントダウンテキスト表示用
+
+    [SerializeField] private TimeDirector timeDirector; // timeDirector変数
+
+    [SerializeField] private GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
+
+    [SerializeField] private ButtonScript buttonScript; // ButtonScript変数
+
+    [SerializeField] private Animator animAi; // アイのアニメーション用変数
+
+    [SerializeField] private AudioSource BGMAudioSource; // BGM用オーディオソース
+
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }

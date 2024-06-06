@@ -1,61 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StarDirector : MonoBehaviour
+public partial class StarDirector : MonoBehaviour
 {
-    public int starCount = 0; // お星様モードになった回数
-    public enum StarState
-    {
-        NormalMode, // 通常状態 0
-        StarMode // スターモード 1
-    }
-    public enum BackImageState
-    {
-        StageNormal, // 通常ステージ背景 0
-        StageStar, // スターステージ背景 1
-        ArenaNormal, // 通常アリーナ背景 2
-        ArenaStar // スターアリーナ背景 3
-    }
-    public StarState starState = StarState.NormalMode; // StarState変数
-    public Image Gauge; // お星様ゲージ
-    public Animator animAi; // アイのアニメーション用変数
-    [EnumIndex(typeof(BackImageState))]
-    public Sprite[] backImages = new Sprite[4]; // 背景画像配列
-    public GameObject[] backImageObjects = new GameObject[2]; // 背景オブジェクト配列
+    /// --------関数一覧-------- ///
+    /// -------public関数------- ///
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // 初期設定
-        Gauge.fillAmount = 0;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        ShowStarMode(); // スターモードの演出を行う
-    }
-    /// <summary>
-    /// スターモードの演出を行う関数
-    /// </summary>
-    private void ShowStarMode()
-    {
-        if (starState == StarState.StarMode) // スターモードの時
-        {
-            animAi.SetBool("isStarMode", true); // アイのスターモードアニメーションをスタートする
-            backImageObjects[0].GetComponent<Image>().sprite = backImages[1]; // ステージ背景をスターモードにする
-            backImageObjects[1].GetComponent<Image>().sprite = backImages[3]; // 観客背景をスターモードにする
-            Gauge.fillAmount -= Time.deltaTime / 10; // ゲージを減少させる(10秒間)
-            if (Gauge.fillAmount <= 0) // ゲージがなくなったら
-            {
-                backImageObjects[0].GetComponent<Image>().sprite = backImages[0]; // ステージ背景を通常モードにする
-                backImageObjects[1].GetComponent<Image>().sprite = backImages[2]; // 観客背景を通常モードにする
-                animAi.SetBool("isStarMode", false); // アイのスターモードアニメーションを終了する
-                starState = StarState.NormalMode; // 通常モードに変更
-                starCount += 1; // お星様モードを加算する
-            }
-        }
-    }
     /// <summary>
     /// ゲットスター関数
     /// </summary>
@@ -77,4 +27,89 @@ public class StarDirector : MonoBehaviour
             }
         }
     }
+
+    /// -------public関数------- ///
+    /// -----protected関数------ ///
+
+
+
+    /// -----protected関数------ ///
+    /// ------private関数------- ///
+
+    private void Start()
+    {
+        // 初期設定
+        Gauge.fillAmount = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        ShowStarMode(); // スターモードの演出を行う
+    }
+
+    /// <summary>
+    /// スターモードの演出を行う関数
+    /// </summary>
+    private void ShowStarMode()
+    {
+        if (starState == StarState.StarMode && !backImageObjects[0].activeSelf) // スターモードの時
+        {
+            // お星様モード用の背景に変更
+            for (int i = 0; i < backImageObjects.Length; i++)
+            {
+                backImageObjects[i].SetActive(true);
+            }
+            Gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
+        }
+        else if (starState == StarState.StarMode && backImageObjects[0].activeSelf) // スターモードの時
+        {
+            Gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
+            if (Gauge.fillAmount <= 0) // ゲージがなくなったら
+            {
+                // お星様モード用の背景に変更
+                for (int i = 0; i < backImageObjects.Length; i++)
+                {
+                    backImageObjects[i].SetActive(false); // ステージ背景を通常モードにする
+                }
+                starState = StarState.NormalMode; // 通常モードに変更
+                starCount += 1; // お星様モードを加算する
+            }
+        }
+    }
+
+    /// ------private関数------- ///
+    /// --------関数一覧-------- ///
+}
+public partial class StarDirector
+{
+    /// --------変数一覧-------- ///
+    /// -------public変数------- ///
+
+    public int starCount = 0; // お星様モードになった回数
+    public enum StarState
+    {
+        NormalMode, // 通常状態 0
+        StarMode // スターモード 1
+    }
+    public StarState starState = StarState.NormalMode; // StarState変数
+
+    /// -------public変数------- ///
+    /// -----protected変数------ ///
+
+
+
+    /// -----protected変数------ ///
+    /// ------private変数------- ///
+
+    [SerializeField] private float starTime = 10; // お星様モードの制限時間
+    [SerializeField] private GameObject[] backImageObjects = new GameObject[2]; // 背景オブジェクト配列
+    [SerializeField] private Image Gauge; // お星様ゲージ
+
+    /// ------private変数------- ///
+    /// -------プロパティ------- ///
+
+
+
+    /// -------プロパティ------- ///
+    /// --------変数一覧-------- ///
 }
