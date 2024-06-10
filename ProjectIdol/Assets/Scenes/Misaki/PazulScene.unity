@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &329614538
@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &474100385
@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &497888314
@@ -2674,7 +2674,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &544461766
@@ -2892,7 +2892,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &595462541
@@ -3887,7 +3887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStart: 0
-  cdTime: 90
+  cdTime: 3000
   timeText: {fileID: 1287688341}
   starDirector: {fileID: 821901330}
   gameStartcd: {fileID: 646762120}
@@ -4087,6 +4087,7 @@ MonoBehaviour:
   - {fileID: 319447120}
   - {fileID: 2033468640}
   detonationObjects: []
+  explotionObjects: []
   ScoreDirector: {fileID: 821901329}
   StarDirector: {fileID: 821901330}
   getScoreText: {fileID: 0}
@@ -4752,7 +4753,7 @@ MonoBehaviour:
   m_margin: {x: -400, y: 0, z: -400, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &957876591
@@ -5794,7 +5795,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1141092837
@@ -5928,7 +5929,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1157110254
@@ -6804,7 +6805,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1284148831
@@ -7797,7 +7798,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1450282205
@@ -9017,10 +9018,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7330689961989390236, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
-      propertyPath: enableInstancing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton0
@@ -9480,7 +9477,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1878831222
@@ -9929,7 +9926,7 @@ MonoBehaviour:
   m_margin: {x: -300, y: 0, z: -300, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2007689754

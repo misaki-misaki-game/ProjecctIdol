@@ -392,10 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  effectState: 0
-  setSignalPoint: 0
-  destroyDeleteTime: 1
   needPoint: 3
+  destroyDeleteTime: 1
   effects:
   - {fileID: 1459862227383078, guid: cc461484bcafc664fb68be84c1fc6860, type: 3}
   - {fileID: 4033412786151888123, guid: 49057b33ea71fbb4da4e8f02a8db9f28, type: 3}

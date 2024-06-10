@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public partial class ButtonScript : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public partial class ButtonScript : MonoBehaviour
         {
             for (int i = 0; i < row; i++) // 行をチェック
             {
+                if (!signals[j * 10 + i]) continue; // nullなら次の処理に移行する
                 Destroy(signals[j * 10 + i]);// 全てのシグナルを破壊する
             }
         }
@@ -177,6 +179,12 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="gameObject">クリックしたオブジェクト</param>
     private void CheckDetonation(GameObject gameObject)
     {
+
+        // 始めの爆発または爆発するシグナルが重複していないなら爆発したシグナルとして格納
+        // 重複していれば処理を中止
+        if (explotionObjects == null || !explotionObjects.Contains(gameObject)) explotionObjects.Add(gameObject);
+        else if (explotionObjects.Contains(gameObject)) return;
+
         centerSignalTP = default; // 10の位 列
         centerSignalDP = default; // 1の位 行
         centerSignalSS = null; // クリックしたオブジェクトのSignalScript格納用
@@ -186,10 +194,12 @@ public partial class ButtonScript : MonoBehaviour
         SearchSignal(gameObject, ref centerSignalTP, ref centerSignalDP);
         // クリックしたオブジェクトのSignalScriptを格納
         centerSignalSS = signals[centerSignalTP * 10 + centerSignalDP].GetComponent<SignalScript>();
-        if (centerSignalDP < 4) // クリックしたオブジェクトの行が右端でなければ 
+
+        // 各斜め方向を探索　既に格納したオブジェクトは処理を行わない 
+        // クリックしたオブジェクトの行が右端でなければ
+        if (centerSignalDP < rightMost && !detonationObjects.Contains(signals[centerSignalTP * 10 + centerSignalDP + 1])) 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
-            Debug.Log(centerSignalTP + "と" + centerSignalDP);
             detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP + 1]);
             if (centerSignalDP % 2 == 0) // 右下の場合
             {
@@ -202,7 +212,8 @@ public partial class ButtonScript : MonoBehaviour
                 RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
             }
         }
-        if (centerSignalDP > 0) // クリックしたオブジェクトの行が左端でなければ
+        // クリックしたオブジェクトの行が左端でなければ
+        if (centerSignalDP > 0 && !detonationObjects.Contains(signals[centerSignalTP * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
             detonationObjects.Add(signals[centerSignalTP * 10 + centerSignalDP - 1]);
@@ -217,33 +228,45 @@ public partial class ButtonScript : MonoBehaviour
                 RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
             }
         }
-        if (centerSignalTP > 0 && centerSignalDP < 4 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        if (centerSignalTP > 0 && centerSignalDP < rightMost && centerSignalDP % 2 == 0 && !detonationObjects.Contains(signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1]))
         {
             // クリックしたオブジェクトの1つ右上のオブジェクトを格納
             detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1]);
             // 右上への探索を開始する
             RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0 && !detonationObjects.Contains(signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左上のオブジェクトを格納
             detonationObjects.Add(signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1]);
             // 左上への探索を開始する
             RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (centerSignalTP < 5 && centerSignalDP < 4 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        if (centerSignalTP < bottom && centerSignalDP < rightMost && centerSignalDP % 2 > 0 && !detonationObjects.Contains(signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1]))
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
             detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1]);
             // 右下への探索を開始する
             RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (centerSignalTP < 5 && centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        if (centerSignalTP < bottom && centerSignalDP > 0 && centerSignalDP % 2 > 0 && !detonationObjects.Contains(signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
             detonationObjects.Add(signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1]);
             // 左下への探索を開始する
             RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
+        }
+        // 誘爆したオブジェクトの中にボムがあれば、それを中心に爆発処理を行う
+        for (int i = 0; i < detonationObjects.Count; i++)
+        {
+            if (detonationObjects[i].GetComponent<SignalScript>().state == SignalScript.STATE.SPECIAL)
+            {
+                CheckDetonation(detonationObjects[i]);
+            }
         }
         state = centerSignalSS.state; // 押したボタンのstateを代入する
         isChain = true; // チェインしているのでtrueにする
@@ -371,7 +394,9 @@ public partial class ButtonScript : MonoBehaviour
             }
             ss.AddSetSignalPoint();
         }
-        detonationObjects = new List<GameObject>(); // 中身を空にする
+        // 中身を空にする
+        detonationObjects = new List<GameObject>();
+        explotionObjects = new List<GameObject>();
     }
 
     /// <summary>
@@ -561,6 +586,7 @@ public partial class ButtonScript
     [SerializeField] private GameObject clickedGameObject; // クリックしたオブジェクトを格納する変数
     [SerializeField] private GameObject[] signals; // シグナル格納用
     [SerializeField] private List<GameObject> detonationObjects; // 誘爆したシグナル格納用
+    [SerializeField] private List<GameObject> explotionObjects; // 爆発したシグナル格納用
 
     [SerializeField] private ScoreDirector ScoreDirector; // ScoreDirector変数
 

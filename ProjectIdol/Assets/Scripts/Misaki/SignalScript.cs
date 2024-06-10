@@ -18,6 +18,7 @@ public partial class SignalScript : MonoBehaviour
         EffectDestroy(Effect.BOMBSETEFFECT); // BOMBSETEFFECT時のエフェクトを消す
         effectState = Effect.RESURRECTIONEFFECT; // エフェクトステータスを復活するときに変更
         PlayEffect(effectState); // エフェクトを呼び出す
+        sp.color = Color.white; // 画像色を標準色(白)にする
         if (!isBomb) // ボムが生成されない場合
         {
             int rnd = Random.Range(1, 5); // 1～4の範囲でランダム
@@ -89,7 +90,7 @@ public partial class SignalScript : MonoBehaviour
             isBomb = false; // ボムにしないためにtrueにする
         }
         state = STATE.NOTHING; // stateをNOTHINGにする
-        sp.sprite = null; // シグナル画像をnullにする
+        sp.color = Color.clear; // 画像を透明にする
         PlayEffect(effectState); // エフェクトを呼び出す
     }
 

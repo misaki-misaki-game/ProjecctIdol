@@ -23,7 +23,6 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] RhythmDiamondMesh rhythmDiamondMesh;
     [SerializeField] RhythmDiamondMesh diamondFrame;
     [SerializeField] RhythmDiamondMesh diamondGraph;
-    [SerializeField] float bgmF = 0.3f;
 
     void Start()
     {

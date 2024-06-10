@@ -10,7 +10,6 @@ public class JudgmentArea : MonoBehaviour
     [SerializeField] GameObject textEffectPrefab;       //シグナルを消せたときに表示させたいテキストを設定するためのゲームオブジェクト
     //[SerializeField] GameObject putEffectPrefab;    //判定がPerfectの場合のエフェクトのプレハブ
     [SerializeField] GameObject pereffectPerfab;      //判定がNomalの場合のエフェクトのプレハブ
-    [SerializeField] float delay = 0.1f;                //オブジェクトを非アクティブにする時間
     [SerializeField] AudioSource SEaudio;
     [SerializeField] int perfectScorePoint = 3000;
     [SerializeField] int nomalScorePoint = 1500;
