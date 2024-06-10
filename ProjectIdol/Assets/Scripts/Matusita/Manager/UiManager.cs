@@ -59,33 +59,33 @@ public class UiManager : MonoBehaviour
     [SerializeField] int totalRankPointS = 506;
     [SerializeField] int totalRankPointA = 369;
     [SerializeField] int totalRankPointB = 280;
-    [SerializeField] int totalRankPointC =  112;
+    [SerializeField] int totalRankPointC = 112;
     [SerializeField] int totalRankPointD = 56;
     string colorPoint;
 
-    [SerializeField] int blueRankPointS=132;
-    [SerializeField] int blueRankPointA=94;
-    [SerializeField] int blueRankPointB=78;
-    [SerializeField] int blueRankPointC=36;
-    [SerializeField] int blueRankPointD=18;
+    [SerializeField] int blueRankPointS = 132;
+    [SerializeField] int blueRankPointA = 94;
+    [SerializeField] int blueRankPointB = 78;
+    [SerializeField] int blueRankPointC = 36;
+    [SerializeField] int blueRankPointD = 18;
 
-    [SerializeField] int redRankPointS=128;
-    [SerializeField] int redRankPointA=96;
-    [SerializeField] int redRankPointB=72;
-    [SerializeField] int redRankPointC=28;
-    [SerializeField] int redRankPointD=14;
+    [SerializeField] int redRankPointS = 128;
+    [SerializeField] int redRankPointA = 96;
+    [SerializeField] int redRankPointB = 72;
+    [SerializeField] int redRankPointC = 28;
+    [SerializeField] int redRankPointD = 14;
 
-    [SerializeField] int whiteRankPointS=120;
-    [SerializeField] int whiteRankPointA=83;
-    [SerializeField] int whiteRankPointB=60;
-    [SerializeField] int whiteRankPointC=20;
-    [SerializeField] int whiteRankPointD=10;
+    [SerializeField] int whiteRankPointS = 120;
+    [SerializeField] int whiteRankPointA = 83;
+    [SerializeField] int whiteRankPointB = 60;
+    [SerializeField] int whiteRankPointC = 20;
+    [SerializeField] int whiteRankPointD = 10;
 
-    [SerializeField] int yellowRankPointS=126;
-    [SerializeField] int yellowRankPointA=96;
-    [SerializeField] int yellowRankPointB=70;
-    [SerializeField] int yellowRankPointC=28;
-    [SerializeField] int yellowRankPointD=14;
+    [SerializeField] int yellowRankPointS = 126;
+    [SerializeField] int yellowRankPointA = 96;
+    [SerializeField] int yellowRankPointB = 70;
+    [SerializeField] int yellowRankPointC = 28;
+    [SerializeField] int yellowRankPointD = 14;
 
     public string blueRank;
     public string redRank;
@@ -97,9 +97,9 @@ public class UiManager : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        scoreText.text = "Score\n" + score.ToString();
+        scoreText.text = score.ToString();
         lastScoreText.text = "Score:" + score.ToString();
-        comboText.text = "Combo:" + combo.ToString();
+        comboText.text = combo.ToString();
         //timeText.text = "Time :" + time.ToString();
         //timeText.text = string.Format("Time :{0:0}s", time);
 
@@ -131,7 +131,7 @@ public class UiManager : MonoBehaviour
         //JudgmentAreaスクリプトのSignalJudgmentで使用している
         if (score <= 0 && combo <= 0)
         {
-        //scoreとcomboに数値が入ってないときは減らさないようにする
+            //scoreとcomboに数値が入ってないときは減らさないようにする
             score = 0;
             combo = 0;
         }
@@ -175,19 +175,19 @@ public class UiManager : MonoBehaviour
             score += bonusScore;
         }
     }
-    public void AddBluePoint (int colorPoint)
+    public void AddBluePoint(int colorPoint)
     {
         bluePoints += colorPoint;
     }
-    public void AddRedPoint (int colorPoint)
+    public void AddRedPoint(int colorPoint)
     {
         redPoints += colorPoint;
     }
-    public void AddWhitePoint (int colorPoint)
+    public void AddWhitePoint(int colorPoint)
     {
         whitePoints += colorPoint;
     }
-    public void AddYellowPoint (int colorPoint)
+    public void AddYellowPoint(int colorPoint)
     {
         yellowPoints += colorPoint;
     }
@@ -195,12 +195,12 @@ public class UiManager : MonoBehaviour
     //各色のポイントのランクを表示する
     public string EvaluateRank(int colorPoint, string tag)
     {
-    //パラメーターの評価を行う関数を追加
+        //パラメーターの評価を行う関数を追加
         string rank = "";
         switch (tag)
         {
             case "BlueNotes":
-                if      (colorPoint <= blueRankPointS) rank = "S";
+                if (colorPoint <= blueRankPointS) rank = "S";
                 else if (colorPoint <= blueRankPointA) rank = "A";
                 else if (colorPoint <= blueRankPointB) rank = "B";
                 else if (colorPoint <= blueRankPointC) rank = "C";
@@ -208,7 +208,7 @@ public class UiManager : MonoBehaviour
                 break;
 
             case "RedNotes":
-                if      (colorPoint <= redRankPointS) rank = "S";
+                if (colorPoint <= redRankPointS) rank = "S";
                 else if (colorPoint <= redRankPointA) rank = "A";
                 else if (colorPoint <= redRankPointB) rank = "B";
                 else if (colorPoint <= redRankPointC) rank = "C";
@@ -216,7 +216,7 @@ public class UiManager : MonoBehaviour
                 break;
 
             case "WhiteNotes":
-                if      (colorPoint <= whiteRankPointS) rank = "S";
+                if (colorPoint <= whiteRankPointS) rank = "S";
                 else if (colorPoint <= whiteRankPointA) rank = "A";
                 else if (colorPoint <= whiteRankPointB) rank = "B";
                 else if (colorPoint <= whiteRankPointC) rank = "C";
@@ -224,7 +224,7 @@ public class UiManager : MonoBehaviour
                 break;
 
             case "YellowNotes":
-                if      (colorPoint <= yellowRankPointS) rank = "S";
+                if (colorPoint <= yellowRankPointS) rank = "S";
                 else if (colorPoint <= yellowRankPointA) rank = "A";
                 else if (colorPoint <= yellowRankPointB) rank = "B";
                 else if (colorPoint <= yellowRankPointC) rank = "C";
@@ -241,13 +241,13 @@ public class UiManager : MonoBehaviour
         //各シグナルのポイントの合計
         totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
         string rank = "";
-        if      (0               < totalPoints && totalPoints <= totalRankPointD) rank = "-D-";
+        if (0 < totalPoints && totalPoints <= totalRankPointD) rank = "-D-";
         else if (totalRankPointD < totalPoints && totalPoints <= totalRankPointC) rank = "-C-";
         else if (totalRankPointC < totalPoints && totalPoints <= totalRankPointB) rank = "-B-";
         else if (totalRankPointB < totalPoints && totalPoints <= totalRankPointA) rank = "-A-";
         else if (totalRankPointA < totalPoints && totalPoints <= totalRankPointS) rank = "-S-";
 
-        totalRankText.text= rank;
+        totalRankText.text = rank;
     }
     public void ShowResult()
     {
@@ -263,9 +263,9 @@ public class UiManager : MonoBehaviour
         yellowRank = EvaluateRank(yellowPoints, "YellowNotes");
 
         // ランクをテキストに表示
-        pointText.text =   blueRank + "  青シグナル: " + bluePoints   + "pt\n" +
-                           redRank  + "  赤シグナル: " + redPoints    + "pt\n" +
-                          whiteRank + "  白シグナル: " + whitePoints  + "pt\n" +
+        pointText.text = blueRank + "  青シグナル: " + bluePoints + "pt\n" +
+                           redRank + "  赤シグナル: " + redPoints + "pt\n" +
+                          whiteRank + "  白シグナル: " + whitePoints + "pt\n" +
                          yellowRank + "  黄シグナル: " + yellowPoints + "pt\n" +
                          "最終ポイント" + totalPoints;
     }
