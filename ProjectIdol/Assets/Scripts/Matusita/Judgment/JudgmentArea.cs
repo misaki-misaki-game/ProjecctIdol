@@ -77,14 +77,14 @@ public class JudgmentArea : MonoBehaviour
             float distance = Mathf.Abs(hit2D.transform.position.y - transform.position.y);
             //float distance = Mathf.Abs(hit2D.transform.position.x - transform.position.x);
 
-            if (distance < 5)
+            if (distance < 6)
             {
                 Debug.Log("黄色パーフェクト");
                 //もしシグナルを消したのが半径4以下なら
                 uiManager.AddScore(perfectScorePoint);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
                 uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
                 //SpawnTextEffect("Parfect", notePosition, Color.yellow);
-                SpawnTextEffect("Parfect", hit2D.transform.position, Color.yellow);
+                SpawnTextEffect("Perfect", hit2D.transform.position, Color.yellow);
                 Debug.Log("perfect");
 
                 switch (hit2D.collider.gameObject.tag)
@@ -135,7 +135,7 @@ public class JudgmentArea : MonoBehaviour
                 }
 
             }
-            else
+            else if (distance<7|| distance > 10)
             {
                 //もしシグナルを消したのがそれ以外なら
                 uiManager.NoteMiss();                                                                                   //UIManagerのNoteMissを使用してスコアに-25加算する
@@ -147,6 +147,7 @@ public class JudgmentArea : MonoBehaviour
             ////ぶつかったものを破壊する
             Destroy(hit2D.collider.gameObject);
             hit2D.collider.gameObject.SetActive(false);
+            Debug.Log("last");
         }
     }
 

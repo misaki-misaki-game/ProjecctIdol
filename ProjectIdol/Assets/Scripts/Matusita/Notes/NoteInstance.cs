@@ -1,90 +1,140 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 //using static UnityEditor.PlayerSettings;
 
 public class NoteInstance : MonoBehaviour
 {
-    [SerializeField] GameObject l_prefabBlue;     //左側専用の青  西南西(Sキー)の方向に移動する
-    [SerializeField] GameObject l_prefabRed;      //左側専用の赤  北北西(Fキー)の方向に移動する
-    [SerializeField] GameObject l_prefabWhite;    //左側専用の白  南南西(Aキー)の方向に移動する
-    [SerializeField] GameObject l_prefabYellow;   //左側専用の黄  西北西(Dキー)の方向に移動する
-    [SerializeField] GameObject r_prefabBlue;     //右側専用の青  北北東(Jキー)の方向に移動する
-    [SerializeField] GameObject r_prefabRed;      //右側専用の赤  東南東(Lキー)の方向に移動する
-    [SerializeField] GameObject r_prefabWhite;    //右側専用の白  東北東(Kキー)の方向に移動する
-    [SerializeField] GameObject r_prefabYellow;   //右側専用の黄  南南東(;キー)の方向に移動する
+    [SerializeField] GameObject bluePrefab;
+    [SerializeField] GameObject redPrefab;
+    [SerializeField] GameObject whitePrefab;
+    [SerializeField] GameObject yellowPrefab;
 
-    public void NoteEventCC()
+    public void NoteEventCC()   //音階のC#がなった時にシグナルを生成させる
     {
-        //音階のC#がなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabWhite, pos, Quaternion.identity);       //白色のシグナルを南南西(Aキー)の方向に移動させる
+        Debug.Log("CC");
+        GameObject obj = SpawnPotision(yellowPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventC()
+    public void NoteEventC()    //音階のCがなった時にシグナルを生成させる
     {
-        //音階のCがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabYellow, pos, Quaternion.identity);      //黄色のシグナルを南南東(;キー)の方向に移動させる
+        Debug.Log("C");
+        GameObject obj = SpawnPotision(yellowPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventDD()
+    public void NoteEventDD()   //音階のD#がなった時にシグナルを生成させる
     {
-        //音階のD#がなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabYellow, pos, Quaternion.identity);      //白色のシグナルを東北東(Kキー)の方向に移動させる
+        Debug.Log("DD");
+        GameObject obj = SpawnPotision(bluePrefab);
+        AddAngle(obj);
     }
-    public void NoteEventD()
+    public void NoteEventD()    //音階のDがなった時にシグナルを生成させる
     {
-        //音階のDがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabRed, pos, Quaternion.identity);         //赤色のシグナルを東南東(Lキー)の方向に移動させる
+        Debug.Log("D");
+        GameObject obj = SpawnPotision(yellowPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventE()
+    public void NoteEventE()    //音階のEがなった時にシグナルを生成させる
     {
-        //音階のEがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabRed, pos, Quaternion.identity);         //赤色のシグナルを北北西(Fキー)の方向に移動させる
+        Debug.Log("E");
+        GameObject obj = SpawnPotision(yellowPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventFF()
+    public void NoteEventFF()   //音階のF#がなった時にシグナルを生成させる
     {
-        //音階のF#がなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabBlue, pos, Quaternion.identity);        //青色のシグナルを西南西(Sキー)の方向に移動させる
+        Debug.Log("FF");
+        GameObject obj = SpawnPotision(redPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventF()
+    public void NoteEventF()    //音階のFがなった時にシグナルを生成させる
     {
-        //音階のFがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabWhite, pos, Quaternion.identity);       //白色のシグナルを南南西(Aキー)の方向に移動させる
+        Debug.Log("F");
+        GameObject obj = SpawnPotision(redPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventGG()
+    public void NoteEventGG()   //音階のG#がなった時にシグナルを生成させる
     {
-        //音階のG#がなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabYellow, pos, Quaternion.identity);      //黄色のシグナルを西北西(Dキー)の方向に移動させる
+        Debug.Log("GG");
+        GameObject obj = SpawnPotision(redPrefab);
+        AddAngle(obj);
     }
-    public void NoteEventG()
+    public void NoteEventG()    //音階のGがなった時にシグナルを生成させる
     {
-        //音階のGがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabRed, pos, Quaternion.identity);         //赤色のシグナルを東南東(Lキー)の方向に移動させる
+        Debug.Log("G");
+        GameObject obj = SpawnPotision(bluePrefab);
+        AddAngle(obj);
     }
-    public void NoteEventAA()
+    //public IEnumerator NoteEventAA()   //音階のA#がなった時にシグナルを生成させる
+    //{
+    //    Debug.Log("AA");
+    //    SpawnPotision();
+    //    yield return MoveAngles();
+    //}
+    public void NoteEventA()    //音階のAがなった時にシグナルを生成させる
     {
-        //音階のA#がなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(l_prefabYellow, pos, Quaternion.identity);      //黄色色のシグナルを南南西の方向に移動させる
+        Debug.Log("A");
+        GameObject obj = SpawnPotision(whitePrefab);
+        AddAngle(obj);
     }
-    public void NoteEventA()
+    public void NoteEventB()    //音階のBがなった時にシグナルを生成させる
     {
-        //音階のAがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabBlue, pos, Quaternion.identity);        //青色のシグナルを北北東(Jキー)の方向に移動させる
+        Debug.Log("B");
+        GameObject obj = SpawnPotision(whitePrefab);
+        AddAngle(obj);
     }
-    public void NoteEventB()
+
+    /// <summary>
+    /// シグナルを生成位置に生成する
+    /// </summary>
+    /// <param name="spawnObj">生成させたいプレハブを入れる</param>
+    public GameObject SpawnPotision(GameObject spawnObj)
     {
-        //音階のBがなった時にシグナルを生成させる
-        Vector3 pos = new Vector3(0, -23, 0);                       //円の中心に生成するように設定している
-        Instantiate(r_prefabYellow, pos, Quaternion.identity);      //黄色のシグナルを東南東(;キー)の方向に移動させる
+        Vector3 pos = new Vector3(0, -23, 0);
+        return Instantiate(spawnObj, pos, Quaternion.identity);
     }
+
+    /// <summary>
+    /// プレハブに
+    /// </summary>
+    /// <param name="anglesObj">SpawnPosition()で使用するシグナルプレハブを入れる</param>
+    void AddAngle(GameObject anglesObj)
+    {
+        switch (Random.Range(1, 9))
+        {
+            case 1: //レーン１側にシグナルを移動させる
+                anglesObj.AddComponent<North_NorthEast>();
+                break;
+
+            case 2: //レーン２側にシグナルを移動させる
+                anglesObj.AddComponent<East_NorthEast>();
+                break;
+
+            case 3: //レーン３側にシグナルを移動させる
+                anglesObj.AddComponent<East_SouthEast>();
+                break;
+
+            case 4: //レーン４側にシグナルを移動させる
+                anglesObj.AddComponent<South_SouthEast>();
+                break;
+
+            case 5: //レーン５側にシグナルを移動させる
+                anglesObj.AddComponent<North_NorthWest>();
+                break;
+
+            case 6: //レーン６側にシグナルを移動させる
+                anglesObj.AddComponent<West_NorthWest>();
+                break;
+
+            case 7: //レーン７側にシグナルを移動させる
+                anglesObj.AddComponent<West_SouthWest>();
+                break;
+
+            case 8: //レーン８側にシグナルを移動させる
+                anglesObj.AddComponent<South_SouthWest>();
+                break;
+
+        }
+    }
+
 }
-
