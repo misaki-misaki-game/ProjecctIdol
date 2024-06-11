@@ -7,6 +7,7 @@ TagManager:
   - Fade
   - GameDirector
   - Eternity
+  - Cover
   layers:
   - Default
   - TransparentFX

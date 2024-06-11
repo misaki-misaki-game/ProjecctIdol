@@ -33,6 +33,19 @@ public partial class ScoreDirector : SignalScript
     }
 
     /// <summary>
+    /// お星様モード終了時にスコアを取得する関数
+    /// </summary>
+    /// <param name="score">獲得したスコア</param>
+    public void GetStarScore(float score)
+    {
+        totalScore += score;
+        // スコアを表示
+        scoreText.text = string.Format("{0:00000000}", totalScore);
+        // コンボを表示
+        comboText.text = string.Format("{0:0}", combo);
+    }
+
+    /// <summary>
     /// 各ステータスのランクをつける関数
     /// </summary>
     public void SetRank()
@@ -473,16 +486,23 @@ public partial class ScoreDirector
     [SerializeField] private TextMeshProUGUI scoreText; // スコアテキスト表示用
     [SerializeField] private TextMeshProUGUI scoreShowText; // スコアテキスト表示用
     [SerializeField] private TextMeshProUGUI comboText; // コンボテキスト表示用
+
     [SerializeField] private StarDirector starDirector; // StarDirector変数
+
     [SerializeField] private GameObject nextButton; // ボタン変数
     [SerializeField] private GameObject resultObject; // リザルトオブジェクト変数
     [SerializeField] private GameObject graphObject; // グラフオブジェクト変数
     [SerializeField] private GameObject currentScoreObject; // 現在のスコアオブジェクト変数
     [SerializeField] private GameObject rankingObject; // ランキングオブジェクト変数
+
     [SerializeField] private AudioSource SEAudioSource; // SE用オーディオソース
+
     [SerializeField] private AudioClip SEAudioClip; // 決定音クリップ
+
     [SerializeField] private DataManager dataManager; // DataManager変数
+
     [SerializeField] private Ranking ranking; // Ranking変数
+
     [SerializeField] private Image Gauge; // コンボゲージ
 
     /// ------private変数------- ///

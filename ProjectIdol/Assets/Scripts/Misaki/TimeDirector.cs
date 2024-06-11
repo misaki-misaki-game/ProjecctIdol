@@ -43,6 +43,7 @@ public partial class TimeDirector : MonoBehaviour
             buttonScript.ButtonsDestroy(); // ボタンを全て破壊する
             buttonFrame.SetActive(false); // フレームを非表示する
             scoreDirector.SetRank(); // 各スコアに応じてランクを設定する
+            starGauge.SetActive(false); // お星様ゲージを非表示にする
             graphBackImage.SetActive(true); // グラフ用背景を表示
             /// diamondFrameとdiamondGraphのセットアップを行う ///
             diamondFrame.SetUp();
@@ -95,17 +96,26 @@ public partial class TimeDirector
     private Animator aniScd; // gameStartcdのanimator変数
 
     [SerializeField] private float cdTime; // カウントダウンタイム変数
+
     [SerializeField] private TextMeshProUGUI timeText; // カウントダウンテキスト表示用
+
     [SerializeField] private StarDirector starDirector; // StarDirector変数
+
     [SerializeField] private GameObject gameStartcd; // ゲームスタート時のカウントダウン変数
     [SerializeField] private GameObject graphBackImage; // グラフ背景用変数
     [SerializeField] private GameObject nextButton; // ボタン変数
     [SerializeField] private GameObject buttonFrame; // フレーム変数
+    [SerializeField] private GameObject starGauge; // お星様ゲージ
+
     [SerializeField] private ButtonScript buttonScript; // ButtonScript変数
+
     [SerializeField] private ScoreDirector scoreDirector; // ScoreDirector変数
+
     [SerializeField] private DiamondMesh diamondFrame; // フレーム用DiamondMesh変数
     [SerializeField] private DiamondMesh diamondGraph; // グラフ用DiamondMesh変数
+
     [SerializeField] private AudioSource SEAudioSource; // SE用オーディオソース
+
     [SerializeField] private Animator animAi; // キャラクターのアニメーション用変数
 
     /// ------private変数------- ///

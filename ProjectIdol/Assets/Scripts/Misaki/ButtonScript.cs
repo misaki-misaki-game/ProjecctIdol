@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System.Linq;
 
 public partial class ButtonScript : MonoBehaviour
 {
@@ -22,6 +21,7 @@ public partial class ButtonScript : MonoBehaviour
                 Destroy(signals[j * 10 + i]);// 全てのシグナルを破壊する
             }
         }
+        resetButton.gameObject.SetActive(false); // リセットボタンを非表示にする
     }
 
     /// <summary>
@@ -103,7 +103,8 @@ public partial class ButtonScript : MonoBehaviour
     /// </summary>
     private void SignalClick()
     {
-        if (Input.GetMouseButtonDown(0) && gameStart) // 左クリックしたらかつゲームがスタートしていれば
+        // 左クリックしたらかつゲームがスタートしていればかつ通常モードなら
+        if (Input.GetMouseButtonDown(0) && gameStart && StarDirector.starState == StarDirector.StarState.NormalMode) 
         {
             // シグナルをクリックできたかの処理
             RaycastHit2D hitSprite = CheckHit();

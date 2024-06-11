@@ -18,10 +18,10 @@ public partial class StarDirector : MonoBehaviour
             if (chain >= 1)
             {
                 // チェインの値分ゲージを増加させる
-                Gauge.fillAmount += chain / 100;
+                gauge.fillAmount += chain / 100;
             }
             // お星様ゲージが1になったら
-            if (Gauge.fillAmount == 1)
+            if (gauge.fillAmount == 1)
             {
                 starState = StarState.StarMode; // スターモードに変更
             }
@@ -39,7 +39,7 @@ public partial class StarDirector : MonoBehaviour
     private void Start()
     {
         // 初期設定
-        Gauge.fillAmount = 0;
+        gauge.fillAmount = 0;
     }
 
     private void FixedUpdate()
@@ -59,18 +59,24 @@ public partial class StarDirector : MonoBehaviour
             {
                 backImageObjects[i].SetActive(true);
             }
-            Gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
+            starCanvas.SetActive(true); // お星様モード時のキャンパスを表示する
+            swipeScript.InitializationScore(); // お星様モードのスコアを初期化する
+            resetButton.interactable = false; // ボタンを押せないようにする
+            gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
         }
         else if (starState == StarState.StarMode && backImageObjects[0].activeSelf) // スターモードの時
         {
-            Gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
-            if (Gauge.fillAmount <= 0) // ゲージがなくなったら
+            gauge.fillAmount -= Time.deltaTime / starTime; // ゲージを減少させる(10秒間)
+            if (gauge.fillAmount <= 0) // ゲージがなくなったら
             {
                 // お星様モード用の背景に変更
                 for (int i = 0; i < backImageObjects.Length; i++)
                 {
                     backImageObjects[i].SetActive(false); // ステージ背景を通常モードにする
                 }
+                scoreDirector.GetStarScore(swipeScript.GetStarScore); // お星様モードでのスコアを取得する
+                starCanvas.SetActive(false); // お星様モード時のキャンパスを非表示にする
+                resetButton.interactable = true; // ボタンを押せるようにする
                 starState = StarState.NormalMode; // 通常モードに変更
                 starCount += 1; // お星様モードを加算する
             }
@@ -102,8 +108,17 @@ public partial class StarDirector
     /// ------private変数------- ///
 
     [SerializeField] private float starTime = 10; // お星様モードの制限時間
+
+    [SerializeField] private GameObject starCanvas; // お星様モード時のキャンパス
     [SerializeField] private GameObject[] backImageObjects = new GameObject[2]; // 背景オブジェクト配列
-    [SerializeField] private Image Gauge; // お星様ゲージ
+
+    [SerializeField] private Button resetButton; // リセットボタン変数
+
+    [SerializeField] private Image gauge; // お星様ゲージ
+
+    [SerializeField] private SwipeScript swipeScript; // スワイプスクリプト変数
+
+    [SerializeField] private ScoreDirector scoreDirector; // スコアディレクター変数
 
     /// ------private変数------- ///
     /// -------プロパティ------- ///
