@@ -19,8 +19,6 @@ public partial class DiamondMesh : MonoBehaviour
         isSetUp = true; // CreateGraph‚ğŒÄ‚Ño‚·‚½‚ß‚Étrue‚É•ÏX
     }
 
-
-
     /// -------publicŠÖ”------- ///
     /// -----protectedŠÖ”------ ///
 

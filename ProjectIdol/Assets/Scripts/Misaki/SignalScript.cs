@@ -39,14 +39,13 @@ public partial class SignalScript : MonoBehaviour
                     sp.sprite = signals[3]; // 白シグナルを設定
                     break;
             }
-            spgl.EnableInstancing = true; // 画像を光らせない
         }
         else // ボムが生成される場合
         {
             state = STATE.SPECIAL; // STATEをX字ボムに設定
             buttonScript.specialSignals.Add(this.gameObject); // ボムを格納する
             sp.sprite = signals[5]; // X字ボムを設定
-            spgl.EnableInstancing = false; // 画像を光らせる
+            blink.SetActive(true); // ブリンクを表示
             // ボムの個数制限を超えていたら
             if (buttonScript.specialSignals.Count > bombMax)
             {
@@ -68,6 +67,7 @@ public partial class SignalScript : MonoBehaviour
         {
             // X字ボムリストから自分を取り除く
             buttonScript.specialSignals.Remove(this.gameObject);
+            blink.SetActive(false); // ブリンクを非表示
         }
         // setSignalPointがneedPointを超過していたら超過分を代入　それ以外は0にする
         if (setSignalPoint > needPoint) setSignalPoint -= needPoint;
@@ -102,7 +102,6 @@ public partial class SignalScript : MonoBehaviour
         setSignalPoint += 1;
     }
 
-
     /// -------public関数------- ///
     /// -----protected関数------ ///
 
@@ -117,8 +116,8 @@ public partial class SignalScript : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
         // ButtonScript格納
         buttonScript = GameObject.FindGameObjectWithTag("GameDirector").GetComponent<ButtonScript>();
-        // SpriteGlowEffect格納
-        spgl = GetComponent<SpriteGlow.SpriteGlowEffect>();
+        // 子オブジェクトの0番目を代入
+        blink = transform.GetChild(0).gameObject;
         // シグナルをセットする
         SetSignal();
     }
@@ -200,7 +199,6 @@ public partial class SignalScript : MonoBehaviour
         }
     }
 
-
     /// ------private関数------- ///
     /// --------関数一覧-------- ///
 }
@@ -248,6 +246,8 @@ public partial class SignalScript
 
     [EnumIndex(typeof(Effect))]
     [SerializeField] private GameObject[] effects = new GameObject[4]; // エフェクト配列
+    [SerializeField] private GameObject blink; // 点滅オブジェクト
+
     [EnumIndex(typeof(STATE))]
     [SerializeField] private Sprite[] signals = new Sprite[6]; // シグナル画像配列
 
@@ -256,8 +256,6 @@ public partial class SignalScript
     private SpriteRenderer sp; // 画像を切り替える
 
     private ButtonScript buttonScript; // ButtonScript変数
-
-    private SpriteGlow.SpriteGlowEffect spgl; // SpriteGlowEffect変数
 
     /// ------private変数------- ///
     /// -------プロパティ------- ///

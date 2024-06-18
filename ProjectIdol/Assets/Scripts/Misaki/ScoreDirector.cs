@@ -181,7 +181,8 @@ public partial class ScoreDirector : SignalScript
     /// </summary>
     private void ContinuationCombo()
     {
-        if (isCombo) // コンボしているのであれば
+        // コンボ中かつノーマルモードあれば
+        if (isCombo && starDirector.starState == StarDirector.StarState.NormalMode)
         {
             // コンボ持続時間を減らす
             comboTime -= Time.deltaTime;

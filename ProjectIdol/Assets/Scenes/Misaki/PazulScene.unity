@@ -253,7 +253,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton24
@@ -382,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton44
@@ -544,7 +544,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton20
@@ -622,7 +622,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton22
@@ -1326,7 +1326,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton31
@@ -2875,7 +2875,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton21
@@ -3232,7 +3232,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton13
@@ -3801,7 +3801,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton42
@@ -3874,7 +3874,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton14
@@ -3963,7 +3963,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton33
@@ -4173,6 +4173,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  blink: {fileID: 0}
   signals:
   - {fileID: 0}
   - {fileID: 0}
@@ -4335,9 +4336,9 @@ MonoBehaviour:
   StarDirector: {fileID: 821901330}
   getScoreText: {fileID: 0}
   resetImage:
-  - {fileID: 21300000, guid: 616de2c36db33fd4bbedec2c51973486, type: 3}
-  - {fileID: 21300000, guid: 0e16d0ee7ae4e1046abc46594002d86b, type: 3}
-  - {fileID: 21300000, guid: 6d338af73bee2ba43950618d6210f213, type: 3}
+  - {fileID: 21300000, guid: 1616a1adcc154db4db10145ad809f429, type: 3}
+  - {fileID: 21300000, guid: c45c4cf0482ce454f88404175794917b, type: 3}
+  - {fileID: 21300000, guid: 144f22d90bf888948af934202729e7fd, type: 3}
 --- !u!82 &821901333
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4850,7 +4851,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton30
@@ -5340,7 +5341,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton12
@@ -5900,7 +5901,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton54
@@ -6635,7 +6636,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 430, y: -1067.3}
-  m_SizeDelta: {x: 291, y: 110}
+  m_SizeDelta: {x: 460, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1228679293
 MonoBehaviour:
@@ -6713,7 +6714,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 046a2e1e7bdf14c448318e7aa4d96444, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44464da15407b6149958dcc5481df59e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7611,7 +7612,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton50
@@ -7818,7 +7819,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton3
@@ -7901,7 +7902,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton52
@@ -7979,7 +7980,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton51
@@ -8152,7 +8153,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton32
@@ -8557,7 +8558,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton34
@@ -8774,7 +8775,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton10
@@ -8932,7 +8933,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton43
@@ -9164,7 +9165,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton53
@@ -9248,7 +9249,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton41
@@ -9665,10 +9666,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton0
@@ -9751,7 +9748,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton4
@@ -10213,10 +10210,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton1
@@ -10346,7 +10339,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton40
@@ -10648,7 +10641,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton11
@@ -10759,7 +10752,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton23
@@ -11133,7 +11126,7 @@ PrefabInstance:
     - target: {fileID: 5990446203635212865, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9117074501797810208, guid: 4de6f1a745b807c4983cbca9311c6d9a, type: 3}
       propertyPath: m_Name
       value: TouchButton2

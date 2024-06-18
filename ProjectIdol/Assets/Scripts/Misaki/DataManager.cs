@@ -97,7 +97,6 @@ public partial class DataManager
 
     [SerializeField] public MasterData data; // json変換するデータのクラス 
 
-
     /// -------public変数------- ///
     /// -----protected変数------ ///
 

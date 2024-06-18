@@ -140,7 +140,6 @@ public partial class ButtonScript : MonoBehaviour
         ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
         ShowGetScore(signal); // ゲットしたスコアを表示する
         StarDirector.GetStar(chain); // ゲットスター関数を呼び出し
-        Debug.Log(state + " 色シグナルをクリック");
     }
 
     /// <summary>
