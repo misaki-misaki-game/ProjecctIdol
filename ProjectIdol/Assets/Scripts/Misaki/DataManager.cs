@@ -17,7 +17,7 @@ public partial class DataManager : MonoBehaviour // MasterDataをjson形式に変えて
         StreamWriter writer = new StreamWriter(filepath, false); // ファイル書き込み指定
         writer.WriteLine(json); // json変換した情報を書き込み
         writer.Close(); // ファイルを閉じる
-        Debug.Log("セーブしています" + json);
+        // Debug.Log("セーブしています" + json);
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public partial class DataManager : MonoBehaviour // MasterDataをjson形式に変えて
     /// </summary>
     public void ResetHighScore()
     {
-        Debug.Log("ハイスコアの初期化を行います");
+        // Debug.Log("ハイスコアの初期化を行います");
         data = new MasterData(); // dataにMasterData型を代入
         Save(data); // セーブする
     }
@@ -48,7 +48,7 @@ public partial class DataManager : MonoBehaviour // MasterDataをjson形式に変えて
     /// </summary>
     private void CheckSaveData()
     {
-        Debug.Log("起動ロード開始");
+        // Debug.Log("起動ロード開始");
         data = new MasterData(); // dataにMasterData型を代入
 #if UNITY_ANDROID
         // Path.Combine()を使用してアプリの永続的なデータ保存用ディレクトリにファイルパスを作成し、そこにJSONデータを書き込む
@@ -59,7 +59,7 @@ public partial class DataManager : MonoBehaviour // MasterDataをjson形式に変えて
 #endif
         if (!File.Exists(filepath)) // ファイルがないとき
         {
-            Debug.Log("saveデータを作ろうとしています");
+            //Debug.Log("saveデータを作ろうとしています");
             Save(data); // ファイル作成
         }
         data = Load(filepath); // ファイルを読み込んでdataに格納
@@ -77,12 +77,12 @@ public partial class DataManager : MonoBehaviour // MasterDataをjson形式に変えて
             StreamReader reader = new StreamReader(path); // ファイル読み込み指定
             string json = reader.ReadToEnd(); // ファイル内容全て読み込み
             reader.Close(); // ファイルを閉じる
-            Debug.Log("ロードしています" + json);
+            // Debug.Log("ロードしています" + json);
             return JsonUtility.FromJson<MasterData>(json); // jsonファイルを型に戻して返す
         }
         else
         {
-            Debug.LogError("ファイルが見つかりません" + path);
+            // Debug.LogError("ファイルが見つかりません" + path);
             return null; // nullを返す
         }
     }

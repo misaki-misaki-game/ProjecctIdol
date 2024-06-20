@@ -175,7 +175,6 @@ public partial class Ranking : MonoBehaviour
             // もし中央の要素がターゲットと等しい場合
             if (arr[mid].CompareTo(target) == 0)
             {
-                Debug.Log(mid);
                 return mid;
             }
             // もし中央の要素よりも小さい場合、右側を探索
@@ -190,7 +189,6 @@ public partial class Ranking : MonoBehaviour
             }
         }
         // ターゲットが見つからない場合
-        Debug.Log(-1);
         return -1;
     }
 
@@ -217,7 +215,6 @@ public partial class Ranking : MonoBehaviour
         if (!isScroll) return; // isScrollがfalseならリターンする
         if (scrollTarget < scrollbar.value)
         {
-            Debug.Log("スクロールします");
             scrollValue -= Time.deltaTime; // deltaTimeを加算する
             float progress = Mathf.Clamp01(scrollValue / scrollTime); // scrollValue / scrollTimeの割合を代入
             scrollbar.value -= Mathf.Lerp(0, scrollTarget, progress); // 0からscrollTargetValueまでの値に対して割合(progress)を代入

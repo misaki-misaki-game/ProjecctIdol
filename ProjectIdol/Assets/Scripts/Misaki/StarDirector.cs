@@ -42,10 +42,7 @@ public partial class StarDirector : MonoBehaviour
         }
 
         // パーティクルを止める
-        for (int i = 0; i < particles.Length; i++)
-        {
-            particles[i].Stop();
-        }
+        particle.Stop();
         swipeScript.GetParticleSystem.Stop();
 
         scoreDirector.GetStarScore(starUltChain, swipeScript.GetStarScore, swipeScript.GetStarState); // お星様モードでのスコアを取得する
@@ -88,10 +85,7 @@ public partial class StarDirector : MonoBehaviour
                 backImageObjects[i].SetActive(true);
             }
             // パーティクルを発生させる
-            for (int i = 0; i < particles.Length; i++)
-            {
-                particles[i].Play();
-            }
+            particle.Play();
             starCanvas.SetActive(true); // お星様モード時のキャンパスを表示する
             swipeScript.InitializationScore(); // お星様モードのスコアを初期化する
             resetButton.interactable = false; // ボタンを押せないようにする
@@ -146,7 +140,7 @@ public partial class StarDirector
 
     [SerializeField] private ScoreDirector scoreDirector; // スコアディレクター変数
 
-    [SerializeField] private ParticleSystem[] particles = new ParticleSystem[2]; // パーティクルシステム変数
+    [SerializeField] private ParticleSystem particle; // パーティクルシステム変数
 
     /// ------private変数------- ///
     /// -------プロパティ------- ///

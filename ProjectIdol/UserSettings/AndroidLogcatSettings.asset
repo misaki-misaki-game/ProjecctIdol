@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "8592SACEAG00005461",
         "name": "com.DefaultCompany.ProjectIdol",
-        "processId": 7962,
+        "processId": 9305,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -30,6 +30,30 @@
             "deviceId": "8592SACEAG00005461",
             "name": "com.DefaultCompany.ProjectIdol",
             "processId": 7962,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 7984,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 8536,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 9102,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 9305,
             "exited": false
         }
     ],

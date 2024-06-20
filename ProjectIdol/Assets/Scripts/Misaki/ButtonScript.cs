@@ -73,7 +73,6 @@ public partial class ButtonScript : MonoBehaviour
         ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
         ShowGetScore(special); // ゲットしたスコアを表示する
         StarDirector.GetStar(chain); // ゲットスター関数を呼び出し
-        Debug.Log(special + "が自動で爆発しました");
     }
 
     /// -------public関数------- ///

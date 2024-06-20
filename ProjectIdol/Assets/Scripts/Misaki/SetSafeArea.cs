@@ -36,8 +36,6 @@ public partial class SetSafeArea : MonoBehaviour
         {
             var area = Screen.safeArea; // 画面のセーフエリアを取得
             var resolution = Screen.currentResolution; // 現在の解像度を取得
-            //Debug.Log(area);
-            //Debug.Log(resolution);
 
             rect.sizeDelta = Vector2.zero; // sizeDeltaを0にする(矩形サイズとアンカーサイズを同じにする)
             // アンカーにセーフエリアと画面の解像度の割合を代入
