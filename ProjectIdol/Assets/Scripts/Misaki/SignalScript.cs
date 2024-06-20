@@ -158,6 +158,7 @@ public partial class SignalScript : MonoBehaviour
                 // 子オブジェクトの処理を行う
                 Destroy(childObject); // 子オブジェクトを破壊する
             }
+            childrenWithTag.Clear(); // リストの中身を破棄する
         }
     }
 

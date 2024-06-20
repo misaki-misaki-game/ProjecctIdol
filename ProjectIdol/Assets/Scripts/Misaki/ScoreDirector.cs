@@ -321,7 +321,7 @@ public partial class ScoreDirector : SignalScript
                             break;
                     }
                 }
-                detonationStates = new List<STATE>(); // リストを空にする
+                detonationStates.Clear(); // リストを空にする
                 break;
         }
     }

@@ -398,8 +398,8 @@ public partial class ButtonScript : MonoBehaviour
             ss.AddSetSignalPoint();
         }
         // ’†g‚ğ‹ó‚É‚·‚é
-        detonationObjects = new List<GameObject>();
-        explotionObjects = new List<GameObject>();
+        detonationObjects.Clear();
+        explotionObjects.Clear();
     }
 
     /// <summary>

@@ -64,7 +64,7 @@ public partial class SwipeScript : MonoBehaviour
         safeRange[3, 1] = three_quarters + sixty_fourthNote * safeFrame;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
