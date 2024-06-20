@@ -36,13 +36,17 @@ public partial class ScoreDirector : SignalScript
     /// お星様モード終了時にスコアを取得する関数
     /// </summary>
     /// <param name="score">獲得したスコア</param>
-    public void GetStarScore(float score)
+    public void GetStarScore(float chain, float score, List<STATE> states)
     {
         totalScore += score;
         // スコアを表示
         scoreText.text = string.Format("{0:00000000}", totalScore);
         // コンボを表示
         comboText.text = string.Format("{0:0}", combo);
+        foreach (STATE s in states)
+        {
+            CalculateUltimateScore(chain, s);
+        }
     }
 
     /// <summary>

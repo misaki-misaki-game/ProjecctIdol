@@ -247,7 +247,7 @@ public partial class Ranking : MonoBehaviour
     {
         for (int i = 0; i < rankingScoreText.Length; i++)
         {
-            rankingScoreText[i].text = string.Format("{0:0000000}Pt", ranking[i]); // 各順位を書き出し
+            rankingScoreText[i].text = string.Format("{0:0000000}", ranking[i]); // 各順位を書き出し
         }
     }
 

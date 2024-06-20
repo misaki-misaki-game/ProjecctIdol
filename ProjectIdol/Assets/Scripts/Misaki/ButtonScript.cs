@@ -134,7 +134,10 @@ public partial class ButtonScript : MonoBehaviour
         {
             if (!CheckChainSignal(signal)) return; // チェイン確認関数を呼び出し チェインしていなければリターンする
         }
-        SEAudioSource.Play(); // SEを鳴らす
+        // SEを鳴らす
+        if (ss.state == SignalScript.STATE.SPECIAL) SEAudioSource.PlayOneShot(SEClips[1]);
+        else SEAudioSource.PlayOneShot(SEClips[0]);
+
         ss.BreakSignal(isChain, chain); // ブレイク関数を呼び出し
         ResurrectionSignal(); // stateがNOTHINGのシグナル全てにsetSignalPointを1加算する
         ScoreDirector.GetScore(chain, isChain, state); // ゲットスコア関数を呼び出し
@@ -582,6 +585,9 @@ public partial class ButtonScript
     private SignalScript comparisonSignalSS; // クリックしていないオブジェクトのSignalScript格納用
 
     [SerializeField] private AudioSource SEAudioSource; // SE用オーディオソース
+
+    [Header("[0]...通常シグナルSE,[1]...ボムシグナル")]
+    [SerializeField] private AudioClip[] SEClips = new AudioClip[2];
 
     [SerializeField] private GameObject clickedGameObject; // クリックしたオブジェクトを格納する変数
     [SerializeField] private GameObject[] signals; // シグナル格納用

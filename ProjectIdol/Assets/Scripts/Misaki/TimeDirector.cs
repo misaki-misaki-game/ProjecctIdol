@@ -40,6 +40,11 @@ public partial class TimeDirector : MonoBehaviour
             this.gameOver = false; // falseにすることでこのif文を1回だけ呼び出す
             this.gameStart = false; // 上記を行うと上のif文が呼び出されるのでそれを行わないためにfalseにする
             animAi.SetTrigger("isDanceEnd"); // アイのアニメーションを終了する
+            // お星様モードならお星様モードを終了させる
+            if (starDirector.starState == StarDirector.StarState.StarMode)
+            {
+                starDirector.StarEnd();
+            }
             buttonScript.ButtonsDestroy(); // ボタンを全て破壊する
             buttonFrame.SetActive(false); // フレームを非表示する
             scoreDirector.SetRank(); // 各スコアに応じてランクを設定する

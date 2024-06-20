@@ -42,7 +42,7 @@ public partial class GameStartCountDownScript : MonoBehaviour
         timeDirector.gameStart = true; // 制限時間をスタートする
         buttonScript.gameStart = true; // ボタンのクリックを許可する
         buttonScript.resetButton.GetComponent<Button>().interactable = true; // ボタンを押せるようにする
-        BGMAudioSource.Play(); // BGMを鳴らす
+        Music.Play("Main Camera"); // BGMを鳴らす
         animAi.SetTrigger("isDanceStart"); // アイのアニメーションをスタートする
         gameStartcd.SetActive(false); // カウントキャンパスを非表示にする
     }
@@ -96,6 +96,7 @@ public partial class GameStartCountDownScript
 
     [SerializeField] private AudioSource BGMAudioSource; // BGM用オーディオソース
 
+    //[SerializeField] private MusicUnity music; // ミュージックユニティ変数
 
     /// ------private変数------- ///
     /// -------プロパティ------- ///

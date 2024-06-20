@@ -15,8 +15,12 @@ Shader "Custom/BlinkShader" // シェーダーの名前を定義　"グループ名/シェーダー名"
         Tags
         {
             "RenderType"="Transparent" // レンダリングタイプを透明に設定
+            "Queue"="Transparent"
            // "RenderPipeline"="UniversalPipeline" // レンダーパイプラインをURPに対応
         }
+
+        // ブレンド設定を追加
+        Blend SrcAlpha OneMinusSrcAlpha
         
         // [Level Of Detail] 描写レベル　
         LOD 100 // LOD値が100以上ならこのマテリアルを描写
@@ -65,6 +69,8 @@ Shader "Custom/BlinkShader" // シェーダーの名前を定義　"グループ名/シェーダー名"
                 float4 col = tex2D(_MainTex, i.uv); // テクスチャから色をサンプリング
                 if (col.a < _TransparencyMin) // アルファ値が低い部分（透明部分）には点滅を適用しない
                 {
+                    col.rgb = (0, 0, 0);
+                    col.a = 0;
                     return col; // そのままの色を返す
                 }
                 float blink = abs(sin(_Time.y * _BlinkSpeed)) * _BlinkIntensity; // 点滅の計算 _TimeはUnityが自動的に提供する時間のパラメータ
