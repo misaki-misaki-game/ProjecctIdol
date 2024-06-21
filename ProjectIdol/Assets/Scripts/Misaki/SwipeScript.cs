@@ -64,7 +64,7 @@ public partial class SwipeScript : MonoBehaviour
         safeRange[3, 1] = three_quarters + sixty_fourthNote * safeFrame;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -94,7 +94,6 @@ public partial class SwipeScript : MonoBehaviour
                 {
                     SwipeCheck();
                 }
-                else return;
             }
 
             // マウスのx軸の位置に基づいて回転角度を計算

@@ -360,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addScore: 500
   safeFrame: 6
-  targetDistanceX: 200
+  targetDistanceX: 100
   audioSource: {fileID: 821901333}
   clip: {fileID: 8300000, guid: 49649913f017af947a35dc4ec94b28a0, type: 3}
   psyllium: {fileID: 1187419468}
@@ -7084,6 +7084,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198354506248529134, guid: 7f3f815e8d08b8f4abf36d4764a56be5, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198354506248529134, guid: 7f3f815e8d08b8f4abf36d4764a56be5, type: 3}
       propertyPath: lengthInSec
       value: 0.3
       objectReference: {fileID: 0}
@@ -11722,8 +11726,12 @@ PrefabInstance:
       value: -342
       objectReference: {fileID: 0}
     - target: {fileID: 8974446940241978696, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
+      propertyPath: m_Size
+      value: 0.5996311
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974446940241978696, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8974446940241978696, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_NumberOfSteps
@@ -11835,7 +11843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8974446940931990675, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1517.9999
+      value: 650
       objectReference: {fileID: 0}
     - target: {fileID: 8974446941337288524, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_sharedMaterial
@@ -11859,11 +11867,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8974446941951484463, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.599631
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8974446941951484463, guid: 95ab9b4408f4af64eb863e3683d050e4, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.40036893
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
