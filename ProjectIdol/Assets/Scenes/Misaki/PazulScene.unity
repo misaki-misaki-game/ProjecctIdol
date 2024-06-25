@@ -2757,25 +2757,25 @@ MonoBehaviour:
   Volume: 1
   OutputMixerGroup: {fileID: 0}
   Sections:
-  - Name: Section
+  - Name: 
     Clips:
-    - {fileID: 8300000, guid: 8eb50f681be9ede4c88bfaca3f6bc88d, type: 3}
+    - {fileID: 8300000, guid: 2c78f21ccaf8a464182b26f790e9823a, type: 3}
     Meters:
     - StartBar: 0
-      Tempo: 166
+      Tempo: 84
       UnitPerBeat: 4
       UnitPerBar: 16
       Numerator: 4
       Denominator: 4
-    SyncType: 3
-    SyncFactor: 1
+    SyncType: 0
+    SyncFactor: 0
     Markers: []
     EntryPointTiming:
       Bar: 0
       Beat: 0
       Unit: 0
     ExitPointTiming:
-      Bar: 61
+      Bar: 33
       Beat: 0
       Unit: 0
     LoopStartTiming:
@@ -2783,7 +2783,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     LoopEndTiming:
-      Bar: 61
+      Bar: 33
       Beat: 0
       Unit: 0
     Transition:
@@ -3394,7 +3394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &613545323
 MonoBehaviour:
   m_ObjectHideFlags: 0
