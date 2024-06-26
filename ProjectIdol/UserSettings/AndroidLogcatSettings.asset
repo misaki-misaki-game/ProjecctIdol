@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "8592SACEAG00005461",
         "name": "com.DefaultCompany.ProjectIdol",
-        "processId": 27460,
+        "processId": 28175,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,12 @@
             "deviceId": "8592SACEAG00005461",
             "name": "com.DefaultCompany.ProjectIdol",
             "processId": 27460,
+            "exited": false
+        },
+        {
+            "deviceId": "8592SACEAG00005461",
+            "name": "com.DefaultCompany.ProjectIdol",
+            "processId": 28175,
             "exited": false
         }
     ],
