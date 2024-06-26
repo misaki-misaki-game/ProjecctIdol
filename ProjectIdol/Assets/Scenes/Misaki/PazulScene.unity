@@ -2759,7 +2759,7 @@ MonoBehaviour:
   Sections:
   - Name: 
     Clips:
-    - {fileID: 8300000, guid: 2c78f21ccaf8a464182b26f790e9823a, type: 3}
+    - {fileID: 8300000, guid: 6f487605062af504ea016fdadddf3f81, type: 3}
     Meters:
     - StartBar: 0
       Tempo: 84
@@ -2775,7 +2775,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     ExitPointTiming:
-      Bar: 33
+      Bar: 31
       Beat: 0
       Unit: 0
     LoopStartTiming:
@@ -2783,7 +2783,7 @@ MonoBehaviour:
       Beat: 0
       Unit: 0
     LoopEndTiming:
-      Bar: 33
+      Bar: 31
       Beat: 0
       Unit: 0
     Transition:
