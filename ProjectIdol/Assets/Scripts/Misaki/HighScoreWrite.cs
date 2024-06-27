@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public partial class HighScoreWrite : MonoBehaviour
 {
@@ -22,15 +23,30 @@ public partial class HighScoreWrite : MonoBehaviour
 
     private void Start()
     {
+        // パズルシーンとリズムシーンを取得
+        puzzle = SceneUtility.GetBuildIndexByScenePath("PuzzleScene");
+        rhythm = SceneUtility.GetBuildIndexByScenePath("RhythmGame");
+
+        // パズルシーンとリズムシーンがビルドされているかをboolに落とし込む
+        isPuzzleBuilt = puzzle != -1;
+        isRhythmBuilt = rhythm != -1;
+
         ShowHighScore(); // ハイスコアを表示
     }
 
     private void ShowHighScore()
     {
-        scoreText[0].text = string.Format("{0:00000000}Pt", dataManager.data.puzzleHighScore); // パズルモードスコア書き出し
-        scoreText[1].text = string.Format(dataManager.data.puzzleHighScoreRank); // パズルモードランク書き出し
-        scoreText[2].text = string.Format("{0:00000000}Pt", dataManager.data.rhythmRanking[0]); // リズムモードスコア書き出し
-        scoreText[3].text = string.Format(dataManager.data.rhythmHighScoreRank); // リズムモードランク書き出し
+        if (isPuzzleBuilt && isRhythmBuilt || !isPuzzleBuilt && !isRhythmBuilt) Debug.LogError("どちらもビルドされている、または、どちらもビルドされていません");
+        else if (isPuzzleBuilt)
+        {
+            scoreText[0].text = string.Format("{0:00000000}Pt", dataManager.data.puzzleHighScore); // パズルモードスコア書き出し
+            scoreText[1].text = string.Format(dataManager.data.puzzleHighScoreRank); // パズルモードランク書き出し
+        }
+        else if (isRhythmBuilt)
+        {
+            scoreText[0].text = string.Format("{0:00000000}Pt", dataManager.data.rhythmRanking[0]); // リズムモードスコア書き出し
+            scoreText[1].text = string.Format(dataManager.data.rhythmHighScoreRank); // リズムモードランク書き出し
+        }
     }
 
 
@@ -58,8 +74,16 @@ public partial class HighScoreWrite
     /// -----protected変数------ ///
     /// ------private変数------- ///
 
+    // ビルドしているかどうか(bool)
+    bool isPuzzleBuilt;
+    bool isRhythmBuilt;
+
+    // ビルドしているかどうか(int)
+    int puzzle;
+    int rhythm;
+
     [EnumIndex(typeof(HighScore))]
-    [SerializeField] private TextMeshProUGUI[] scoreText = new TextMeshProUGUI[4]; // テキスト配列
+    [SerializeField] private TextMeshProUGUI[] scoreText = new TextMeshProUGUI[2]; // テキスト配列
 
     [SerializeField] private DataManager dataManager; // DataManager変数
 

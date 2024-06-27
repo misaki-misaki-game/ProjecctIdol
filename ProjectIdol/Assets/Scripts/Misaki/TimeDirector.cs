@@ -67,7 +67,7 @@ public partial class TimeDirector : MonoBehaviour
         if (gameStart && !gameOver)
         {
             // カウントダウンタイムを表示
-            timeText.text = string.Format("TIME:{0:0}s", cdTime);
+            timeText.text = string.Format("{0:0}s", cdTime);
             // 経過時刻を引いていく
             cdTime -= Time.deltaTime;
             // 0秒以下になったらカウントダウンタイムを0に固定し,ゲームオーバーにする
