@@ -1074,7 +1074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &824971139
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bbbb631801fcae34081acf8e10d60f64, type: 3}
   - {fileID: 21300000, guid: f33e37e258fcb894db4b2b0ad3f08a93, type: 3}
   audioSource: {fileID: 1863886712}
-  se: {fileID: 0}
+  se: {fileID: 8300000, guid: 49649913f017af947a35dc4ec94b28a0, type: 3}
 --- !u!1 &964806786
 GameObject:
   m_ObjectHideFlags: 0
