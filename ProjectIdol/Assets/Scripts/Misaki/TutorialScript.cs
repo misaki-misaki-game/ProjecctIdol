@@ -18,6 +18,7 @@ namespace Misaki
             // SEを鳴らし、開く
             audioSource.Play();
             gameObject.SetActive(true);
+            PageChange();
         }
 
         /// <summary>
@@ -106,6 +107,8 @@ namespace Misaki
             else if (page == pageMin)
             {
                 prev.SetActive(false);
+                next.SetActive(true);
+                close.SetActive(false);
             }
             // その他の場合
             else
