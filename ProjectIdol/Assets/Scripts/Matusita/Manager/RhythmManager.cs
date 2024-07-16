@@ -31,14 +31,14 @@ public class RhythmManager : MonoBehaviour
 
     IEnumerator GameMain()
     {
-        countDownText.text = "      3";                         //カウントダウンパネルに表示するテキストを3に変更する
+        countDownText.text = "　　　   3";                         //カウントダウンパネルに表示するテキストを3に変更する
                                                                 //空白はカウントダウンパネルに表示するときに綺麗に真ん中に表示するためのもの
         yield return new WaitForSeconds(1);                     //1秒開ける
-        countDownText.text = "      2";                         //カウントダウンパネルに表示するテキストを2に変更する
+        countDownText.text = "　　　   2";                         //カウントダウンパネルに表示するテキストを2に変更する
         yield return new WaitForSeconds(1);                     //1秒開ける
-        countDownText.text = "      1";                         //カウントダウンパネルに表示するテキストを1に変更する
+        countDownText.text = "　　　   1";                         //カウントダウンパネルに表示するテキストを1に変更する
         yield return new WaitForSeconds(1);                     //1秒開ける
-        countDownText.text = "  ライブ\n" + "     開始!";        //カウントダウンパネルに表示するテキストをライブ開始！に変更する
+        countDownText.text = "　　ライブ\n" + "　　　開始!!";        //カウントダウンパネルに表示するテキストをライブ開始！に変更する
         yield return new WaitForSeconds(0.5f);                  //0.5秒開ける
         countDownText.text = " ";                               //カウントダウンパネルに何も表示しないようにするために空白を表示させる
         countDownPanal.SetActive(false);                        //カウントダウンパネルを非表示にする

@@ -18,6 +18,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;          //タイムテキスト　ゲーム画面には表示していないが、今後使う可能性があるため残している
     [SerializeField] TextMeshProUGUI rankText;          //ゲーム終了時にランクを表示するためのテキスト
 
+    [SerializeField] Aidama aidama;
+
     [SerializeField] DataManager dataManager;           // DataManager変数
     [SerializeField] RhythmDiamondMesh rhythmDiamondMesh;
 
@@ -32,8 +34,6 @@ public class UiManager : MonoBehaviour
     bool isScoreCount = false;                          // スコアをカウントしているかどうか
     float showScore = 0f;                               // 加算されるスコア変数
     float timer = 0;                                    // 加算する時間変数
-
-
 
     //岬さんのscoreDirectorからもってきた
     [EnumIndex(typeof(UltimateType))]
@@ -56,11 +56,11 @@ public class UiManager : MonoBehaviour
     [SerializeField] int yellowPoints = 0;
 
     int totalPoints = 0;
-    [SerializeField] int totalRankPointS = 506;
-    [SerializeField] int totalRankPointA = 369;
-    [SerializeField] int totalRankPointB = 280;
-    [SerializeField] int totalRankPointC = 112;
-    [SerializeField] int totalRankPointD = 56;
+    [SerializeField] int totalRankS = 506;
+    [SerializeField] int totalRankA = 369;
+    [SerializeField] int totalRankB = 280;
+    [SerializeField] int totalRankC = 112;
+    [SerializeField] int totalRankD = 56;
     string colorPoint;
 
     [SerializeField] int blueRankPointS = 132;
@@ -91,7 +91,7 @@ public class UiManager : MonoBehaviour
     public string redRank;
     public string whiteRank;
     public string yellowRank;
-
+    public int perfectCounts = 0;
 
     public void FixedUpdate()
     {
@@ -100,29 +100,22 @@ public class UiManager : MonoBehaviour
         scoreText.text = score.ToString();
         lastScoreText.text = "Score:" + score.ToString();
         comboText.text = combo.ToString();
-        //timeText.text = "Time :" + time.ToString();
-        //timeText.text = string.Format("Time :{0:0}s", time);
 
-        if (time <= 120.5f && time >= 98)
-        {
-            //Debug.Log("アイのアニメーション再生する");
-            //AiAnimation.Play("Miss_Anim");
-        }
         BonusCalculate();
-        // トータルスコアが確定したらスコアを加算するアニメーションを呼び出す
         CountShowScore(score, scoreAnimTime);
     }
 
     public void AddScore(int point)
     {
-        //参照先でpointに数値を入れるとその数値分scoreにプラスすることができる
-        //JudgmentAreaスクリプトのSignalJudgmentで使用している
-        score += point;
+        //score += point;
+        //Score_CA();
+    }
+    public void AddPerfectCounts()
+    {
+        perfectCounts++;
     }
     public void AddCombo()
     {
-        //参照先でcomboを1ずつプラスすることができる
-        //JudgmentAreaスクリプトのSignalJudgmentで使用している
         combo++;
     }
     public void NoteMiss()
@@ -147,31 +140,31 @@ public class UiManager : MonoBehaviour
         if (combo <= 50 && combo >= 99)
         {
             // スコアに現在のスコアの10％を加算する
-            float bonusScore = score * 10 / 100;
+            bonusScore = score * 10 / 100;
             score += bonusScore;
         }
         else if (combo <= 100 && combo >= 149)
         {
             // スコアに現在のスコアの20％を加算する
-            float bonusScore = score * 20 / 100;
+            bonusScore = score * 20 / 100;
             score += bonusScore;
         }
         else if (combo <= 150 && combo >= 199)
         {
             // スコアに現在のスコアの30％を加算する
-            float bonusScore = score * 30 / 100;
+            bonusScore = score * 30 / 100;
             score += bonusScore;
         }
         else if (combo <= 200 && combo >= 249)
         {
             // スコアに現在のスコアの40％を加算する
-            float bonusScore = score * 40 / 100;
+            bonusScore = score * 40 / 100;
             score += bonusScore;
         }
         else if (combo <= 250 && combo >= 299)
         {
             // スコアに現在のスコアの50％を加算する
-            float bonusScore = score * 50 / 100;
+            bonusScore = score * 50 / 100;
             score += bonusScore;
         }
     }
@@ -206,7 +199,6 @@ public class UiManager : MonoBehaviour
                 else if (colorPoint <= blueRankPointC) rank = "C";
                 else if (colorPoint <= blueRankPointD) rank = "D";
                 break;
-
             case "RedNotes":
                 if (colorPoint <= redRankPointS) rank = "S";
                 else if (colorPoint <= redRankPointA) rank = "A";
@@ -214,7 +206,6 @@ public class UiManager : MonoBehaviour
                 else if (colorPoint <= redRankPointC) rank = "C";
                 else if (colorPoint <= redRankPointD) rank = "D";
                 break;
-
             case "WhiteNotes":
                 if (colorPoint <= whiteRankPointS) rank = "S";
                 else if (colorPoint <= whiteRankPointA) rank = "A";
@@ -222,7 +213,6 @@ public class UiManager : MonoBehaviour
                 else if (colorPoint <= whiteRankPointC) rank = "C";
                 else if (colorPoint <= whiteRankPointD) rank = "D";
                 break;
-
             case "YellowNotes":
                 if (colorPoint <= yellowRankPointS) rank = "S";
                 else if (colorPoint <= yellowRankPointA) rank = "A";
@@ -241,11 +231,11 @@ public class UiManager : MonoBehaviour
         //各シグナルのポイントの合計
         totalPoints = bluePoints + redPoints + whitePoints + yellowPoints;
         string rank = "";
-        if (0 < totalPoints && totalPoints <= totalRankPointD) rank = "-D-";
-        else if (totalRankPointD < totalPoints && totalPoints <= totalRankPointC) rank = "-C-";
-        else if (totalRankPointC < totalPoints && totalPoints <= totalRankPointB) rank = "-B-";
-        else if (totalRankPointB < totalPoints && totalPoints <= totalRankPointA) rank = "-A-";
-        else if (totalRankPointA < totalPoints && totalPoints <= totalRankPointS) rank = "-S-";
+        if (0 < totalPoints && totalPoints <= totalRankD) rank = "-D-";
+        else if (totalRankD < totalPoints && totalPoints <= totalRankC) rank = "-C-";
+        else if (totalRankC < totalPoints && totalPoints <= totalRankB) rank = "-B-";
+        else if (totalRankB < totalPoints && totalPoints <= totalRankA) rank = "-A-";
+        else if (totalRankA < totalPoints && totalPoints <= totalRankS) rank = "-S-";
 
         totalRankText.text = rank;
     }
@@ -307,4 +297,5 @@ public class UiManager : MonoBehaviour
         rankingObject.SetActive(true);                                  // ランキング画面を表示
         ranking.CheckRankin(dataManager.data.rhythmRanking, score);     // ランキングに入っているかのチェック
     }
+
 }

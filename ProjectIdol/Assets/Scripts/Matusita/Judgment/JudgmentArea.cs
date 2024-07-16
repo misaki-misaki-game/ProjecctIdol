@@ -5,11 +5,11 @@ using System.Collections;
 
 public class JudgmentArea : MonoBehaviour
 {
+    [SerializeField] UiManager uiManager;
     [SerializeField] float radius;                      //シグナルの判定の半径を設定する
-    [SerializeField] UiManager uiManager;               //UIManagerを使うための変数
     [SerializeField] GameObject textEffectPrefab;       //シグナルを消せたときに表示させたいテキストを設定するためのゲームオブジェクト
-    //[SerializeField] GameObject putEffectPrefab;    //判定がPerfectの場合のエフェクトのプレハブ
-    [SerializeField] GameObject pereffectPerfab;      //判定がNomalの場合のエフェクトのプレハブ
+    //[SerializeField] GameObject putEffectPrefab;
+    [SerializeField] GameObject pereffectPerfab;
     [SerializeField] AudioSource SEaudio;
     [SerializeField] int perfectScorePoint = 3000;
     [SerializeField] int nomalScorePoint = 1500;
@@ -67,22 +67,20 @@ public class JudgmentArea : MonoBehaviour
             return;
         }
 
-        //RaycastHit2D hit2D = Circlehits2D[0];
         RaycastHit2D hit2D = hits2D[0];
 
         if (hit2D)
         {
             //近さ表示  絶対値で考える Mathf.Abs()
             float distance = Mathf.Abs(hit2D.transform.position.y - transform.position.y);
-            //float distance = Mathf.Abs(hit2D.transform.position.x - transform.position.x);
-
-            if (distance < 6)
+            Debug.Log("距離:"+distance);
+            if (distance < 4)
             {
                 Debug.Log("黄色パーフェクト");
                 //もしシグナルを消したのが半径4以下なら
-                uiManager.AddScore(perfectScorePoint);                                                                               //UIManagerのAddScoreを使用してスコアに50加算する
-                uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                //SpawnTextEffect("Parfect", notePosition, Color.yellow);
+                uiManager.AddScore(perfectScorePoint);      //スコアに50加算する
+                uiManager.AddCombo();                       //コンボに1加算する
+                uiManager.AddPerfectCounts();
                 SpawnTextEffect("Perfect", hit2D.transform.position, Color.yellow);
                 Debug.Log("perfect");
 
@@ -105,13 +103,12 @@ public class JudgmentArea : MonoBehaviour
                         break;
                 }
             }
-            else if (distance < 7)
+            else if (distance < 5)
             {
                 //もしシグナルを消したのが半径7以下なら
-                uiManager.AddScore(nomalScorePoint);                                                                               //UIManagerのAddScoreを使用してスコアに25加算する
-                uiManager.AddCombo();                                                                                   //UIManagerのAddComboを使用してコンボに1加算する
-                //SpawnTextEffect("Nomal", notePosition, Color.red);              //シグナルを消した場所に赤色でNomalと表示し、Nomal専用のエフェクトを表示する
-                SpawnTextEffect("Nomal", hit2D.transform.position, Color.red);
+                uiManager.AddScore(nomalScorePoint);    //スコアに25加算する
+                uiManager.AddCombo();                   //コンボに1加算する
+                SpawnTextEffect("Nomal",hit2D.transform.position, Color.red);
                 Debug.Log("nomal");
 
                 switch (hit2D.collider.gameObject.tag)
@@ -134,12 +131,11 @@ public class JudgmentArea : MonoBehaviour
                 }
 
             }
-            else if (distance<7|| distance > 10)
+            else if (distance < 9)
             {
                 //もしシグナルを消したのがそれ以外なら
-                uiManager.NoteMiss();                                                                                   //UIManagerのNoteMissを使用してスコアに-25加算する
-                //SpawnTextEffect("Miss", notePosition, Color.blue);                              //シグナルを消した場所に青色でMissと表示する、エフェクト、SEは無し
-                SpawnTextEffect("Miss", hit2D.transform.position, Color.blue);
+                uiManager.NoteMiss();                                   //スコアに-25加算する
+                SpawnTextEffect("Miss",hit2D.transform.position, Color.blue);
                 Debug.Log("miss");
             }
 

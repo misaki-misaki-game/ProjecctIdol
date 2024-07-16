@@ -9,7 +9,7 @@ public class DestroyArea : MonoBehaviour
 
     [SerializeField] float radius;          //シグナルの判定の半径を設定する
     [SerializeField] UiManager uiManager;   //UIManagerを使うための変数
-
+    public int breakHit;
     private void Update()
     {
         RaycastHit2D[] hits2D = Physics2D.CircleCastAll(transform.position, radius, Vector3.zero);      //Rayを飛ばして判定する

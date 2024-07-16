@@ -65,12 +65,6 @@ public class NoteInstance : MonoBehaviour
         GameObject obj = SpawnPotision(bluePrefab);
         AddAngle(obj);
     }
-    //public IEnumerator NoteEventAA()   //音階のA#がなった時にシグナルを生成させる
-    //{
-    //    Debug.Log("AA");
-    //    SpawnPotision();
-    //    yield return MoveAngles();
-    //}
     public void NoteEventA()    //音階のAがなった時にシグナルを生成させる
     {
         Debug.Log("A");
@@ -95,7 +89,7 @@ public class NoteInstance : MonoBehaviour
     }
 
     /// <summary>
-    /// プレハブに
+    /// プレハブに移動させるスクリプトを追加する
     /// </summary>
     /// <param name="anglesObj">SpawnPosition()で使用するシグナルプレハブを入れる</param>
     void AddAngle(GameObject anglesObj)
