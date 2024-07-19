@@ -13,9 +13,9 @@ public partial class ButtonScript : MonoBehaviour
     /// </summary>
     public void ButtonsDestroy()
     {
-        for (int j = 0; j < column; j++) // 列をチェック
+        for (int j = 0; j < row; j++) // 行をチェック
         {
-            for (int i = 0; i < row; i++) // 行をチェック
+            for (int i = 0; i < column; i++) // 列をチェック
             {
                 if (!signals[j * 10 + i]) continue; // nullなら次の処理に移行する
                 Destroy(signals[j * 10 + i]);// 全てのシグナルを破壊する
@@ -31,9 +31,9 @@ public partial class ButtonScript : MonoBehaviour
     {
         if (resetStock > 0) // 残りリセット回数が0を超過しているなら
         {
-            for (int j = 0; j < column; j++) // 列をチェック
+            for (int j = 0; j < row; j++) // 行をチェック
             {
-                for (int i = 0; i < row; i++) // 行をチェック
+                for (int i = 0; i < column; i++) // 列をチェック
                 {
                     SignalScript ss = signals[j * 10 + i].GetComponent<SignalScript>();
                     ss.BreakSignal(false); // ブレイクシグナルを呼び出す
@@ -87,8 +87,8 @@ public partial class ButtonScript : MonoBehaviour
     {
         rightMost = (signals.Length % 10) - 1; // 右端を代入
         bottom = signals.Length / 10; // 最下段を代入
-        row = signals.Length % 10; // 行数を代入
-        column = (signals.Length / 10) + 1; // 列数を代入
+        column = signals.Length % 10; // 列数を代入
+        row = (signals.Length / 10) + 1; // 行数を代入
         resetButton.GetComponent <Button>().interactable = false; // ボタンを押せないようにする
     }
 
@@ -187,8 +187,8 @@ public partial class ButtonScript : MonoBehaviour
         if (explotionObjects == null || !explotionObjects.Contains(gameObject)) explotionObjects.Add(gameObject);
         else if (explotionObjects.Contains(gameObject)) return;
 
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
+        centerSignalTP = default; // 10の位 行
+        centerSignalDP = default; // 1の位 列
         centerSignalSS = null; // クリックしたオブジェクトのSignalScript格納用
         comparisonSignalSS = null; // クリックしていないオブジェクトのSignalScript格納用
 
@@ -198,7 +198,7 @@ public partial class ButtonScript : MonoBehaviour
         centerSignalSS = signals[centerSignalTP * 10 + centerSignalDP].GetComponent<SignalScript>();
 
         // 各斜め方向を探索　既に格納したオブジェクトは処理を行わない 
-        // クリックしたオブジェクトの行が右端でなければ
+        // クリックしたオブジェクトの列が右端でなければ
         if (centerSignalDP < rightMost && !detonationObjects.Contains(signals[centerSignalTP * 10 + centerSignalDP + 1])) 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
@@ -214,7 +214,7 @@ public partial class ButtonScript : MonoBehaviour
                 RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
             }
         }
-        // クリックしたオブジェクトの行が左端でなければ
+        // クリックしたオブジェクトの列が左端でなければ
         if (centerSignalDP > 0 && !detonationObjects.Contains(signals[centerSignalTP * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
@@ -230,7 +230,7 @@ public partial class ButtonScript : MonoBehaviour
                 RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
             }
         }
-        // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        // クリックしたオブジェクトの行が最上段かつ列が右端かつあまりが0ならば
         if (centerSignalTP > 0 && centerSignalDP < rightMost && centerSignalDP % 2 == 0 && !detonationObjects.Contains(signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1]))
         {
             // クリックしたオブジェクトの1つ右上のオブジェクトを格納
@@ -238,7 +238,7 @@ public partial class ButtonScript : MonoBehaviour
             // 右上への探索を開始する
             RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        // クリックしたオブジェクトの行が最上段かつ列が左端かつあまりが0ならば
         if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0 && !detonationObjects.Contains(signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左上のオブジェクトを格納
@@ -246,7 +246,7 @@ public partial class ButtonScript : MonoBehaviour
             // 左上への探索を開始する
             RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの行が最下段かつ列が右端かつあまりが0を超過するならば
         if (centerSignalTP < bottom && centerSignalDP < rightMost && centerSignalDP % 2 > 0 && !detonationObjects.Contains(signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1]))
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
@@ -254,7 +254,7 @@ public partial class ButtonScript : MonoBehaviour
             // 右下への探索を開始する
             RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの行が最下段かつ列が左端かつあまりが0を超過するならば
         if (centerSignalTP < bottom && centerSignalDP > 0 && centerSignalDP % 2 > 0 && !detonationObjects.Contains(signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1]))
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
@@ -280,18 +280,19 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="gameObject">基準となるオブジェクト</param>
     private void RecursiveCheckTopRight(GameObject gameObject)
     {
-        detonationSignalTP = default; // 10の位 列
-        detonationSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 行
+        detonationSignalDP = default; // 1の位 列
         // 対象のオブジェクトが配列内オブジェクトのどれなのかを探す
         SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
-        if (detonationSignalDP < rightMost && detonationSignalDP % 2 > 0) // 対象のオブジェクトの行が右端でなければ 
+        if (detonationSignalDP < rightMost && detonationSignalDP % 2 > 0) // 対象のオブジェクトの列が右端でなければ 
         {
             // 対象のオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のオブジェクトを格納
             detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP + 1]);
             // 条件を満たさなくなるまで探索する
             RecursiveCheckTopRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (detonationSignalTP > 0 && detonationSignalDP < rightMost && detonationSignalDP % 2 == 0) // 対象のオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        // 対象のオブジェクトの行が最上段かつ列が右端かつあまりが0ならば
+        else if (detonationSignalTP > 0 && detonationSignalDP < rightMost && detonationSignalDP % 2 == 0)
         {
             // 対象のオブジェクトの1つ右上のオブジェクトを格納
             detonationObjects.Add(signals[(detonationSignalTP - 1) * 10 + detonationSignalDP + 1]);
@@ -306,8 +307,8 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="gameObject">基準となるオブジェクト</param>
     private void RecursiveCheckTopLeft(GameObject gameObject)
     {
-        detonationSignalTP = default; // 10の位 列
-        detonationSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 行
+        detonationSignalDP = default; // 1の位 列
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
         SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
         if (detonationSignalDP > 0 && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの行が左端でなければ
@@ -317,7 +318,8 @@ public partial class ButtonScript : MonoBehaviour
             // 条件を満たさなくなるまで探索する
             RecursiveCheckTopLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (detonationSignalTP > 0 && detonationSignalDP > 0 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        // クリックしたオブジェクトの行が最上段かつ列が左端かつあまりが0ならば
+        else if (detonationSignalTP > 0 && detonationSignalDP > 0 && detonationSignalDP % 2 == 0)
         {
             // クリックしたオブジェクトの1つ左上のオブジェクトを格納
             detonationObjects.Add(signals[(detonationSignalTP - 1) * 10 + detonationSignalDP - 1]);
@@ -332,8 +334,8 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="gameObject">基準となるオブジェクト</param>
     private void RecursiveCheckBottomRight(GameObject gameObject)
     {
-        detonationSignalTP = default; // 10の位 列
-        detonationSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 行
+        detonationSignalDP = default; // 1の位 列
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
         SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
         if (detonationSignalDP < rightMost && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの行が右端でなければ 
@@ -343,7 +345,8 @@ public partial class ButtonScript : MonoBehaviour
             // 条件を満たさなくなるまで探索する
             RecursiveCheckBottomRight(detonationObjects[detonationObjects.Count - 1]);
         }
-        else if (detonationSignalTP < bottom && detonationSignalDP < rightMost && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの行が最下段かつ列が右端かつあまりが0を超過するならば
+        else if (detonationSignalTP < bottom && detonationSignalDP < rightMost && detonationSignalDP % 2 > 0)
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
             detonationObjects.Add(signals[(detonationSignalTP + 1) * 10 + detonationSignalDP + 1]);
@@ -358,18 +361,19 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="gameObject">基準となるオブジェクト</param>
     private void RecursiveCheckBottomLeft(GameObject gameObject)
     {
-        detonationSignalTP = default; // 10の位 列
-        detonationSignalDP = default; // 1の位 行
+        detonationSignalTP = default; // 10の位 行
+        detonationSignalDP = default; // 1の位 列
         // クリックしたオブジェクトが配列内オブジェクトのどれなのかを探す
         SearchSignal(gameObject, ref detonationSignalTP, ref detonationSignalDP);
-        if (detonationSignalDP > 0 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの行が左端でなければ
+        if (detonationSignalDP > 0 && detonationSignalDP % 2 == 0) // クリックしたオブジェクトの列が左端でなければ
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のオブジェクトを格納
             detonationObjects.Add(signals[detonationSignalTP * 10 + detonationSignalDP - 1]);
             // 条件を満たさなくなるまで探索する
             RecursiveCheckBottomLeft(detonationObjects[detonationObjects.Count - 1]);
         }
-        if (detonationSignalTP < bottom && detonationSignalDP > 0 && detonationSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        // クリックしたオブジェクトの行が最下段かつ列が左端かつあまりが0を超過するならば
+        if (detonationSignalTP < bottom && detonationSignalDP > 0 && detonationSignalDP % 2 > 0)
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
             detonationObjects.Add(signals[(detonationSignalTP + 1) * 10 + detonationSignalDP - 1]);
@@ -408,8 +412,8 @@ public partial class ButtonScript : MonoBehaviour
     /// <returns>チェインしているかどうか</returns>
     private bool CheckChainSignal(GameObject gameObject)
     {
-        centerSignalTP = default; // 10の位 列
-        centerSignalDP = default; // 1の位 行
+        centerSignalTP = default; // 10の位 行
+        centerSignalDP = default; // 1の位 列
         centerSignalSS = null; // クリックしたオブジェクトのSignalScript格納用
         comparisonSignalSS = null; // クリックしていないオブジェクトのSignalScript格納用
 
@@ -418,49 +422,49 @@ public partial class ButtonScript : MonoBehaviour
         // クリックしたオブジェクトのSignalScriptを格納
         centerSignalSS = signals[centerSignalTP * 10 + centerSignalDP].GetComponent<SignalScript>();
 
-        if (centerSignalDP < rightMost) // クリックしたオブジェクトの行が右端でなければ 
+        if (centerSignalDP < rightMost) // クリックしたオブジェクトの列が右端でなければ 
         {
             // クリックしたオブジェクトの1つ右上(centerSignalDPが偶数と0の場合は右下)のSignalScriptを格納
             comparisonSignalSS = signals[centerSignalTP * 10 + centerSignalDP + 1].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalDP > 0) // クリックしたオブジェクトの行が左端でなければ
+        if (centerSignalDP > 0) // クリックしたオブジェクトの列が左端でなければ
         {
             // クリックしたオブジェクトの1つ左上(centerSignalDPが偶数と0の場合は左下)のSignalScriptを格納
             comparisonSignalSS = signals[centerSignalTP * 10 + centerSignalDP - 1].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP > 0) // クリックしたオブジェクトの列が最上段でなければ
+        if (centerSignalTP > 0) // クリックしたオブジェクトの行が最上段でなければ
         {
             // クリックしたオブジェクトの1つ上のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP - 1) * 10 + centerSignalDP].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP > 0 && centerSignalDP < rightMost && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が右端かつあまりが0ならば
+        if (centerSignalTP > 0 && centerSignalDP < rightMost && centerSignalDP % 2 == 0) // クリックしたオブジェクトの行が最上段かつ列が右端かつあまりが0ならば
         {
             // クリックしたオブジェクトの1つ右上のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP - 1) * 10 + centerSignalDP + 1].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの列が最上段かつ行が左端かつあまりが0ならば
+        if (centerSignalTP > 0 && centerSignalDP > 0 && centerSignalDP % 2 == 0) // クリックしたオブジェクトの行が最上段かつ列が左端かつあまりが0ならば
         {
             // クリックしたオブジェクトの1つ左上のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP - 1) * 10 + centerSignalDP - 1].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP < bottom) // クリックしたオブジェクトの列が最下段でなければ
+        if (centerSignalTP < bottom) // クリックしたオブジェクトの行が最下段でなければ
         {
             // クリックしたオブジェクトの1つ下のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP + 1) * 10 + centerSignalDP].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP < bottom && centerSignalDP < rightMost && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が右端かつあまりが0を超過するならば
+        if (centerSignalTP < bottom && centerSignalDP < rightMost && centerSignalDP % 2 > 0) // クリックしたオブジェクトの行が最下段かつ列が右端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ右下のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP + 1) * 10 + centerSignalDP + 1].GetComponent<SignalScript>();
             CheckSameSignal(centerSignalSS, comparisonSignalSS);
         }
-        if (centerSignalTP < bottom && centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの列が最下段かつ行が左端かつあまりが0を超過するならば
+        if (centerSignalTP < bottom && centerSignalDP > 0 && centerSignalDP % 2 > 0) // クリックしたオブジェクトの行が最下段かつ列が左端かつあまりが0を超過するならば
         {
             // クリックしたオブジェクトの1つ左下のSignalScriptを格納
             comparisonSignalSS = signals[(centerSignalTP + 1) * 10 + centerSignalDP - 1].GetComponent<SignalScript>();
@@ -484,14 +488,14 @@ public partial class ButtonScript : MonoBehaviour
     /// <param name="centerSignalDP">1の位</param>
     private void SearchSignal(GameObject gameObject, ref int centerSignalTP, ref int centerSignalDP)
     {
-        for (int j = 0; j < column; j++) // 列をチェック
+        for (int j = 0; j < row; j++) // 行をチェック
         {
-            for (int i = 0; i < row; i++) // 行をチェック
+            for (int i = 0; i < column; i++) // 列をチェック
             {
                 if (gameObject == signals[j * 10 + i]) // 対象のオブジェクトと配列内のオブジェクトが同じなら
                 {
-                    centerSignalTP = j; // 列を格納
-                    centerSignalDP = i; // 行を格納
+                    centerSignalTP = j; // 行を格納
+                    centerSignalDP = i; // 列を格納
                 }
             }
         }
@@ -517,9 +521,9 @@ public partial class ButtonScript : MonoBehaviour
     private void ResurrectionSignal()
     {
         if (!isChain) return; // チェインしていないならリターンする
-        for (int j = 0; j < column; j++) // 列をチェック
+        for (int j = 0; j < row; j++) // 列をチェック
         {
-            for (int i = 0; i < row; i++) // 行をチェック
+            for (int i = 0; i < column; i++) // 行をチェック
             {
                 if (signals[j * 10 + i].GetComponent<SignalScript>().state == SignalScript.STATE.NOTHING) // そのSignalのstateがNOTHINGなら
                 {
@@ -572,8 +576,8 @@ public partial class ButtonScript
     private int resetStock = 3; // リセット回数
     private int rightMost = 0; // シグナルの並びの右端
     private int bottom = 0; // シグナルの並びの最下段
-    private int row = 0; // 行数
     private int column = 0; // 列数
+    private int row = 0; // 行数
 
     private float chain = 0; // チェイン変数
 
